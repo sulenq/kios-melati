@@ -1,0 +1,30 @@
+* {
+  font-family: "Inter", sans-serif !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --p50: #f1f8ff;
+  --p100: #ddecfd;
+  --p200: #bbd7fc;
+  --p200a: #76a4ff3e;
+  --p300: #98bdf6;
+  --p400: #7ca4ec;
+  --p450: #618dde;
+  --p500: #5281e1;
+  --p500a: #76a4ff9e;
+  --p600: #3b63c1;
+  --p700: #2948a2;
+  --p800: #1a3182;
+  --p900: #0f216c;
+  --b: #111111;
+  --ba: #000000a6;
+  --bt: #333333;
+  --wt: #ececec;
+  --divider: #c1c1c121;
+  --divider2: #acacac40;
+}
+
+a {
+  text-decoration: none !important;
+}
