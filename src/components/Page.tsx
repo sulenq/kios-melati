@@ -1,16 +1,17 @@
 import { VStack } from "@chakra-ui/react";
 
-export default function Page({ children }: any) {
+export default function Page(props: any) {
   return (
     <VStack
+      {...props}
       id="page"
       align={"flex-start"}
-      maxW={"1280px"}
       w={"100%"}
+      maxW={"1280px"}
       mx={"auto"}
-      px={[4, 6, 8]}
+      px={[5, 6, 8]}
     >
-      {children}
+      {props.children}
     </VStack>
   );
 }

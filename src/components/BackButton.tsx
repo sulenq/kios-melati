@@ -1,5 +1,5 @@
 import { IconButton, Icon } from "@chakra-ui/react";
-import {ArrowLeft} from "@phosphor-icons/react";
+import { ArrowLeft } from "@phosphor-icons/react";
 
 export default function BackButton(props: any) {
   return (
@@ -9,10 +9,16 @@ export default function BackButton(props: any) {
       onClick={() => {
         window.history.back();
       }}
-      className="btn-sm divider"
+      className="btn sm-clicky"
       aria-label="backBtn"
-      icon={<Icon as={ArrowLeft} fontSize={18} {...props.fontSize} {...props?.color} />}
-      borderRadius={"full"}
+      icon={
+        <Icon
+          as={ArrowLeft}
+          fontSize={18}
+          {...props.fontSize}
+          {...props?.color}
+        />
+      }
       variant={"ghost"}
     />
   );

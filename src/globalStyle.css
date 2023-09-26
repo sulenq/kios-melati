@@ -3,6 +3,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* COLORS */
 :root {
   --p50: #f1f8ff;
   --p100: #ddecfd;
@@ -20,11 +21,61 @@
   --b: #111111;
   --ba: #000000a6;
   --bt: #333333;
+  --w: #ffffff;
   --wt: #ececec;
-  --divider: #c1c1c121;
+  --divider: #98989821;
   --divider2: #acacac40;
+  --trans: #ff000000;
 }
 
 a {
   text-decoration: none !important;
+}
+
+.btn-solid {
+  background: var(--divider) !important;
+}
+.btn:hover:not(:disabled),
+.btn-solid:hover:not(:disabled) {
+  background: var(--divider);
+}
+.btn:active:not(:disabled),
+.btn-solid:active:not(:disabled) {
+  background: var(--divider2);
+}
+.clicky:active:not(:disabled) {
+  transform: scale(0.95);
+}
+.sm-clicky:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+input {
+  border-radius: 8px !important;
+  outline: none !important;
+  border: var(--divider);
+}
+input::placeholder {
+  opacity: 0.8;
+}
+input:focus,
+input:focus-visible {
+  box-shadow: none !important;
+  border: 2px solid var(--p500) !important;
+}
+
+select:-webkit-autofill {
+  background-color: #fff;
+}
+textarea:-webkit-autofill {
+  background-color: #fff;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,0 +1,18 @@
+src
+    components
+        ColorModeSwitcher
+        BackButton
+    const
+        adminNav
+        cashierNav
+        products
+    globalState
+        useAuth - prior
+        useProducts - prior
+        useAuthDemo - second
+        useTransactions
+        useDebts
+        useExpenses
+    pages
+        Landing
+        NotFound

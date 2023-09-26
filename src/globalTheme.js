@@ -41,7 +41,7 @@ export const globalTheme = extendTheme({
     b: "#050505",
     bt: "#333333",
     w: "white",
-    wt: "#ddd",
+    wt: "#eee",
   },
 
   styles: {
@@ -78,27 +78,36 @@ export const globalTheme = extendTheme({
     Button: {
       baseStyle: {
         fontWeight: 700,
+        borderRadius: "8px",
       },
-      variants: {
-        solid: {
-          _hover: { bg: "var(--divider)" },
-          _active: { bg: "var(--divider2)" },
+    },
+
+    Input: {
+      baseStyle: (props) => ({
+        field: {
+          _autofill: {
+            boxShadow:
+              props.colorMode === "dark"
+                ? "0 0 0px 1000px #050505 inset"
+                : "0 0 0px 1000px #ffffff inset",
+          },
+          _hover: {
+            bg: props.colorMode === "dark" ? "#050505" : "white",
+          },
+          _focus: {
+            bg: props.colorMode === "dark" ? "#050505" : "white",
+          },
+          _active: {
+            bg: props.colorMode === "dark" ? "#050505" : "white",
+          },
         },
-        ghost: {
-          _hover: { bg: "var(--divider)" },
-          _active: { bg: "var(--divider2)" },
-        },
-        outline: {
-          _hover: { bg: "var(--divider)" },
-          _active: { bg: "var(--divider2)" },
-        },
-      },
+      }),
     },
 
     Checkbox: {
       baseStyle: (props) => ({
         icon: {
-          color: props.colorMode === "dark" ? "bt" : "wt",
+          color: "wt",
         },
       }),
     },

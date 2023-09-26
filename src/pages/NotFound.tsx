@@ -1,25 +1,33 @@
-import { Button, Text, VStack } from "@chakra-ui/react";
+import { Button, Image, Text, VStack } from "@chakra-ui/react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <VStack justify={"center"} h={"100vh"} bg={"b"} color={"wt"}>
-      <Text fontSize={[64, 82, 124]} fontWeight={700} lineHeight={1}>
-        404
+    <VStack minH={"100vh"} justify={"center"} gap={0} py={12}>
+      <Image src="./img/404.png" maxW={"400px"} mb={4} />
+      <Text
+        textAlign={"center"}
+        fontSize={28}
+        fontWeight={700}
+        lineHeight={1}
+        mb={4}
+      >
+        404 Page Not Found
       </Text>
-
-      <Text mb={4} fontSize={24} fontWeight={600}>
-        Page Not Found
+      <Text textAlign={"center"} maxW={"400px"} mb={4}>
+        You probably mistype the url or the page you're looking for is missing
       </Text>
 
       <Button
+        h={"50px"}
+        colorScheme="bnw"
+        px={8}
+        className="clicky"
         as={Link}
         to={"/"}
-        color={"wt"}
-        className="divider"
-        bg={"var(--divider2)"}
       >
-        Go to Landing Page
+        Back to Landing Page
       </Button>
     </VStack>
   );
