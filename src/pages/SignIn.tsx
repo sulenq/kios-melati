@@ -12,14 +12,22 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import NavHeader from "../components/NavHeader";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import InputPassword from "../components/InputPassword";
 import { Link } from "react-router-dom";
+import users from "../const/users";
+import { setCookie } from "typescript-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+  const signInRoleBg = useColorModeValue("b", "w");
+  const signInRoleColor = useColorModeValue("wt", "bt");
+  const navigate = useNavigate();
+
   const formik = useFormik({
     validateOnChange: false,
 
@@ -38,8 +46,28 @@ export default function SignIn() {
 
     onSubmit: (values, { resetForm }) => {
       if (values?.role === "admin" || values?.role === "cashier") {
-        console.log(values);
-        resetForm();
+        if (users) {
+          let isMatch = users.some((u) => {
+            if (
+              values.username === u.username &&
+              values.password === u.password
+            ) {
+              console.log("signed in");
+              console.log(process.env.REACT_APP_TOKEN);
+              setCookie("token", process.env.REACT_APP_TOKEN, {
+                expires: values.staySignedIn ? 7 : 1,
+              });
+              resetForm();
+              navigate("/admin");
+              return true;
+            }
+            return false;
+          });
+
+          if (!isMatch) {
+            console.log("username and password did not match");
+          }
+        }
       } else {
         console.log("Invalid Role, valid roles are ADMIN or CASHIER");
       }
@@ -99,12 +127,14 @@ export default function SignIn() {
                       w={"50%"}
                       transition={"200ms"}
                       textAlign={"center"}
-                      bg={formik.values.role === "admin" ? "b" : ""}
+                      bg={formik.values.role === "admin" ? signInRoleBg : ""}
                       p={1}
                       borderRadius={6}
                       fontWeight={700}
                       fontSize={14}
-                      color={formik.values.role === "admin" ? "wt" : ""}
+                      color={
+                        formik.values.role === "admin" ? signInRoleColor : ""
+                      }
                       opacity={formik.values.role !== "admin" ? 0.5 : 1}
                       cursor={"pointer"}
                       onClick={() => {
@@ -117,12 +147,14 @@ export default function SignIn() {
                       w={"50%"}
                       transition={"200ms"}
                       textAlign={"center"}
-                      bg={formik.values.role === "cashier" ? "b" : ""}
+                      bg={formik.values.role === "cashier" ? signInRoleBg : ""}
                       p={1}
                       borderRadius={6}
                       fontWeight={700}
                       fontSize={14}
-                      color={formik.values.role === "cashier" ? "wt" : ""}
+                      color={
+                        formik.values.role === "cashier" ? signInRoleColor : ""
+                      }
                       opacity={formik.values.role !== "cashier" ? 0.5 : 1}
                       cursor={"pointer"}
                       onClick={() => {
@@ -181,10 +213,15 @@ export default function SignIn() {
                   w={"100%"}
                   colorScheme="bnw"
                   h={"50px"}
+                  mb={4}
                   //   borderRadius={"full"}
                 >
                   SIGN IN
                 </Button>
+
+                <Text fontSize={14} textAlign={"center"} opacity={0.5}>
+                  By default you will stay signed in for 24 hours
+                </Text>
               </form>
             </Box>
           </SimpleGrid>

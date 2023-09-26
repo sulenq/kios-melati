@@ -19,7 +19,7 @@ export default function NavHeader({ title }: { title: string }) {
     >
       <BackButton />
 
-      <Text fontWeight={600} opacity={0.5}>
+      <Text fontWeight={600} color={"p.500"} fontSize={18}>
         {title}
       </Text>
 

@@ -21,6 +21,9 @@ export default function InputPassword({
         type="password"
         placeholder="type your password"
         name="password"
+        onFocus={(e) => {
+          e.target.select();
+        }}
         onChange={handleForm}
         value={formik.values.password}
       />
