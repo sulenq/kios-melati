@@ -4,8 +4,9 @@ export default function Page(props: any) {
   return (
     <VStack
       {...props}
+      gap={0}
       id="page"
-      align={"flex-start"}
+      align={"stretch"}
       w={"100%"}
       maxW={"1280px"}
       mx={"auto"}

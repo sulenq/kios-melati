@@ -39,7 +39,7 @@ export default function Landing() {
                 </Text>
                 <Text
                   fontSize={[24, 28, 32]}
-                  fontWeight={700}
+                  fontWeight={800}
                   lineHeight={1}
                   mb={4}
                 >
@@ -63,7 +63,7 @@ export default function Landing() {
 
             <HStack fontSize={14}>
               <Text>Don't have an account?</Text>
-              <Text as={Link} to={"/signup"} fontWeight={500} color={"p.500"}>
+              <Text as={Link} to={"/signup"} fontWeight={600} color={"p.500"}>
                 Sign Up
               </Text>
             </HStack>

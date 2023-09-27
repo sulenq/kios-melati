@@ -90,15 +90,7 @@ export const globalTheme = extendTheme({
               props.colorMode === "dark"
                 ? "0 0 0px 1000px #050505 inset"
                 : "0 0 0px 1000px #ffffff inset",
-          },
-          _hover: {
-            bg: props.colorMode === "dark" ? "#050505" : "white",
-          },
-          _focus: {
-            bg: props.colorMode === "dark" ? "#050505" : "white",
-          },
-          _active: {
-            bg: props.colorMode === "dark" ? "#050505" : "white",
+            border: "2px solid var(--divider) !important",
           },
         },
       }),
@@ -110,6 +102,14 @@ export const globalTheme = extendTheme({
           color: "wt",
         },
       }),
+    },
+
+    Tooltip: {
+      baseStyle: {
+        bg: "p.500",
+        color: "w",
+        "--popper-arrow-bg": "#5281e1",
+      },
     },
   },
 });

@@ -9,7 +9,7 @@ export default function NotFound() {
       <Text
         textAlign={"center"}
         fontSize={28}
-        fontWeight={700}
+        fontWeight={800}
         lineHeight={1}
         mb={4}
       >

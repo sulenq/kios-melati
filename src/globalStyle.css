@@ -23,8 +23,9 @@
   --bt: #333333;
   --w: #ffffff;
   --wt: #ececec;
-  --divider: #98989821;
+  --divider: #a7a7a721;
   --divider2: #acacac40;
+  --divider3: #989898a6;
   --trans: #ff000000;
 }
 
@@ -53,10 +54,11 @@ a {
 input {
   border-radius: 8px !important;
   outline: none !important;
-  border: var(--divider);
+  border: 2px solid var(--divider) !important;
 }
 input::placeholder {
-  opacity: 0.8;
+  /* opacity: 0.5; */
+  color: var(--divider3);
 }
 input:focus,
 input:focus-visible {
@@ -69,6 +71,22 @@ select:-webkit-autofill {
 }
 textarea:-webkit-autofill {
   background-color: #fff;
+}
+
+.ss::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ss::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.ss::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.ss::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 @keyframes fade-in {

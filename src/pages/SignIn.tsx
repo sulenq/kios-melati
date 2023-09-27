@@ -19,9 +19,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import InputPassword from "../components/InputPassword";
 import { Link } from "react-router-dom";
-import users from "../const/users";
+import adminUsers from "../const/adminUsers";
 import { setCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
+import cashierUsers from "../const/cashierUsers";
 
 export default function SignIn() {
   const signInRoleBg = useColorModeValue("b", "w");
@@ -45,28 +46,81 @@ export default function SignIn() {
     }),
 
     onSubmit: (values, { resetForm }) => {
-      if (values?.role === "admin" || values?.role === "cashier") {
-        if (users) {
-          let isMatch = users.some((u) => {
-            if (
-              values.username === u.username &&
-              values.password === u.password
-            ) {
-              console.log("signed in");
-              console.log(process.env.REACT_APP_TOKEN);
-              setCookie("token", process.env.REACT_APP_TOKEN, {
-                expires: values.staySignedIn ? 7 : 1,
-              });
-              resetForm();
-              navigate("/admin");
-              return true;
-            }
-            return false;
-          });
+      type AuthState = {
+        token: string | undefined;
+        idPublic: number | undefined;
+        username: string | undefined;
+        role: "admin" | "cashier" | undefined;
+        storeName: string | undefined;
+        expires: number | undefined;
+      };
+      let authState: AuthState;
 
-          if (!isMatch) {
-            console.log("username and password did not match");
+      if (values.role === "admin") {
+        let isMatch = adminUsers.some((u) => {
+          if (
+            values.username === u.username &&
+            values.password === u.password
+          ) {
+            const token = process.env.REACT_APP_ADMIN_TOKEN;
+            // console.log(token);
+            setCookie("token", token, {
+              expires: values.staySignedIn ? 7 : 1,
+            });
+            resetForm();
+
+            authState = {
+              token: token,
+              idPublic: u.idPublic,
+              username: u.username,
+              role: u.role,
+              storeName: u.storeName,
+              expires: values.staySignedIn ? 7 : 1,
+            };
+            setCookie("authState", JSON.stringify(authState), {
+              expires: authState.expires,
+            });
+            navigate("/admin");
+            return true;
           }
+          return false;
+        });
+
+        if (!isMatch) {
+          console.log("username and password did not match");
+        }
+      } else if (values.role === "cashier") {
+        let isMatch = cashierUsers.some((u) => {
+          if (
+            values.username === u.username &&
+            values.password === u.password
+          ) {
+            const token = process.env.REACT_APP_CASHIER_TOKEN;
+            console.log(token);
+            setCookie("token", token, {
+              expires: values.staySignedIn ? 7 : 1,
+            });
+            resetForm();
+
+            authState = {
+              token: token,
+              idPublic: u.idPublic,
+              username: u.username,
+              role: u.role,
+              storeName: u.storeName,
+              expires: values.staySignedIn ? 7 : 1,
+            };
+            setCookie("authState", JSON.stringify(authState), {
+              expires: authState.expires,
+            });
+            navigate("/cashier");
+            return true;
+          }
+          return false;
+        });
+
+        if (!isMatch) {
+          console.log("username and password did not match");
         }
       } else {
         console.log("Invalid Role, valid roles are ADMIN or CASHIER");
@@ -85,7 +139,11 @@ export default function SignIn() {
 
   return (
     <>
-      <VStack px={[3, 6, 8]} borderBottom={"2px solid var(--divider)"}>
+      <VStack
+        px={[3, null, 5]}
+        borderBottom={"2px solid var(--divider)"}
+        py={2}
+      >
         <NavHeader title={"Sign In"} />
       </VStack>
 
@@ -130,7 +188,7 @@ export default function SignIn() {
                       bg={formik.values.role === "admin" ? signInRoleBg : ""}
                       p={1}
                       borderRadius={6}
-                      fontWeight={700}
+                      fontWeight={600}
                       fontSize={14}
                       color={
                         formik.values.role === "admin" ? signInRoleColor : ""
@@ -150,7 +208,7 @@ export default function SignIn() {
                       bg={formik.values.role === "cashier" ? signInRoleBg : ""}
                       p={1}
                       borderRadius={6}
-                      fontWeight={700}
+                      fontWeight={600}
                       fontSize={14}
                       color={
                         formik.values.role === "cashier" ? signInRoleColor : ""

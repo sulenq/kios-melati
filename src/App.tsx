@@ -8,6 +8,9 @@ import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import { useScreenWidth } from "./utils";
+import Admin from "./pages/Admin";
+import RequireRole from "./pages/RequireRole";
+import Cashier from "./pages/Cashier";
 
 export const App = () => {
   // UTILS
@@ -35,6 +38,24 @@ export const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
           {/* <Route path="/signup" element={<Landing />} /> */}
+
+          <Route
+            path="/admin"
+            element={
+              <RequireRole allowedRoles={["admin"]} signinPath={"/signin"}>
+                <Admin />
+              </RequireRole>
+            }
+          />
+
+          <Route
+            path="/cashier"
+            element={
+              <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
+                <Cashier />
+              </RequireRole>
+            }
+          />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

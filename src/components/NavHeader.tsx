@@ -2,30 +2,35 @@ import { HStack, Text, useColorModeValue } from "@chakra-ui/react";
 import BackButton from "./BackButton";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
-export default function NavHeader({ title }: { title: string }) {
+export default function NavHeader(props: any) {
   const navHeaderBg = useColorModeValue("white", "b");
 
   return (
     <HStack
       w={"100%"}
-      maxW={"1280px"}
+      maxW={"1240px"}
       mx={"auto"}
       position={"sticky"}
       top={0}
       left={0}
       justify={"space-between"}
-      py={2}
-      bg={navHeaderBg}
+      bg={props.bg || navHeaderBg}
     >
       <BackButton />
 
-      <Text fontWeight={600} color={"p.500"} fontSize={18}>
-        {title}
+      <Text
+        fontWeight={600}
+        color={"p.500"}
+        // fontSize={18}
+      >
+        {props.title}
       </Text>
 
-      <HStack>
-        <ColorModeSwitcher className="btn sm-clicky" />
-      </HStack>
+      {props?.right || (
+        <HStack>
+          <ColorModeSwitcher className="btn sm-clicky" />
+        </HStack>
+      )}
     </HStack>
   );
 }
