@@ -33,6 +33,17 @@ a {
   text-decoration: none !important;
 }
 
+p {
+  font-size: 13px;
+}
+label {
+  font-size: 13px !important;
+}
+
+button {
+  font-size: 13px !important;
+}
+
 .btn-solid {
   background: var(--divider) !important;
 }
@@ -55,6 +66,7 @@ input {
   border-radius: 8px !important;
   outline: none !important;
   border: 2px solid var(--divider) !important;
+  font-size: 14px !important;
 }
 input::placeholder {
   /* opacity: 0.5; */
@@ -64,13 +76,6 @@ input:focus,
 input:focus-visible {
   box-shadow: none !important;
   border: 2px solid var(--p500) !important;
-}
-
-select:-webkit-autofill {
-  background-color: #fff;
-}
-textarea:-webkit-autofill {
-  background-color: #fff;
 }
 
 .ss::-webkit-scrollbar {
@@ -95,5 +100,20 @@ textarea:-webkit-autofill {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  p {
+    font-size: 15px;
+  }
+  label {
+    font-size: 15px !important;
+  }
+  button {
+    font-size: 14px !important;
+  }
+  input {
+    font-size: 14px !important;
   }
 }

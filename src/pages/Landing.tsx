@@ -61,7 +61,7 @@ export default function Landing() {
               SIGN IN
             </Button>
 
-            <HStack fontSize={14}>
+            <HStack fontSize={14} gap={1}>
               <Text>Don't have an account?</Text>
               <Text as={Link} to={"/signup"} fontWeight={600} color={"p.500"}>
                 Sign Up

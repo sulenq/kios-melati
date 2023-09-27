@@ -65,19 +65,19 @@ export default function Cashier() {
   //               <Text noOfLines={1}>{p.name}</Text>
   //             </Td>
 
-  //             <Td px={3} py={3} fontSize={14} opacity={0.5} isNumeric>
+  //             <Td px={3} py={3} opacity={0.5} isNumeric>
   //               {p.stock}
   //             </Td>
 
-  //             <Td px={3} py={3} fontSize={14} isNumeric>
+  //             <Td px={3} py={3} isNumeric>
   //               {p.price}
   //             </Td>
 
-  //             <Td px={3} py={3} fontSize={14} opacity={0.5}>
+  //             <Td px={3} py={3} opacity={0.5}>
   //               {p.category}
   //             </Td>
 
-  //             <Td px={3} py={3} fontSize={14} opacity={0.5}>
+  //             <Td px={3} py={3} opacity={0.5}>
   //               {p.code}
   //             </Td>
   //           </Tr>
@@ -113,11 +113,16 @@ export default function Cashier() {
         {sw < 770 ? (
           <VStack
             gap={4}
-            py={4}
+            py={3}
             justify={"space-between"}
             // borderBottom={"2px solid var(--divider)"}
           >
-            <VStack gap={1}>
+            <HStack
+              w={"100%"}
+              gap={1}
+              align={"flex-start"}
+              justify={"space-between"}
+            >
               <Text opacity={0.5}>Total</Text>
 
               <HStack align={"flex-end"}>
@@ -131,7 +136,7 @@ export default function Cashier() {
                   250.000
                 </Text>
               </HStack>
-            </VStack>
+            </HStack>
 
             <HStack>
               <Box>
@@ -157,7 +162,7 @@ export default function Cashier() {
 
                       <IconButton
                         aria-label="indexProductButton"
-                        icon={<Icon as={MagnifyingGlass} />}
+                        icon={<Icon as={MagnifyingGlass} fontSize={18} />}
                         colorScheme="bnw"
                         className="clicky"
                         position={"absolute"}
@@ -171,17 +176,16 @@ export default function Cashier() {
               </Box>
 
               <HStack justify={"flex-end"}>
-                <Button
+                <IconButton
+                  aria-label="checkoutButton"
                   colorScheme="bnw"
                   className="clicky"
                   fontSize={15}
-                  px={6}
-                  rightIcon={
+                  px={5}
+                  icon={
                     <Icon as={ArrowElbowDownLeft} fontSize={18} weight="bold" />
                   }
-                >
-                  CHECKOUT
-                </Button>
+                />
               </HStack>
             </HStack>
           </VStack>
@@ -231,7 +235,7 @@ export default function Cashier() {
 
                     <IconButton
                       aria-label="indexProductButton"
-                      icon={<Icon as={MagnifyingGlass} />}
+                      icon={<Icon as={MagnifyingGlass} fontSize={18} />}
                       colorScheme="bnw"
                       className="clicky"
                       position={"absolute"}

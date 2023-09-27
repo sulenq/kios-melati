@@ -7,30 +7,11 @@ import { globalTheme } from "./globalTheme";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
-// import { useScreenWidth } from "./utils";
 import Admin from "./pages/Admin";
 import RequireRole from "./pages/RequireRole";
 import Cashier from "./pages/Cashier";
 
 export const App = () => {
-  // UTILS
-  // const sw = useScreenWidth();
-
-  // adjust vp scale for mobile
-  // const [vp, setVp] = useState<HTMLMetaElement | null>(null);
-  // useEffect(() => {
-  //   setVp(document.querySelector<HTMLMetaElement>('meta[name="viewport"]'));
-  // }, []);
-  // useEffect(() => {
-  //   if (vp) {
-  //     if (sw < 770) {
-  //       vp.setAttribute("content", "width=device-width, initial-scale=0.8125");
-  //     } else {
-  //       vp.setAttribute("content", "width=device-width, initial-scale=1");
-  //     }
-  //   }
-  // }, [vp, sw]);
-
   return (
     <ChakraProvider theme={globalTheme}>
       <BrowserRouter>

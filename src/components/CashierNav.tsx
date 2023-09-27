@@ -32,14 +32,15 @@ export default function CashierNav(props: any) {
         {cashierNav.map((n, i) => {
           return (
             <Tooltip key={i} label={n.name} placement={"top"} hasArrow>
-              <IconButton
-                as={Link}
-                aria-label={n.name}
-                className="btn sm-clicky"
-                variant={"ghost"}
-                icon={<Icon as={n.icon} fontSize={18} />}
-                bg={location.pathname === n.link ? "var(--divider)" : ""}
-              />
+              <Link to={n.link}>
+                <IconButton
+                  aria-label={n.name}
+                  className="btn sm-clicky"
+                  variant={"ghost"}
+                  icon={<Icon as={n.icon} fontSize={18} />}
+                  bg={location.pathname === n.link ? "var(--divider)" : ""}
+                />
+              </Link>
             </Tooltip>
           );
         })}

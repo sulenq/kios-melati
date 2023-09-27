@@ -189,7 +189,7 @@ export default function SignIn() {
                       p={1}
                       borderRadius={6}
                       fontWeight={600}
-                      fontSize={14}
+                      fontSize={[12, 13, null]}
                       color={
                         formik.values.role === "admin" ? signInRoleColor : ""
                       }
@@ -209,7 +209,7 @@ export default function SignIn() {
                       p={1}
                       borderRadius={6}
                       fontWeight={600}
-                      fontSize={14}
+                      fontSize={[12, 13, null]}
                       color={
                         formik.values.role === "cashier" ? signInRoleColor : ""
                       }
@@ -254,13 +254,11 @@ export default function SignIn() {
                     isChecked={formik.values.staySignedIn}
                     onChange={handleForm}
                   >
-                    <Text fontSize={14}>Stay Signed In (1 week) </Text>
+                    <Text>Stay Signed In (1 week) </Text>
                   </Checkbox>
 
                   <Link to="">
-                    <Text fontSize={14} color={"p.500"}>
-                      Forgot password?
-                    </Text>
+                    <Text color={"p.500"}>Forgot password?</Text>
                   </Link>
                 </HStack>
 
@@ -270,14 +268,13 @@ export default function SignIn() {
                   className="clicky"
                   w={"100%"}
                   colorScheme="bnw"
-                  h={"50px"}
                   mb={4}
                   //   borderRadius={"full"}
                 >
                   SIGN IN
                 </Button>
 
-                <Text fontSize={14} textAlign={"center"} opacity={0.5}>
+                <Text textAlign={"center"} opacity={0.5}>
                   By default you will stay signed in for 24 hours
                 </Text>
               </form>

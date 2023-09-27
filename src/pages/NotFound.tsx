@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <VStack minH={"100vh"} justify={"center"} gap={0} py={12}>
-      <Image src="../img/404.png" maxW={"400px"} mb={4} />
+    <VStack minH={"100vh"} justify={"center"} gap={0} py={12} px={[8]}>
+      <Image src="../img/404.png" w={"100%"} maxW={"400px"} mb={4} />
       <Text
         textAlign={"center"}
         fontSize={28}

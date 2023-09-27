@@ -21,7 +21,7 @@ export default function NavHeader(props: any) {
       <Text
         fontWeight={600}
         color={"p.500"}
-        // fontSize={18}
+        fontSize={15}
       >
         {props.title}
       </Text>
