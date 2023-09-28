@@ -65,9 +65,10 @@ export default function Cashier() {
           scrollBehavior="inside"
         >
           <ModalContent>
-            <ModalBody px={[4, 6, 8]} py={0}>
+            <ModalBody p={0}>
               <HStack
-                py={3}
+                py={2}
+                px={3}
                 position={"sticky"}
                 top={0}
                 left={0}
@@ -92,7 +93,12 @@ export default function Cashier() {
                 />
               </HStack>
 
-              <Box h={"calc(100% - 117px)"} overflow={"auto"} borderRadius={12}>
+              <Box
+                px={[4, 6, 8]}
+                h={"calc(100% - 117px)"}
+                overflow={"auto"}
+                borderRadius={12}
+              >
                 <Table>
                   <Thead>
                     <Tr opacity={0.5}>
