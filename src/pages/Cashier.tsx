@@ -67,8 +67,7 @@ export default function Cashier() {
           <ModalContent>
             <ModalBody px={[4, 6, 8]} py={0}>
               <HStack
-                pt={4}
-                pb={3}
+                py={3}
                 position={"sticky"}
                 top={0}
                 left={0}
