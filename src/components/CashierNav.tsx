@@ -10,10 +10,10 @@ export default function CashierNav(props: any) {
       <HStack
         w={"100%"}
         justify={"center"}
-        p={4}
+        p={"10px"}
         position={"fixed"}
         left={0}
-        bottom={2}
+        bottom={0}
       >
         {props.children}
       </HStack>
@@ -26,7 +26,7 @@ export default function CashierNav(props: any) {
         bg={"var(--divider)"}
         backdropFilter={"blur(10px)"}
         borderRadius={12}
-        p={1}
+        p={"5px"}
         gap={1}
       >
         {cashierNav.map((n, i) => {
@@ -34,6 +34,8 @@ export default function CashierNav(props: any) {
             <Tooltip key={i} label={n.name} placement={"top"} hasArrow>
               <Link to={n.link}>
                 <IconButton
+                  w={"42px"}
+                  h={"42px !important"}
                   aria-label={n.name}
                   className="btn sm-clicky"
                   variant={"ghost"}

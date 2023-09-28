@@ -64,6 +64,16 @@ export const globalTheme = extendTheme({
       }),
     },
 
+    Modal: {
+      baseStyle: (props) => ({
+        dialog: {
+          bg: props.colorMode === "dark" ? "#080808" : "white",
+          color: props.colorMode === "dark" ? "wt" : "wt",
+          boxShadow: "none",
+        },
+      }),
+    },
+
     Menu: {
       baseStyle: (props) => ({
         list: {
@@ -77,7 +87,7 @@ export const globalTheme = extendTheme({
 
     Button: {
       baseStyle: {
-        fontWeight: 600,
+        fontWeight: 700,
         borderRadius: "8px",
       },
     },

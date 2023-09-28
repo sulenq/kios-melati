@@ -1,10 +1,18 @@
 import { VStack } from "@chakra-ui/react";
-import React from "react";
 
-export default function Container({ children }: any) {
+export default function Container(props: any) {
   return (
-    <VStack id="container" maxW={"1280px"} w={"100%"} mx={"auto"}>
-      {children}
+    <VStack
+      {...props}
+      gap={0}
+      id="page"
+      align={"stretch"}
+      w={"100%"}
+      maxW={"1280px"}
+      mx={"auto"}
+      px={[5, 6, 8]}
+    >
+      {props.children}
     </VStack>
   );
 }

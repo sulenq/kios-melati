@@ -1,5 +1,5 @@
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
-import Page from "../components/Page";
+import Container from "../components/Container";
 import {
   Box,
   Button,
@@ -17,9 +17,10 @@ export default function Landing() {
 
   return (
     <Box bgImage={"./img/grocery.jpg"} bgSize={"cover"}>
-      <Page>
+      <Container>
         <VStack w={"100%"} minH={"100vh"} justify={"center"}>
           <VStack
+            gap={0}
             w={"100%"}
             maxW={"500px"}
             justify={"center"}
@@ -54,8 +55,8 @@ export default function Landing() {
               className="clicky"
               colorScheme="bnw"
               w={"100%"}
-              h={"50px"}
-              mb={4}
+              // h={"50px"}
+              mb={3}
               // borderRadius={"full"}
             >
               SIGN IN
@@ -69,7 +70,7 @@ export default function Landing() {
             </HStack>
           </VStack>
         </VStack>
-      </Page>
+      </Container>
     </Box>
   );
 }

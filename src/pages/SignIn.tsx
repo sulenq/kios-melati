@@ -1,6 +1,5 @@
-import Page from "../components/Page";
+import Container from "../components/Container";
 import {
-  Box,
   Button,
   Checkbox,
   FormControl,
@@ -141,13 +140,13 @@ export default function SignIn() {
     <>
       <VStack
         px={[3, null, 5]}
-        borderBottom={"2px solid var(--divider)"}
+        borderBottom={"1px solid var(--divider2)"}
         py={2}
       >
         <NavHeader title={"Sign In"} />
       </VStack>
 
-      <Page>
+      <Container>
         <VStack
           w={"100%"}
           minH={"calc(100vh - 70px)"}
@@ -171,8 +170,8 @@ export default function SignIn() {
               />
             </>
 
-            <Box>
-              <form onSubmit={formik.handleSubmit}>
+            <VStack justify={"center"} gap={0}>
+              <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
                 <FormControl mb={4}>
                   <FormLabel>Role</FormLabel>
                   <HStack
@@ -278,10 +277,10 @@ export default function SignIn() {
                   By default you will stay signed in for 24 hours
                 </Text>
               </form>
-            </Box>
+            </VStack>
           </SimpleGrid>
         </VStack>
-      </Page>
+      </Container>
     </>
   );
 }

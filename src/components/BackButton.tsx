@@ -14,8 +14,7 @@ export default function BackButton(props: any) {
       icon={
         <Icon
           as={ArrowLeft}
-          fontSize={18}
-          {...props.fontSize}
+          fontSize={props.fontSize || 20}
           {...props?.color}
         />
       }

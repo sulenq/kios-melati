@@ -1,10 +1,10 @@
 import AdminNav from "../components/AdminNav";
-import Page from "../components/Page";
+import Container from "../components/Container";
 
 export default function Admin() {
   return (
-    <Page>
+    <Container>
       <AdminNav />
-    </Page>
+    </Container>
   );
 }
