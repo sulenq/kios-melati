@@ -261,11 +261,11 @@ export default function Cashier() {
 
       <Container pt={1}>
         <Text fontSize={24} fontWeight={600} my={2}>
-          Order
+          Orders
         </Text>
 
         {order.orderList.map((o, i) => (
-          <OrderItem key={i} order={o} />
+          <OrderItem key={i} order={o} index={i} />
         ))}
       </Container>
     </>

@@ -11,17 +11,18 @@ import {
 } from "@chakra-ui/react";
 import useFormatNumber from "../utils/useFormatNumber";
 import useOrder, { OrderItem } from "../globalState/useOrder";
-import { Minus, Plus } from "@phosphor-icons/react";
+import { Minus, Plus, TrashSimple } from "@phosphor-icons/react";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
 
 type Props = {
   order: OrderItem;
+  index: number;
 };
 
-export default function OrderItemComponent({ order }: Props) {
+export default function OrderItemComponent({ order, index }: Props) {
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
-  const { setOrder } = useOrder();
+  const { setQty, deleteOrder } = useOrder();
 
   return (
     <HStack gap={3} justify={"space-between"} mb={3}>
@@ -52,34 +53,53 @@ export default function OrderItemComponent({ order }: Props) {
           <Text fontSize={15}>{fn(order.totalPrice)}</Text>
         </HStack>
 
-        <ButtonGroup isAttached>
+        <HStack gap={1}>
           <IconButton
-            className="btn-solid clicky"
-            aria-label="qtyMinusButton"
-            icon={<Icon as={Minus} />}
-          />
-
-          <Input
-            value={order.qty}
-            onChange={(e) => {
-              setOrder({
-                ...order,
-                qty: rfn(e.target.value),
-                totalPrice: rfn(e.target.value) * order.price,
-              });
+            onClick={() => {
+              deleteOrder(index);
             }}
-            textAlign={"right"}
-            borderRadius={"0 !important"}
-            placeholder="qty"
-            w={"50px"}
+            aria-label="deleteOrderButton"
+            icon={<Icon as={TrashSimple} fontSize={14} />}
+            className="btn-solid clicky"
           />
 
-          <IconButton
-            className="btn-solid clicky"
-            aria-label="qtyPlusButton"
-            icon={<Icon as={Plus} />}
-          />
-        </ButtonGroup>
+          <ButtonGroup isAttached>
+            <IconButton
+              onClick={() => {
+                setQty(index, order.qty > 1 ? order.qty - 1 : 1);
+              }}
+              className="btn-solid clicky"
+              aria-label="qtyMinusButton"
+              icon={<Icon as={Minus} />}
+            />
+
+            <Input
+              value={order.qty}
+              onChange={(e) => {
+                let qty;
+                if (e.target.value === "" || e.target.value === "0") {
+                  qty = 1;
+                } else {
+                  qty = rfn(e.target.value);
+                }
+                setQty(index, qty);
+              }}
+              textAlign={"right"}
+              borderRadius={"0 !important"}
+              placeholder="qty"
+              w={"50px"}
+            />
+
+            <IconButton
+              onClick={() => {
+                setQty(index, order.qty + 1);
+              }}
+              className="btn-solid clicky"
+              aria-label="qtyPlusButton"
+              icon={<Icon as={Plus} />}
+            />
+          </ButtonGroup>
+        </HStack>
       </VStack>
     </HStack>
   );
