@@ -49,7 +49,7 @@ export default function SearchProduct() {
 
   return (
     <Box h={"100vh"}>
-      <VStack borderBottom={"1px solid var(--divider)"} py={2} px={2}>
+      <VStack borderBottom={"1px solid var(--divider2)"} p={2}>
         <HeaderContainer>
           <NavHeader title={"Search Product"} right={null} />
         </HeaderContainer>

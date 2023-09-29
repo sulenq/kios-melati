@@ -138,7 +138,7 @@ export default function SignIn() {
 
   return (
     <>
-      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
+      <VStack borderBottom={"1px solid var(--divider2)"} p={2}>
         <NavHeader title={"Sign In"} />
       </VStack>
 

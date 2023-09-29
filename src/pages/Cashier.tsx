@@ -33,7 +33,7 @@ export default function Cashier() {
 
   return (
     <>
-      <VStack px={2} borderBottom={"1px solid var(--divider)"} py={2}>
+      <VStack borderBottom={"1px solid var(--divider2)"} p={2}>
         <NavHeader
           title={"Cashiering"}
           left={null}

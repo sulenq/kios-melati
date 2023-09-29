@@ -50,6 +50,7 @@ export default function Landing() {
               className="clicky"
               colorScheme="bnw"
               w={"100%"}
+              h={"44px"}
               // h={["40px", null, "50px"]}
               borderRadius={"full"}
             >
@@ -57,7 +58,7 @@ export default function Landing() {
             </Button>
 
             <HStack gap={1}>
-              <Text fontSize={14}>Don't have an account?</Text>
+              <Text>Don't have an account?</Text>
               <Text
                 fontSize={14}
                 as={Link}
