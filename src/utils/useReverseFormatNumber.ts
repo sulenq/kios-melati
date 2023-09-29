@@ -10,7 +10,7 @@ const useReverseFormatNumber = (numString: string) => {
   } else {
     cleanedString = "0";
   }
-  return cleanedString;
+  return parseInt(cleanedString);
 };
 
 export default useReverseFormatNumber;

@@ -24,26 +24,37 @@ import useSearchProduct from "../globalState/useSearchProduct";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
 import { useRef } from "react";
+import OrderItem from "../components/OrderItem";
+import useFormatNumber from "../utils/useFormatNumber";
 
 export default function Cashier() {
   const sw = useScreenWidth();
+  const fn = useFormatNumber;
   const { searchProduct, setSearchProduct } = useSearchProduct();
-  const { order } = useOrder();
+  const { order, resetOrder } = useOrder();
   const searchProductButton = useRef(null);
 
   return (
     <>
-      <VStack borderBottom={"1px solid var(--divider2)"} p={2}>
+      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
         <NavHeader
           title={"Cashiering"}
           left={null}
           right={
-            <IconButton
-              aria-label="newTransaction"
-              className="btn sm-clicky"
-              variant={"ghost"}
-              icon={<Icon as={Plus} fontSize={18} weight="bold" />}
-            />
+            <Tooltip
+              openDelay={1000}
+              label={"New Transaction"}
+              hasArrow
+              placement="left"
+            >
+              <IconButton
+                aria-label="newTransaction"
+                className="btn sm-clicky"
+                variant={"ghost"}
+                icon={<Icon as={Plus} fontSize={18} weight="bold" />}
+                onClick={resetOrder}
+              />
+            </Tooltip>
           }
         />
       </VStack>
@@ -70,14 +81,14 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {order.total}
+                  {fn(order.total) || 0}
                 </Text>
               </HStack>
             </HStack>
 
             <HStack gap={1} w={"100%"} maxW={"400px"}>
               <HStack gap={1}>
-                <Tooltip label={"Camera Scan"} hasArrow>
+                <Tooltip openDelay={1000} label={"Camera Scan"} hasArrow>
                   <IconButton
                     aria-label="cameraScan"
                     icon={<Icon as={Scan} fontSize={20} />}
@@ -107,7 +118,11 @@ export default function Cashier() {
                   />
 
                   <Box position={"absolute"} right={0} top={0}>
-                    <Tooltip label={"Open Seacrh Tab"} hasArrow>
+                    <Tooltip
+                      openDelay={1000}
+                      label={"Open Seacrh Tab"}
+                      hasArrow
+                    >
                       <IconButton
                         ref={searchProductButton}
                         as={Link}
@@ -125,7 +140,7 @@ export default function Cashier() {
               </HStack>
 
               <HStack justify={"flex-end"}>
-                <Tooltip label={"Chekout"} hasArrow>
+                <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
                   <IconButton
                     aria-label="checkoutButton"
                     colorScheme="ap"
@@ -151,7 +166,7 @@ export default function Cashier() {
         ) : (
           <HStack
             gap={4}
-            py={4}
+            py={3}
             justify={"space-between"}
             // borderBottom={"2px solid var(--divider)"}
           >
@@ -166,13 +181,13 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {order.total}
+                  {fn(order.total) || 0}
                 </Text>
               </HStack>
             </Box>
 
             <HStack w={"40%"}>
-              <Tooltip label={"Camera Scan"} hasArrow>
+              <Tooltip openDelay={1000} label={"Camera Scan"} hasArrow>
                 <IconButton
                   aria-label="cameraScan"
                   icon={<Icon as={Scan} fontSize={20} />}
@@ -202,7 +217,7 @@ export default function Cashier() {
                 />
 
                 <Box position={"absolute"} right={0} top={0}>
-                  <Tooltip label={"Open Seacrh Tab"} hasArrow>
+                  <Tooltip openDelay={1000} label={"Open Seacrh Tab"} hasArrow>
                     <IconButton
                       ref={searchProductButton}
                       as={Link}
@@ -219,7 +234,7 @@ export default function Cashier() {
             </HStack>
 
             <HStack w={"30%"} justify={"flex-end"}>
-              <Tooltip label={"Chekout"} hasArrow>
+              <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
                 <IconButton
                   aria-label="checkoutButton"
                   colorScheme="ap"
@@ -244,10 +259,14 @@ export default function Cashier() {
         )}
       </Container>
 
-      <Container pt={3}>
-        <Text fontSize={24} fontWeight={600}>
+      <Container pt={1}>
+        <Text fontSize={24} fontWeight={600} my={2}>
           Order
         </Text>
+
+        {order.orderList.map((o, i) => (
+          <OrderItem key={i} order={o} />
+        ))}
       </Container>
     </>
   );

@@ -15,6 +15,7 @@ export default function CashierNav(props: any) {
         position={"fixed"}
         left={0}
         bottom={0}
+        zIndex={99}
       >
         {props.children}
       </HStack>
@@ -29,6 +30,7 @@ export default function CashierNav(props: any) {
         borderRadius={"full"}
         p={"5px"}
         gap={1}
+        zIndex={99}
       >
         {cashierNav.map((n, i) => {
           return (
@@ -49,7 +51,7 @@ export default function CashierNav(props: any) {
           );
         })}
 
-        <ColorModeSwitcher borderRadius={"full"} />
+        <ColorModeSwitcher borderRadius={"full"} h={"42px !important"} />
       </HStack>
     </NavContainer>
   );

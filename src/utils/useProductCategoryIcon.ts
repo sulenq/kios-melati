@@ -2,7 +2,7 @@ import {
   BeerStein,
   DotsThreeCircle,
   FirstAidKit,
-  Hamburger,
+  ForkKnife,
   Lightning,
   PencilLine,
   Shower,
@@ -12,7 +12,7 @@ import {
 const useProductCategoryIcon = (category: string) => {
   switch (category) {
     case "Food":
-      return Hamburger;
+      return ForkKnife;
     case "Drink":
       return BeerStein;
     case "Stationery":

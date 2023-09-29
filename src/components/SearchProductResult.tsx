@@ -27,7 +27,7 @@ export default function SearchProductResult({
       <HStack gap={3}>
         <Icon as={productCategoryIcon(category)} fontSize={26} weight="light" />
         <Box>
-          <Tooltip label={name}>
+          <Tooltip label={name} hasArrow placement="right">
             <Text noOfLines={1}>{name}</Text>
           </Tooltip>
           <Text opacity={0.5} fontSize={[10, null, 12]}>

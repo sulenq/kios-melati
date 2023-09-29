@@ -13,6 +13,10 @@ import Cashier from "./pages/Cashier";
 import SearchProduct from "./pages/SearchProduct";
 
 export const App = () => {
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+  });
+
   return (
     <ChakraProvider theme={globalTheme}>
       <BrowserRouter>

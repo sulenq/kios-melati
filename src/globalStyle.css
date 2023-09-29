@@ -23,10 +23,17 @@
   --bt: #333333;
   --w: #ffffff;
   --wt: #ececec;
-  --divider: #acacac20;
-  --divider2: #acacac30;
-  --divider3: #acacac50;
+  --divider: #b4b4b420;
+  --divider2: #b4b4b440;
+  --divider3: #a0a0a0aa;
   --trans: #ff000000;
+}
+
+body {
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
 }
 
 a {
@@ -49,11 +56,11 @@ button {
 }
 .btn:hover:not(:disabled),
 .btn-solid:hover:not(:disabled) {
-  background: var(--divider);
+  background: var(--divider) !important;
 }
 .btn:active:not(:disabled),
 .btn-solid:active:not(:disabled) {
-  background: var(--divider2);
+  background: var(--divider2) !important;
 }
 .clicky:active:not(:disabled) {
   transform: scale(0.95);
