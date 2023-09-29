@@ -20,9 +20,9 @@ export default function Landing() {
       <Container>
         <VStack w={"100%"} minH={"100vh"} justify={"center"}>
           <VStack
-            gap={0}
+            gap={3}
             w={"100%"}
-            maxW={"500px"}
+            maxW={"420px"}
             justify={"center"}
             borderRadius={"12px"}
             p={5}
@@ -31,19 +31,14 @@ export default function Landing() {
           >
             <ColorModeSwitcher position={"absolute"} top={2} right={2} />
 
-            <HStack gap={4} alignSelf={"flex-start"}>
-              <Image src={"./logo512.png"} w={"64px"} mb={4} />
+            <HStack gap={4} alignSelf={"flex-start"} mb={1}>
+              <Image src={"./logo512.png"} w={"64px"} />
 
               <Box>
                 <Text fontWeight={600} opacity={0.5}>
                   Welcome to the
                 </Text>
-                <Text
-                  fontSize={[24, 28, 32]}
-                  fontWeight={800}
-                  lineHeight={1}
-                  mb={4}
-                >
+                <Text fontSize={24} fontWeight={800} lineHeight={1}>
                   JASMINE KIOSK
                 </Text>
               </Box>
@@ -55,16 +50,21 @@ export default function Landing() {
               className="clicky"
               colorScheme="bnw"
               w={"100%"}
-              // h={"50px"}
-              mb={3}
-              // borderRadius={"full"}
+              // h={["40px", null, "50px"]}
+              borderRadius={"full"}
             >
               SIGN IN
             </Button>
 
-            <HStack fontSize={14} gap={1}>
-              <Text>Don't have an account?</Text>
-              <Text as={Link} to={"/signup"} fontWeight={600} color={"p.500"}>
+            <HStack gap={1}>
+              <Text fontSize={14}>Don't have an account?</Text>
+              <Text
+                fontSize={14}
+                as={Link}
+                to={"/signup"}
+                fontWeight={600}
+                color={"p.500"}
+              >
                 Sign Up
               </Text>
             </HStack>

@@ -1,24 +1,19 @@
 import {
   Box,
-  Button,
   FormControl,
   HStack,
   Icon,
   IconButton,
   Input,
   Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   Tooltip,
   VStack,
   Modal,
   ModalContent,
   ModalBody,
   useDisclosure,
+  InputGroup,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import CashierNav from "../components/CashierNav";
 import Container from "../components/Container";
@@ -29,31 +24,46 @@ import {
   Plus,
   MagnifyingGlass,
   ArrowLeft,
+  ShoppingBagOpen,
 } from "@phosphor-icons/react";
 import { useScreenWidth } from "../utils";
-import products from "../const/products";
+// import products from "../const/products";
 import { useComponentsBg } from "../const/colorModeValues";
+import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
+import HeaderContainer from "../components/HeaderContainer";
+import { useEffect } from "react";
 // import products from "../const/products";
 
 export default function Cashier() {
   const sw = useScreenWidth();
   const cbg = useComponentsBg();
 
-  const SearchProductTab = () => {
+  const SearchProductTab = (props: any) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    useEffect(() => {
+      const handleBackButton = (event: PopStateEvent) => {
+        event.preventDefault();
+        onClose();
+      };
+
+      window.addEventListener("popstate", handleBackButton);
+
+      return () => {
+        window.removeEventListener("popstate", handleBackButton);
+      };
+    }, [onClose]);
 
     return (
       <>
         <Tooltip label={"Open Seacrh Tab"} hasArrow>
           <IconButton
             onClick={onOpen}
+            {...props}
             aria-label="indexProductButton"
             icon={<Icon as={MagnifyingGlass} fontSize={18} />}
             colorScheme="bnw"
             className="clicky"
-            position={"absolute"}
-            right={0}
-            top={0}
             zIndex={2}
           />
         </Tooltip>
@@ -63,89 +73,66 @@ export default function Cashier() {
           isOpen={isOpen}
           onClose={onClose}
           scrollBehavior="inside"
+          motionPreset="slideInRight"
         >
           <ModalContent>
             <ModalBody p={0}>
-              <HStack
-                py={2}
-                px={3}
-                position={"sticky"}
-                top={0}
-                left={0}
-                zIndex={2}
-                {...cbg}
-                borderBottom={"1px solid var(--divider2)"}
-              >
-                <IconButton
-                  aria-label="searchProductBackButton"
-                  icon={<Icon as={ArrowLeft} fontSize={20} />}
-                  className="btn sm-clicky"
-                  variant={"ghost"}
-                  onClick={onClose}
-                />
+              <VStack borderBottom={"1px solid var(--divider2)"} py={2} px={3}>
+                <HeaderContainer>
+                  <HStack
+                    w={"100%"}
+                    position={"sticky"}
+                    top={0}
+                    left={0}
+                    zIndex={2}
+                    {...cbg}
+                    justify={"space-between"}
+                  >
+                    <IconButton
+                      aria-label="searchProductBackButton"
+                      icon={<Icon as={ArrowLeft} fontSize={20} />}
+                      className="btn sm-clicky"
+                      variant={"ghost"}
+                      onClick={onClose}
+                    />
 
-                <Input
-                  name={"indexProduct"}
-                  placeholder="Index Product"
-                  bg={"var(--divider)"}
-                  border={"2px solid transparent !important"}
-                  pr={"50px !important"}
-                />
-              </HStack>
+                    <Text fontWeight={600} color={"p.500"} fontSize={15}>
+                      Search Product
+                    </Text>
 
-              <Box
-                px={[4, 6, 8]}
-                h={"calc(100% - 117px)"}
-                overflow={"auto"}
-                borderRadius={12}
-              >
-                <Table>
-                  <Thead>
-                    <Tr opacity={0.5}>
-                      <Th px={3} fontSize={10} pl={0}>
-                        Name
-                      </Th>
-                      <Th px={3} fontSize={10} isNumeric>
-                        Stock
-                      </Th>
-                      <Th px={3} fontSize={10} isNumeric>
-                        Price
-                      </Th>
-                      <Th px={3} fontSize={10}>
-                        Category
-                      </Th>
-                      <Th px={3} fontSize={10} pr={0}>
-                        Code
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {products.map((p, i) => (
-                      <Tr key={i}>
-                        <Td px={3} py={3} fontSize={14} pl={0}>
-                          <Text noOfLines={2}>{p.name}</Text>
-                        </Td>
+                    <ColorModeSwitcher className="btn sm-clicky" />
+                  </HStack>
+                </HeaderContainer>
+              </VStack>
 
-                        <Td px={3} py={3} opacity={0.5} isNumeric>
-                          <Text>{p.stock}</Text>
-                        </Td>
+              <Container>
+                <HStack justify={"center"} my={4}>
+                  <InputGroup maxW={"500px"}>
+                    <InputLeftElement pointerEvents="none">
+                      <Icon
+                        as={MagnifyingGlass}
+                        fontSize={18}
+                        mb={[1, null, 0]}
+                      />
+                    </InputLeftElement>
 
-                        <Td px={3} py={3} isNumeric>
-                          <Text>{p.price}</Text>
-                        </Td>
+                    <Input
+                      name={"indexProduct"}
+                      placeholder="Search Product"
+                      bg={"var(--divider)"}
+                      border={"2px solid transparent !important"}
+                      pl={"40px !important"}
+                    />
+                  </InputGroup>
+                </HStack>
+              </Container>
 
-                        <Td px={3} py={3} opacity={0.5}>
-                          <Text>{p.category}</Text>
-                        </Td>
-
-                        <Td px={3} py={3} opacity={0.5} pr={0}>
-                          <Text>{p.code}</Text>
-                        </Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </Box>
+              <Container>
+                <HStack py={2} borderBottom={"1px solid var(--divider)"}>
+                  <Text>Indomie Bakar</Text>
+                  <Text>3.000</Text>
+                </HStack>
+              </Container>
             </ModalBody>
           </ModalContent>
         </Modal>
@@ -205,9 +192,9 @@ export default function Cashier() {
               </HStack>
             </HStack>
 
-            <HStack w={"100%"} maxW={"400px"}>
+            <HStack gap={1} w={"100%"} maxW={"400px"}>
               <FormControl>
-                <HStack>
+                <HStack gap={1}>
                   <Tooltip label={"Camera Scan"} hasArrow>
                     <IconButton
                       aria-label="cameraScan"
@@ -226,22 +213,34 @@ export default function Cashier() {
                       pr={"50px !important"}
                     />
 
-                    <SearchProductTab />
+                    <Box position={"absolute"} right={0} top={0}>
+                      <SearchProductTab />
+                    </Box>
                   </Box>
                 </HStack>
               </FormControl>
 
               <HStack justify={"flex-end"}>
-                <IconButton
-                  aria-label="checkoutButton"
-                  colorScheme="bnw"
-                  className="clicky"
-                  fontSize={15}
-                  px={5}
-                  icon={
-                    <Icon as={ArrowElbowDownLeft} fontSize={18} weight="bold" />
-                  }
-                />
+                <Tooltip label={"Chekout"} hasArrow>
+                  <IconButton
+                    aria-label="checkoutButton"
+                    colorScheme="ap"
+                    className="clicky"
+                    fontSize={15}
+                    px={5}
+                    icon={
+                      <HStack>
+                        <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
+                        <Icon
+                          as={ArrowElbowDownLeft}
+                          fontSize={16}
+                          weight="bold"
+                          color={"wt"}
+                        />
+                      </HStack>
+                    }
+                  />
+                </Tooltip>
               </HStack>
             </HStack>
           </VStack>
@@ -289,24 +288,35 @@ export default function Cashier() {
                       pr={"50px"}
                     />
 
-                    <SearchProductTab />
+                    <Box position={"absolute"} right={0} top={0}>
+                      <SearchProductTab />
+                    </Box>
                   </Box>
                 </HStack>
               </FormControl>
             </Box>
 
             <HStack justify={"flex-end"}>
-              <Button
-                colorScheme="bnw"
-                className="clicky"
-                fontSize={15}
-                px={6}
-                rightIcon={
-                  <Icon as={ArrowElbowDownLeft} fontSize={18} weight="bold" />
-                }
-              >
-                CHECKOUT
-              </Button>
+              <Tooltip label={"Chekout"} hasArrow>
+                <IconButton
+                  aria-label="checkoutButton"
+                  colorScheme="ap"
+                  className="clicky"
+                  fontSize={15}
+                  px={5}
+                  icon={
+                    <HStack>
+                      <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
+                      <Icon
+                        as={ArrowElbowDownLeft}
+                        fontSize={16}
+                        weight="bold"
+                        color={"wt"}
+                      />
+                    </HStack>
+                  }
+                />
+              </Tooltip>
             </HStack>
           </HStack>
         )}

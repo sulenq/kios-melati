@@ -268,7 +268,7 @@ export default function SignIn() {
                   w={"100%"}
                   colorScheme="bnw"
                   mb={4}
-                  //   borderRadius={"full"}
+                    borderRadius={"full"}
                 >
                   SIGN IN
                 </Button>

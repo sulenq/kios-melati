@@ -25,7 +25,7 @@ export default function CashierNav(props: any) {
       <HStack
         bg={"var(--divider)"}
         backdropFilter={"blur(10px)"}
-        borderRadius={12}
+        borderRadius={"full"}
         p={"5px"}
         gap={1}
       >
@@ -37,6 +37,7 @@ export default function CashierNav(props: any) {
                   w={"42px"}
                   h={"42px !important"}
                   aria-label={n.name}
+                  borderRadius={"full"}
                   className="btn sm-clicky"
                   variant={"ghost"}
                   icon={<Icon as={n.icon} fontSize={18} />}

@@ -67,8 +67,8 @@ export const globalTheme = extendTheme({
     Modal: {
       baseStyle: (props) => ({
         dialog: {
-          bg: props.colorMode === "dark" ? "#080808" : "white",
-          color: props.colorMode === "dark" ? "wt" : "wt",
+          bg: props.colorMode === "dark" ? "black" : "white",
+          color: props.colorMode === "dark" ? "wt" : "bt",
           boxShadow: "none",
         },
       }),
@@ -88,7 +88,7 @@ export const globalTheme = extendTheme({
     Button: {
       baseStyle: {
         fontWeight: 700,
-        borderRadius: "8px",
+        borderRadius: "4px",
       },
     },
 
