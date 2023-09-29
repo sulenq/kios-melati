@@ -138,11 +138,7 @@ export default function SignIn() {
 
   return (
     <>
-      <VStack
-        px={[3, null, 5]}
-        borderBottom={"1px solid var(--divider)"}
-        py={2}
-      >
+      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
         <NavHeader title={"Sign In"} />
       </VStack>
 
@@ -268,7 +264,7 @@ export default function SignIn() {
                   w={"100%"}
                   colorScheme="bnw"
                   mb={4}
-                    borderRadius={"full"}
+                  borderRadius={"full"}
                 >
                   SIGN IN
                 </Button>

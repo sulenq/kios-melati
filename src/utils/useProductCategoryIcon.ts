@@ -11,19 +11,19 @@ import {
 
 const useProductCategoryIcon = (category: string) => {
   switch (category) {
-    case "food":
+    case "Food":
       return Hamburger;
-    case "drink":
+    case "Drink":
       return BeerStein;
-    case "stationery":
+    case "Stationery":
       return PencilLine;
-    case "hygiene":
+    case "Hygiene":
       return Shower;
-    case "medicine":
+    case "Medicine":
       return FirstAidKit;
-    case "electronic":
+    case "Electronic":
       return Lightning;
-    case "cosmetic":
+    case "Cosmetic":
       return Sparkle;
     default:
       return DotsThreeCircle;

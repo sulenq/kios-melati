@@ -23,18 +23,20 @@ import { Link } from "react-router-dom";
 import useSearchProduct from "../globalState/useSearchProduct";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
-// import products from "../const/products";
+import { useRef } from "react";
 
 export default function Cashier() {
   const sw = useScreenWidth();
   const { searchProduct, setSearchProduct } = useSearchProduct();
   const { order } = useOrder();
+  const searchProductButton = useRef(null);
 
   return (
     <>
       <VStack px={2} borderBottom={"1px solid var(--divider)"} py={2}>
         <NavHeader
           title={"Cashiering"}
+          left={null}
           right={
             <IconButton
               aria-label="newTransaction"
@@ -50,12 +52,7 @@ export default function Cashier() {
         <CashierNav />
 
         {sw < 770 ? (
-          <VStack
-            gap={3}
-            py={3}
-            justify={"space-between"}
-            // borderBottom={"2px solid var(--divider)"}
-          >
+          <VStack gap={3} py={3} justify={"space-between"}>
             <HStack
               w={"100%"}
               maxW={"400px"}
@@ -100,11 +97,19 @@ export default function Cashier() {
                     onChange={(e) => {
                       setSearchProduct(e.target.value);
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        if (searchProductButton.current) {
+                          (searchProductButton.current as HTMLElement).click();
+                        }
+                      }
+                    }}
                   />
 
                   <Box position={"absolute"} right={0} top={0}>
                     <Tooltip label={"Open Seacrh Tab"} hasArrow>
                       <IconButton
+                        ref={searchProductButton}
                         as={Link}
                         to={"/search-product"}
                         h={"36px"}
@@ -187,11 +192,19 @@ export default function Cashier() {
                   onChange={(e) => {
                     setSearchProduct(e.target.value);
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      if (searchProductButton.current) {
+                        (searchProductButton.current as HTMLElement).click();
+                      }
+                    }
+                  }}
                 />
 
                 <Box position={"absolute"} right={0} top={0}>
                   <Tooltip label={"Open Seacrh Tab"} hasArrow>
                     <IconButton
+                      ref={searchProductButton}
                       as={Link}
                       to={"/search-product"}
                       aria-label="indexProductButton"

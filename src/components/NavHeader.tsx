@@ -17,7 +17,11 @@ export default function NavHeader(props: any) {
       justify={"space-between"}
       bg={props.bg || navHeaderBg}
     >
-      <BackButton />
+      {props?.left === null ? (
+        <Box w={"40px"} />
+      ) : (
+        props?.left || <BackButton />
+      )}
 
       <Text fontWeight={600} color={"p.500"} fontSize={15}>
         {props.title}

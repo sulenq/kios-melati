@@ -49,7 +49,7 @@ export default function CashierNav(props: any) {
           );
         })}
 
-        <ColorModeSwitcher borderRadius={"full"}  />
+        <ColorModeSwitcher borderRadius={"full"} />
       </HStack>
     </NavContainer>
   );

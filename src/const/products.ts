@@ -1,16 +1,16 @@
 type Product = {
-  id: number | undefined | null;
-  CreatedAt: string | undefined | null;
-  UpdatedAt: string | undefined | null;
-  DeletedAt: string | undefined | null;
-  code: string | undefined | null;
-  name: string | undefined | null;
-  price: number | undefined | null;
-  stock: number | undefined | null;
-  user_id: number | undefined | null;
-  modal: number | undefined | null;
-  category: string | undefined | null;
-  color: string | undefined | null;
+  id: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+  DeletedAt: string | null;
+  code: string;
+  name: string;
+  price: number;
+  stock: number;
+  user_id: number;
+  modal: number;
+  category: string;
+  color: string;
 };
 
 type Products = Product[];
