@@ -29,16 +29,16 @@ export const globalTheme = extendTheme({
     bnw: {
       200: "white",
       300: "white",
-      500: "#080808",
-      600: "#080808",
+      500: "#000000",
+      600: "#000000",
     },
     wnb: {
-      200: "#080808",
-      300: "#080808",
+      200: "#000000",
+      300: "#000000",
       500: "white",
       600: "white",
     },
-    b: "#080808",
+    b: "#000000",
     bt: "#333333",
     w: "white",
     wt: "#eee",
@@ -47,7 +47,7 @@ export const globalTheme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: props.colorMode === "dark" ? "#080808" : "white",
+        bg: props.colorMode === "dark" ? "#000000" : "white",
         color: props.colorMode === "dark" ? "wt" : "bt",
       },
     }),
@@ -77,10 +77,10 @@ export const globalTheme = extendTheme({
     Menu: {
       baseStyle: (props) => ({
         list: {
-          bg: props.colorMode === "dark" ? "#080808" : "white",
+          bg: props.colorMode === "dark" ? "#000000" : "white",
         },
         item: {
-          bg: props.colorMode === "dark" ? "#080808" : "white",
+          bg: props.colorMode === "dark" ? "#000000" : "white",
         },
       }),
     },
@@ -98,7 +98,7 @@ export const globalTheme = extendTheme({
           _autofill: {
             boxShadow:
               props.colorMode === "dark"
-                ? "0 0 0px 1000px #080808 inset"
+                ? "0 0 0px 1000px #000000 inset"
                 : "0 0 0px 1000px #ffffff inset",
             border: "2px solid var(--divider) !important",
           },

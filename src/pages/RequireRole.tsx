@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import FullPageSpinner from "../components/FullPageSpinner";
 import { Navigate } from "react-router-dom";
 
-type Role = "admin" | "cashier";
+type Role = "admin" | "cashier" | "";
 type AllowedRoles = Role[];
 type Props = {
   allowedRoles: AllowedRoles;
@@ -31,11 +31,16 @@ export default function RequireRole({
         const authState = JSON.parse(authStateCookie);
         // console.log(authState);
 
-        if (authState.token && allowedRoles.includes(authState.role)) {
+        if (
+          (authState.token && allowedRoles.includes(authState.role)) ||
+          allowedRoles.length === 0
+        ) {
           console.log("authorized");
-          setTimeout(() => {
-            setPage(children);
-          }, 300);
+          setPage(<FullPageSpinner />);
+          // setTimeout(() => {
+          //   setPage(children);
+          // }, 500);
+          setPage(children);
         } else {
           console.log("unauthorized");
           signOut();

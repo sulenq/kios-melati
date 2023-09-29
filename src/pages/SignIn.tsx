@@ -95,7 +95,7 @@ export default function SignIn() {
             values.password === u.password
           ) {
             const token = process.env.REACT_APP_CASHIER_TOKEN;
-            console.log(token);
+            // console.log(token);
             setCookie("token", token, {
               expires: values.staySignedIn ? 7 : 1,
             });
@@ -140,7 +140,7 @@ export default function SignIn() {
     <>
       <VStack
         px={[3, null, 5]}
-        borderBottom={"1px solid var(--divider2)"}
+        borderBottom={"1px solid var(--divider)"}
         py={2}
       >
         <NavHeader title={"Sign In"} />

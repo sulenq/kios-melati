@@ -1,6 +1,7 @@
 import { HStack, Icon, IconButton, Tooltip } from "@chakra-ui/react";
 import cashierNav from "../const/cashierNav";
 import { Link, useLocation } from "react-router-dom";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 export default function CashierNav(props: any) {
   const location = useLocation();
@@ -47,6 +48,8 @@ export default function CashierNav(props: any) {
             </Tooltip>
           );
         })}
+
+        <ColorModeSwitcher borderRadius={"full"}  />
       </HStack>
     </NavContainer>
   );

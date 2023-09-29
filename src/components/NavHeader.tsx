@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Text } from "@chakra-ui/react";
 import BackButton from "./BackButton";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useComponentsBg } from "../const/colorModeValues";
@@ -23,7 +23,11 @@ export default function NavHeader(props: any) {
         {props.title}
       </Text>
 
-      {props?.right || <ColorModeSwitcher className="btn sm-clicky" />}
+      {props?.right === null ? (
+        <Box w={"40px"} />
+      ) : (
+        props?.right || <ColorModeSwitcher className="btn sm-clicky" />
+      )}
     </HStack>
   );
 }

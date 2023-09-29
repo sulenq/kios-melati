@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import Admin from "./pages/Admin";
 import RequireRole from "./pages/RequireRole";
 import Cashier from "./pages/Cashier";
+import SearchProduct from "./pages/SearchProduct";
 
 export const App = () => {
   return (
@@ -34,6 +35,15 @@ export const App = () => {
             element={
               <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
                 <Cashier />
+              </RequireRole>
+            }
+          />
+
+          <Route
+            path="/search-product"
+            element={
+              <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
+                <SearchProduct />
               </RequireRole>
             }
           />

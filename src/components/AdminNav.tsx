@@ -6,7 +6,7 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import { useScreenWidth } from "../utils";
+import useScreenWidth from "../utils/useGetScreenWidth";
 import adminNav from "../const/adminNav";
 import { Link } from "react-router-dom";
 
