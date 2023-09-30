@@ -49,19 +49,7 @@ export default function SearchProduct() {
     }
   }, []);
   const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
-  const { setOrder } = useOrder();
-  const handleAddOrder = (p: any) => {
-    setOrder({
-      id: p.id,
-      code: p.code,
-      name: p.name,
-      price: p.price,
-      qty: 1,
-      totalPrice: p.price,
-      stock: p.stock,
-      category: p.category,
-    });
-  };
+  const { addOrder } = useOrder();
 
   useEffect(() => {
     const filteredProducts = products.filter(
@@ -154,7 +142,16 @@ export default function SearchProduct() {
                 <Container
                   px={[2, 4, 6]}
                   onClick={() => {
-                    handleAddOrder(p);
+                    addOrder({
+                      id: p.id,
+                      code: p.code,
+                      name: p.name,
+                      price: p.price,
+                      qty: 1,
+                      totalPrice: p.price,
+                      stock: p.stock,
+                      category: p.category,
+                    });
                     setProductSearch("");
                     navigate("/cashier");
                   }}

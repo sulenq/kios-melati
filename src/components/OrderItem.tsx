@@ -1,5 +1,5 @@
 import {
-  ButtonGroup,
+  Box,
   HStack,
   Icon,
   IconButton,
@@ -38,7 +38,7 @@ export default function OrderItemComponent({ order }: Props) {
             }}
             aria-label="deleteOrderButton"
             icon={<Icon as={TrashSimple} fontSize={14} />}
-            className="btn-solid clicky"
+            className="btn-solid sm-clicky"
             minW={"30px !important"}
             flex={1}
           />
@@ -70,47 +70,54 @@ export default function OrderItemComponent({ order }: Props) {
           <Text fontSize={14}>{fn(order.totalPrice)}</Text>
         </HStack>
 
-        <HStack gap={1}>
-          <ButtonGroup isAttached>
-            <IconButton
-              onClick={() => {
-                setQty(order.id, order.qty > 1 ? order.qty - 1 : 1);
-              }}
-              className="btn-solid clicky"
-              aria-label="qtyMinusButton"
-              icon={<Icon as={Minus} />}
-            />
+        <Box position={"relative"} w={"120px"}>
+          <IconButton
+            onClick={() => {
+              setQty(order.id, order.qty > 1 ? order.qty - 1 : 1);
+            }}
+            className="btn-solid sm-clicky"
+            aria-label="qtyMinusButton"
+            icon={<Icon as={Minus} />}
+            position={"absolute"}
+            left={0}
+            top={0}
+            zIndex={2}
+          />
 
-            <Input
-              value={order.qty}
-              onChange={(e) => {
-                let qty;
-                if (e.target.value === "" || e.target.value === "0") {
-                  qty = 1;
-                } else {
-                  qty = rfn(e.target.value);
-                }
-                setQty(order.id, qty);
-              }}
-              onFocus={(e) => {
-                e.target.select();
-              }}
-              textAlign={"right"}
-              borderRadius={"0 !important"}
-              placeholder="qty"
-              w={"50px"}
-            />
+          <Input
+            value={order.qty}
+            onChange={(e) => {
+              let qty;
+              if (e.target.value === "" || e.target.value === "0") {
+                qty = 1;
+              } else {
+                qty = rfn(e.target.value);
+              }
+              setQty(order.id, qty);
+            }}
+            onFocus={(e) => {
+              e.target.select();
+            }}
+            textAlign={"right"}
+            placeholder="qty"
+            px={"48px !important"}
+            bg={"var(--divider)"}
+            border={"2px solid transparent !important"}
+          />
 
-            <IconButton
-              onClick={() => {
-                setQty(order.id, order.qty + 1);
-              }}
-              className="btn-solid clicky"
-              aria-label="qtyPlusButton"
-              icon={<Icon as={Plus} />}
-            />
-          </ButtonGroup>
-        </HStack>
+          <IconButton
+            onClick={() => {
+              setQty(order.id, order.qty + 1);
+            }}
+            className="btn-solid sm-clicky"
+            aria-label="qtyPlusButton"
+            icon={<Icon as={Plus} />}
+            position={"absolute"}
+            right={0}
+            top={0}
+            zIndex={2}
+          />
+        </Box>
       </VStack>
     </HStack>
   ) : (
@@ -122,7 +129,7 @@ export default function OrderItemComponent({ order }: Props) {
         }}
         aria-label="deleteOrderButton"
         icon={<Icon as={TrashSimple} fontSize={14} />}
-        className="btn-solid clicky"
+        className="btn-solid sm-clicky"
         minW={"30px !important"}
         flex={1}
       />
@@ -149,22 +156,26 @@ export default function OrderItemComponent({ order }: Props) {
         </Text>
       </VStack>
 
-      <HStack w={"10%"} gap={1}>
+      <HStack justify={"flex-end"} w={"10%"} gap={1}>
         <Text opacity={0.5} fontSize={[10, null, 12]}>
           @
         </Text>
         <Text>{fn(order.price)}</Text>
       </HStack>
 
-      <HStack gap={1} w={"20%"} justify={"flex-end"}>
-        <ButtonGroup isAttached>
+      <HStack w={"20%"} justify={"flex-end"}>
+        <Box position={"relative"} w={"120px"}>
           <IconButton
             onClick={() => {
               setQty(order.id, order.qty > 1 ? order.qty - 1 : 1);
             }}
-            className="btn-solid clicky"
+            className="btn-solid sm-clicky"
             aria-label="qtyMinusButton"
             icon={<Icon as={Minus} />}
+            position={"absolute"}
+            left={0}
+            top={0}
+            zIndex={2}
           />
 
           <Input
@@ -182,20 +193,25 @@ export default function OrderItemComponent({ order }: Props) {
               e.target.select();
             }}
             textAlign={"right"}
-            borderRadius={"0 !important"}
             placeholder="qty"
-            w={"50px"}
+            px={"48px !important"}
+            bg={"var(--divider)"}
+            border={"2px solid transparent !important"}
           />
 
           <IconButton
             onClick={() => {
               setQty(order.id, order.qty + 1);
             }}
-            className="btn-solid clicky"
+            className="btn-solid sm-clicky"
             aria-label="qtyPlusButton"
             icon={<Icon as={Plus} />}
+            position={"absolute"}
+            right={0}
+            top={0}
+            zIndex={2}
           />
-        </ButtonGroup>
+        </Box>
       </HStack>
 
       <HStack gap={1} w={"10%"} justify={"flex-end"}>

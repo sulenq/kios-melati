@@ -15,7 +15,7 @@ import useOrder from "../globalState/useOrder";
 import useFormatNumber from "../utils/useFormatNumber";
 
 export default function Checkout() {
-  const { order } = useOrder();
+  const { orderTotal, pay } = useOrder();
   const fn = useFormatNumber;
 
   return (
@@ -33,7 +33,7 @@ export default function Checkout() {
               mt={1}
               mb={4}
             >
-              <Text opacity={0.5}>Total</Text>
+              <Text opacity={0.5}>Total Order</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -44,7 +44,7 @@ export default function Checkout() {
                   lineHeight={1}
                   color={"p.500"}
                 >
-                  {fn(order.total) || 0}
+                  {fn(orderTotal) || 0}
                 </Text>
               </HStack>
             </HStack>
@@ -69,7 +69,7 @@ export default function Checkout() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {fn(order.pay - order.total) || 0}
+                  {fn(pay - orderTotal) || 0}
                 </Text>
               </HStack>
             </HStack>

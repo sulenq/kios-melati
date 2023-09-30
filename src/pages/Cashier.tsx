@@ -32,7 +32,7 @@ export default function Cashier() {
   const sw = useScreenWidth();
   const fn = useFormatNumber;
   const { productSearch, setProductSearch } = useProductSearch();
-  const { order, resetOrder } = useOrder();
+  const { orderList, resetOrder, orderTotal } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function Cashier() {
               align={"flex-start"}
               justify={"space-between"}
             >
-              <Text opacity={0.5}>Total</Text>
+              <Text opacity={0.5}>Total Order</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -88,7 +88,7 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {fn(order.total) || 0}
+                  {fn(orderTotal) || 0}
                 </Text>
               </HStack>
             </HStack>
@@ -165,7 +165,7 @@ export default function Cashier() {
                 <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
                   <Link to={"/checkout"}>
                     <IconButton
-                      isDisabled={order.orderList.length === 0 ? true : false}
+                      isDisabled={orderList.length === 0 ? true : false}
                       aria-label="checkoutButton"
                       colorScheme="ap"
                       className="clicky"
@@ -200,7 +200,7 @@ export default function Cashier() {
             // borderBottom={"2px solid var(--divider)"}
           >
             <Box w={"30%"}>
-              <Text opacity={0.5}>Total</Text>
+              <Text opacity={0.5}>Total Order</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -210,7 +210,7 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {fn(order.total) || 0}
+                  {fn(orderTotal) || 0}
                 </Text>
               </HStack>
             </Box>
@@ -282,7 +282,7 @@ export default function Cashier() {
               <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
                 <Link to={"/checkout"}>
                   <IconButton
-                    isDisabled={order.orderList.length === 0 ? true : false}
+                    isDisabled={orderList.length === 0 ? true : false}
                     aria-label="checkoutButton"
                     colorScheme="ap"
                     className="clicky"
@@ -307,7 +307,7 @@ export default function Cashier() {
         )}
       </Container>
 
-      {order.orderList.length === 0 && (
+      {orderList.length === 0 && (
         <VStack
           opacity={0.3}
           justify={"center"}
@@ -329,7 +329,7 @@ export default function Cashier() {
         </VStack>
       )}
 
-      {order.orderList.length !== 0 && (
+      {orderList.length !== 0 && (
         <Box
           pb={"72px"}
           overflow={"auto"}
@@ -341,7 +341,7 @@ export default function Cashier() {
             </Text>
           </Container>
 
-          {order.orderList
+          {orderList
             .slice()
             .reverse()
             .map((o, i) => (

@@ -12,6 +12,10 @@ export type OrderItem = {
 };
 
 type Order = {
+  orderList: OrderItem[] | [];
+  orderTotal: number;
+  pay: number;
+  change: number;
   order: {
     orderList: OrderItem[] | [];
     total: number;
@@ -22,6 +26,7 @@ type Order = {
 
 type Actions = {
   setOrder: (orderItem: OrderItem) => void;
+  addOrder: (orderItem: OrderItem) => void;
   setQty: (id: number, newQty: number) => void;
   deleteOrder: (id: number) => void;
   resetOrder: () => void;
@@ -29,7 +34,13 @@ type Actions = {
 };
 
 const useOrder = create<Order & Actions>((set) => ({
+  orderList: [],
+  orderTotal: 0,
+  pay: 0,
+  change: 0,
+
   order: { orderList: [], total: 0, pay: 0, change: 0 },
+
   setOrder: (newOrderItem) =>
     set((state) => {
       const curentTotal = state.order.total;
@@ -70,63 +81,92 @@ const useOrder = create<Order & Actions>((set) => ({
       }
     }),
 
+  addOrder: (newOrderItem) =>
+    set((state) => {
+      const curentTotal = state.orderTotal;
+      const existingOrderItemIndex = state.orderList.findIndex(
+        (o) => o.id === newOrderItem.id
+      );
+
+      if (existingOrderItemIndex !== -1) {
+        const updatedItem = {
+          ...state.orderList[existingOrderItemIndex],
+          qty: state.orderList[existingOrderItemIndex].qty + newOrderItem.qty,
+          totalPrice:
+            state.orderList[existingOrderItemIndex].totalPrice +
+            newOrderItem.totalPrice,
+        };
+
+        const updatedOrderList = [...state.orderList];
+        updatedOrderList[existingOrderItemIndex] = updatedItem;
+
+        return {
+          orderList: updatedOrderList,
+          orderTotal: curentTotal + newOrderItem.totalPrice,
+          pay: state.pay,
+          change: state.change,
+        };
+      } else {
+        return {
+          orderList: [...state.orderList, newOrderItem],
+          orderTotal: curentTotal + newOrderItem.totalPrice,
+          pay: state.pay,
+          change: state.change,
+        };
+      }
+    }),
+
   setQty: (id, newQty) =>
     set((state) => {
-      const index = state.order.orderList.findIndex((o) => o.id === id);
-      const curentTotal = state.order.total;
-      const newTotalPrice = state.order.orderList[index].price * newQty;
-      const qtyBefore = state.order.orderList[index].qty;
+      const index = state.orderList.findIndex((o) => o.id === id);
+      const curentTotal = state.orderTotal;
+      const newTotalPrice = state.orderList[index].price * newQty;
+      const qtyBefore = state.orderList[index].qty;
       const updatedTotal =
-        curentTotal - state.order.orderList[index].price * qtyBefore;
+        curentTotal - state.orderList[index].price * qtyBefore;
       const updatedItem = {
-        ...state.order.orderList[index],
+        ...state.orderList[index],
         qty: newQty,
         totalPrice: newTotalPrice,
       };
 
-      const updatedOrderList = [...state.order.orderList];
+      const updatedOrderList = [...state.orderList];
       updatedOrderList[index] = updatedItem;
 
       return {
-        order: {
-          orderList: updatedOrderList,
-          total: updatedTotal + newTotalPrice,
-          pay: state.order.pay,
-          change: state.order.change,
-        },
+        orderList: updatedOrderList,
+        orderTotal: updatedTotal + newTotalPrice,
+        pay: state.pay,
+        change: state.change,
       };
     }),
 
   deleteOrder: (id) =>
     set((state) => {
-      const index = state.order.orderList.findIndex((o) => o.id === id);
-      const curentTotal = state.order.total;
-      const totalPriceBefore = state.order.orderList[index].totalPrice;
-      const updatedOrderList = [...state.order.orderList];
+      const index = state.orderList.findIndex((o) => o.id === id);
+      const curentTotal = state.orderTotal;
+      const totalPriceBefore = state.orderList[index].totalPrice;
+      const updatedOrderList = [...state.orderList];
       updatedOrderList.splice(index, 1);
 
       return {
-        order: {
-          orderList: updatedOrderList,
-          total: curentTotal - totalPriceBefore,
-          pay: state.order.pay,
-          change: state.order.change,
-        },
+        orderList: updatedOrderList,
+        orderTotal: curentTotal - totalPriceBefore,
+        pay: state.pay,
+        change: state.change,
       };
     }),
 
   resetOrder: () =>
-    set(() => ({ order: { orderList: [], total: 0, pay: 0, change: 0 } })),
+    set(() => ({ orderList: [], orderTotal: 0, pay: 0, change: 0 })),
 
   setPay: (pay) =>
     set((state) => {
       return {
-        order: {
-          orderList: [...state.order.orderList],
-          total: state.order.total,
-          pay: pay,
-          change: state.order.pay - state.order.total,
-        },
+        orderList: [...state.orderList],
+        orderTotal: state.orderTotal,
+        pay: pay,
+        change: state.pay - state.orderTotal,
       };
     }),
 }));
