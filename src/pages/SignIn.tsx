@@ -174,7 +174,7 @@ export default function SignIn() {
                     p={1}
                     justify={"space-between"}
                     bg={"var(--divider)"}
-                    borderRadius={8}
+                    borderRadius={6}
                   >
                     <Text
                       w={"50%"}

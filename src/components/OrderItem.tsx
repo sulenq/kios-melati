@@ -1,5 +1,4 @@
 import {
-  Box,
   ButtonGroup,
   HStack,
   Icon,
@@ -13,32 +12,39 @@ import useFormatNumber from "../utils/useFormatNumber";
 import useOrder, { OrderItem } from "../globalState/useOrder";
 import { Minus, Plus, TrashSimple } from "@phosphor-icons/react";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
+import useProductCategoryIcon from "../utils/useProductCategoryIcon";
+import useScreenWidth from "../utils/useGetScreenWidth";
 
 type Props = {
   order: OrderItem;
-  index: number;
 };
 
-export default function OrderItemComponent({ order, index }: Props) {
+export default function OrderItemComponent({ order }: Props) {
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
+  const sw = useScreenWidth();
   const { setQty, deleteOrder } = useOrder();
+  const productCategoryIcon = useProductCategoryIcon;
 
   return (
-    <HStack gap={3} justify={"space-between"} mb={3}>
-      <HStack gap={3} align={"flex-start"}>
-        <IconButton
-          onClick={() => {
-            deleteOrder(order.id);
-          }}
-          aria-label="deleteOrderButton"
-          icon={<Icon as={TrashSimple} fontSize={14} />}
-          className="btn-solid clicky"
-          minW={"30px !important"}
-          h={"30px !important"}
-        />
+    <HStack gap={3} justify={"space-between"}>
+      <HStack gap={3}>
+        <VStack h={sw < 770 ? "61px" : "68px"} justify={"space-between"}>
+          <Icon mt={1} as={productCategoryIcon(order.category)} fontSize={18} />
 
-        <Box>
+          <IconButton
+            onClick={() => {
+              deleteOrder(order.id);
+            }}
+            aria-label="deleteOrderButton"
+            icon={<Icon as={TrashSimple} fontSize={14} />}
+            className="btn-solid clicky"
+            minW={"30px !important"}
+            flex={1}
+          />
+        </VStack>
+
+        <VStack gap={"2px"} justify={"space-between"} align={"flex-start"}>
           <Tooltip label={order.name} hasArrow placement="right">
             <Text noOfLines={1}>{order.name}</Text>
           </Tooltip>
@@ -53,7 +59,7 @@ export default function OrderItemComponent({ order, index }: Props) {
             </Text>
             <Text>{fn(order.price)}</Text>
           </HStack>
-        </Box>
+        </VStack>
       </HStack>
 
       <VStack align={"flex-end"} gap={1} flexShrink={0}>

@@ -18,7 +18,7 @@ export default function NavHeader(props: any) {
       bg={props.bg || navHeaderBg}
     >
       {props?.left === null ? (
-        <Box w={"40px"} />
+        <Box w={"40px"} h={"40px"} />
       ) : (
         props?.left || <BackButton />
       )}
@@ -28,7 +28,7 @@ export default function NavHeader(props: any) {
       </Text>
 
       {props?.right === null ? (
-        <Box w={"40px"} />
+        <Box w={"40px"} h={"40px"} />
       ) : (
         props?.right || <ColorModeSwitcher className="btn sm-clicky" />
       )}

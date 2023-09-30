@@ -23,7 +23,7 @@ export default function SearchProductResult({
   const productCategoryIcon = useProductCategoryIcon;
 
   return sw < 770 ? (
-    <HStack gap={3} justify={"space-between"} py={3}>
+    <HStack gap={3} justify={"space-between"}>
       <HStack gap={3}>
         <Icon as={productCategoryIcon(category)} fontSize={26} weight="light" />
         <Box>
@@ -50,13 +50,13 @@ export default function SearchProductResult({
       </VStack>
     </HStack>
   ) : (
-    <HStack gap={3} justify={"space-between"} py={3}>
+    <HStack gap={3} justify={"space-between"}>
       <HStack w={"5%"} justify={"flex-start"}>
         <Icon as={productCategoryIcon(category)} fontSize={20} weight="light" />
       </HStack>
 
       <Tooltip label={name} hasArrow placement="right">
-        <Text w={"30%"} noOfLines={1}>
+        <Text w={"40%"} noOfLines={1}>
           {name}
         </Text>
       </Tooltip>
@@ -65,7 +65,7 @@ export default function SearchProductResult({
         {code}
       </Text>
 
-      <Text w={"20%"} opacity={0.5} fontSize={[10, null, 12]}>{`Stock : ${fn(
+      <Text w={"10%"} opacity={0.5} fontSize={[10, null, 12]}>{`Stock : ${fn(
         stock
       )}`}</Text>
 

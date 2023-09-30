@@ -21,7 +21,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { Link } from "react-router-dom";
-import useSearchProduct from "../globalState/useProductSearch";
+import useProductSearch from "../globalState/useProductSearch";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
 import { useRef, useEffect } from "react";
@@ -31,7 +31,7 @@ import useFormatNumber from "../utils/useFormatNumber";
 export default function Cashier() {
   const sw = useScreenWidth();
   const fn = useFormatNumber;
-  const { searchProduct, setSearchProduct } = useSearchProduct();
+  const { productSearch, setProductSearch } = useProductSearch();
   const { order, resetOrder } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -113,9 +113,9 @@ export default function Cashier() {
                       bg={"var(--divider)"}
                       border={"2px solid transparent !important"}
                       pr={"50px !important"}
-                      value={searchProduct}
+                      value={productSearch}
                       onChange={(e) => {
-                        setSearchProduct(e.target.value);
+                        setProductSearch(e.target.value);
                       }}
                       onFocus={() => {
                         inputRef.current?.select();
@@ -163,24 +163,31 @@ export default function Cashier() {
 
               <HStack justify={"flex-end"}>
                 <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
-                  <IconButton
-                    aria-label="checkoutButton"
-                    colorScheme="ap"
-                    className="clicky"
-                    fontSize={15}
-                    px={5}
-                    icon={
-                      <HStack>
-                        <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
-                        <Icon
-                          as={ArrowElbowDownLeft}
-                          fontSize={16}
-                          weight="bold"
-                          color={"wt"}
-                        />
-                      </HStack>
-                    }
-                  />
+                  <Link to={"/checkout"}>
+                    <IconButton
+                      isDisabled={order.orderList.length === 0 ? true : false}
+                      aria-label="checkoutButton"
+                      colorScheme="ap"
+                      className="clicky"
+                      fontSize={15}
+                      px={5}
+                      icon={
+                        <HStack>
+                          <Icon
+                            as={ShoppingBagOpen}
+                            fontSize={24}
+                            color={"wt"}
+                          />
+                          <Icon
+                            as={ArrowElbowDownLeft}
+                            fontSize={16}
+                            weight="bold"
+                            color={"wt"}
+                          />
+                        </HStack>
+                      }
+                    />
+                  </Link>
                 </Tooltip>
               </HStack>
             </HStack>
@@ -227,9 +234,9 @@ export default function Cashier() {
                     bg={"var(--divider)"}
                     border={"2px solid transparent !important"}
                     pr={"50px"}
-                    value={searchProduct}
+                    value={productSearch}
                     onChange={(e) => {
-                      setSearchProduct(e.target.value);
+                      setProductSearch(e.target.value);
                     }}
                     onFocus={() => {
                       inputRef.current?.select();
@@ -273,24 +280,27 @@ export default function Cashier() {
 
             <HStack w={"30%"} justify={"flex-end"}>
               <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
-                <IconButton
-                  aria-label="checkoutButton"
-                  colorScheme="ap"
-                  className="clicky"
-                  fontSize={15}
-                  px={5}
-                  icon={
-                    <HStack>
-                      <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
-                      <Icon
-                        as={ArrowElbowDownLeft}
-                        fontSize={16}
-                        weight="bold"
-                        color={"wt"}
-                      />
-                    </HStack>
-                  }
-                />
+                <Link to={"/checkout"}>
+                  <IconButton
+                    isDisabled={order.orderList.length === 0 ? true : false}
+                    aria-label="checkoutButton"
+                    colorScheme="ap"
+                    className="clicky"
+                    fontSize={15}
+                    px={5}
+                    icon={
+                      <HStack>
+                        <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
+                        <Icon
+                          as={ArrowElbowDownLeft}
+                          fontSize={16}
+                          weight="bold"
+                          color={"wt"}
+                        />
+                      </HStack>
+                    }
+                  />
+                </Link>
               </Tooltip>
             </HStack>
           </HStack>
@@ -308,14 +318,13 @@ export default function Cashier() {
           h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
           position={"relative"}
           animation={"fade-in-fade 1s"}
-          transition={"300ms"}
         >
           <Image
             bottom={"0"}
             position={"absolute"}
             w={"100%"}
             maxW={"400px"}
-            src={"./img/cashier.png"}
+            src={"../img/cashier.png"}
           />
         </VStack>
       )}
@@ -327,17 +336,26 @@ export default function Cashier() {
           h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
         >
           <Container>
-            <Text fontSize={24} fontWeight={600}>
+            <Text fontSize={24} fontWeight={600} mb={2}>
               Orders
             </Text>
-
-            {order.orderList
-              .slice()
-              .reverse()
-              .map((o, i) => (
-                <OrderItem key={i} order={o} index={i} />
-              ))}
           </Container>
+
+          {order.orderList
+            .slice()
+            .reverse()
+            .map((o, i) => (
+              <Container>
+                <Box
+                  borderRadius={6}
+                  p={2}
+                  mb={2}
+                  _hover={{ bg: "var(--divider)" }}
+                >
+                  <OrderItem key={i} order={o} />
+                </Box>
+              </Container>
+            ))}
         </Box>
       )}
     </Box>

@@ -13,7 +13,7 @@ import HeaderContainer from "../components/HeaderContainer";
 import Container from "../components/Container";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import NavHeader from "../components/NavHeader";
-import useSearchProduct from "../globalState/useProductSearch";
+import useProductSearch from "../globalState/useProductSearch";
 import SearchProductResult from "../components/SearchProductResult";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import products from "../const/products";
@@ -39,7 +39,7 @@ export default function SearchProduct() {
 
   const sw = useScreenWidth();
   const navigate = useNavigate();
-  const { searchProduct, setSearchProduct } = useSearchProduct();
+  const { productSearch, setProductSearch } = useProductSearch();
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     if (inputRef.current) {
@@ -64,23 +64,17 @@ export default function SearchProduct() {
   };
 
   useEffect(() => {
-    let filterProductDelay = setTimeout(() => {
-      const filteredProducts = products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchProduct.toLowerCase()) ||
-          product.code.toLowerCase().includes(searchProduct.toLowerCase())
-      );
-      setFilteredProducts(filteredProducts);
-    }, 200);
-
-    return () => {
-      clearTimeout(filterProductDelay);
-    };
-  }, [searchProduct]);
+    const filteredProducts = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(productSearch.toLowerCase()) ||
+        product.code.toLowerCase().includes(productSearch.toLowerCase())
+    );
+    setFilteredProducts(filteredProducts);
+  }, [productSearch]);
 
   return (
-    <Box h={"100vh"}>
-      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
+    <VStack h={"100vh"}>
+      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
           <NavHeader title={"Cashiering - Product Search"} right={null} />
         </HeaderContainer>
@@ -100,9 +94,9 @@ export default function SearchProduct() {
               bg={"var(--divider)"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}
-              value={searchProduct}
+              value={productSearch}
               onChange={(e) => {
-                setSearchProduct(e.target.value);
+                setProductSearch(e.target.value);
               }}
               onFocus={() => {
                 inputRef.current?.select();
@@ -112,35 +106,24 @@ export default function SearchProduct() {
         </HStack>
       </Container>
 
-      {searchProduct === "" && (
+      {productSearch === "" && (
         <VStack
+          flex={1}
           opacity={0.3}
-          justify={"center"}
+          justify={"flex-end"}
           p={4}
-          minH={"400px"}
-          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
-          position={"relative"}
           animation={"fade-in-fade 1s"}
-          transition={"300ms"}
         >
-          <Image
-            bottom={"0"}
-            position={"absolute"}
-            w={"100%"}
-            maxW={"400px"}
-            src={"./img/search.png"}
-          />
+          <Image w={"100%"} maxW={"400px"} src={"../img/search.png"} />
         </VStack>
       )}
 
-      {searchProduct !== "" && filteredProducts.length === 0 && (
+      {productSearch !== "" && filteredProducts.length === 0 && (
         <VStack
+          flex={1}
           opacity={0.3}
           justify={"space-between"}
           p={4}
-          minH={"400px"}
-          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
-          position={"relative"}
           animation={"fade-in-fade 1s"}
           transition={"300ms"}
         >
@@ -148,12 +131,14 @@ export default function SearchProduct() {
             No Result
           </Text>
 
-          <Image w={"100%"} maxW={"400px"} src={"./img/noResult.png"} />
+          <Image w={"100%"} maxW={"400px"} src={"../img/noResult.png"} />
         </VStack>
       )}
 
-      {searchProduct !== "" && filteredProducts.length !== 0 && (
+      {productSearch !== "" && filteredProducts.length !== 0 && (
         <Box
+          w={"100%"}
+          pb={"16px"}
           overflow={"auto"}
           h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
         >
@@ -169,27 +154,31 @@ export default function SearchProduct() {
                 <Container
                   onClick={() => {
                     handleAddOrder(p);
-                    setSearchProduct("");
+                    setProductSearch("");
                     navigate("/cashier");
                   }}
                   key={i}
-                  _hover={{ bg: "var(--divider)" }}
-                  cursor="pointer"
-                  borderRadius={sw > 1280 ? 8 : 0}
                 >
-                  <SearchProductResult
-                    category={p?.category}
-                    name={p?.name}
-                    code={p?.code}
-                    price={p?.price}
-                    stock={p?.stock}
-                  />
+                  <Box
+                    cursor="pointer"
+                    _hover={{ bg: "var(--divider)" }}
+                    borderRadius={6}
+                    p={2}
+                  >
+                    <SearchProductResult
+                      category={p?.category}
+                      name={p?.name}
+                      code={p?.code}
+                      price={p?.price}
+                      stock={p?.stock}
+                    />
+                  </Box>
                 </Container>
               );
             })}
           </Box>
         </Box>
       )}
-    </Box>
+    </VStack>
   );
 }

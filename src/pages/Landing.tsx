@@ -16,7 +16,7 @@ export default function Landing() {
   // const signInColor = useColorModeValue("bt", "wt");
 
   return (
-    <Box bgImage={"./img/grocery.jpg"} bgSize={"cover"}>
+    <Box bgImage={"../img/grocery.jpg"} bgSize={"cover"}>
       <Container>
         <VStack w={"100%"} minH={"100vh"} justify={"center"}>
           <VStack
