@@ -140,7 +140,10 @@ export default function Cashier() {
                     <HStack gap={"2px"} position={"absolute"} right={0} top={0}>
                       {productSearch && (
                         <IconButton
-                          onClick={resetProductSearch}
+                          onClick={() => {
+                            inputRef.current?.focus();
+                            resetProductSearch();
+                          }}
                           _hover={{ bg: "transparent !important" }}
                           _active={{ bg: "transparent !Important" }}
                           zIndex={2}
@@ -269,7 +272,10 @@ export default function Cashier() {
                   <Box position={"absolute"} right={0} top={0}>
                     {productSearch && (
                       <IconButton
-                        onClick={resetProductSearch}
+                        onClick={() => {
+                          inputRef.current?.focus();
+                          resetProductSearch();
+                        }}
                         _hover={{ bg: "transparent !important" }}
                         _active={{ bg: "transparent !Important" }}
                         zIndex={2}
@@ -337,7 +343,7 @@ export default function Cashier() {
           pb={"80px"}
           minH={"400px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
+          h={sw < 770 ? "calc(100% - 162px)" : "calc(100% - 136px)"}
           position={"relative"}
           animation={"fade-in-fade 1s"}
         >
