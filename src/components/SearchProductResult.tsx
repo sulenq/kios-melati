@@ -36,7 +36,7 @@ export default function SearchProductResult({
         </Box>
       </HStack>
 
-      <VStack align={"flex-end"} gap={0} mr={2} flexShrink={0}>
+      <VStack align={"flex-end"} gap={0} mr={1} flexShrink={0}>
         <HStack gap={1}>
           <Text opacity={0.5} fontSize={[10, null, 12]}>
             Rp

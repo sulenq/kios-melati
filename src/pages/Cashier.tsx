@@ -125,6 +125,11 @@ export default function Cashier() {
                         }
                       }
                     }}
+                    onBlur={(e) => {
+                      if (searchProductButton.current) {
+                        (searchProductButton.current as HTMLElement).click();
+                      }
+                    }}
                   />
 
                   <Box position={"absolute"} right={0} top={0}>
@@ -226,6 +231,11 @@ export default function Cashier() {
                       if (searchProductButton.current) {
                         (searchProductButton.current as HTMLElement).click();
                       }
+                    }
+                  }}
+                  onBlur={(e) => {
+                    if (searchProductButton.current) {
+                      (searchProductButton.current as HTMLElement).click();
                     }
                   }}
                 />

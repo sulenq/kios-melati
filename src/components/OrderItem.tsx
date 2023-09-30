@@ -55,7 +55,7 @@ export default function OrderItemComponent({ order, index }: Props) {
         </Box>
       </HStack>
 
-      <VStack align={"flex-end"} gap={2} mr={2} flexShrink={0}>
+      <VStack align={"flex-end"} gap={2} flexShrink={0}>
         <HStack gap={1}>
           <Text opacity={0.5} fontSize={[10, null, 12]}>
             Rp
@@ -84,6 +84,9 @@ export default function OrderItemComponent({ order, index }: Props) {
                   qty = rfn(e.target.value);
                 }
                 setQty(order.id, qty);
+              }}
+              onFocus={(e) => {
+                e.target.select();
               }}
               textAlign={"right"}
               borderRadius={"0 !important"}
