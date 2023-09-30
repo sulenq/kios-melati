@@ -95,7 +95,10 @@ export default function SearchProduct() {
                 position={"absolute"}
                 right={0}
                 top={0}
-                onClick={resetProductSearch}
+                onClick={() => {
+                  inputRef.current?.focus();
+                  resetProductSearch();
+                }}
                 _hover={{ bg: "transparent !important" }}
                 _active={{ bg: "transparent !Important" }}
                 zIndex={2}
