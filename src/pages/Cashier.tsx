@@ -65,7 +65,7 @@ export default function Cashier() {
         />
       </VStack>
 
-      <Container borderBottom={"1px solid var(--divider)"}>
+      <Container>
         <CashierNav />
 
         {sw < 770 ? (
@@ -234,11 +234,17 @@ export default function Cashier() {
                       inputRef.current?.select();
                     }}
                     onKeyDown={(e) => {
-                      e.preventDefault();
                       if (e.key === "Enter") {
+                        e.preventDefault();
                         if (searchProductButton.current) {
                           (searchProductButton.current as HTMLElement).click();
                         }
+                      }
+                    }}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (searchProductButton.current) {
+                        (searchProductButton.current as HTMLElement).click();
                       }
                     }}
                   />
@@ -291,23 +297,25 @@ export default function Cashier() {
         )}
       </Container>
 
-      <Box
-        overflow={"auto"}
-        h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
-      >
-        <Container pt={1} pb={"72px"}>
-          <Text fontSize={24} fontWeight={600} my={2}>
-            Orders
-          </Text>
+      {order.orderList.length !== 0 && (
+        <Box
+          overflow={"auto"}
+          h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
+        >
+          <Container pb={"72px"}>
+            <Text fontSize={24} fontWeight={600}>
+              Orders
+            </Text>
 
-          {order.orderList
-            .slice()
-            .reverse()
-            .map((o, i) => (
-              <OrderItem key={i} order={o} index={i} />
-            ))}
-        </Container>
-      </Box>
+            {order.orderList
+              .slice()
+              .reverse()
+              .map((o, i) => (
+                <OrderItem key={i} order={o} index={i} />
+              ))}
+          </Container>
+        </Box>
+      )}
     </Box>
   );
 }
