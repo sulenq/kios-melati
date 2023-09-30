@@ -104,29 +104,39 @@ export default function Cashier() {
                 </Tooltip>
 
                 <Box position={"relative"} w={"100%"}>
-                  <Input
-                    ref={inputRef}
-                    name={"indexProduct"}
-                    placeholder="Index Product"
-                    bg={"var(--divider)"}
-                    border={"2px solid transparent !important"}
-                    pr={"50px !important"}
-                    value={searchProduct}
-                    onChange={(e) => {
-                      setSearchProduct(e.target.value);
-                    }}
-                    onFocus={() => {
-                      inputRef.current?.select();
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
+                  <form>
+                    <Input
+                      ref={inputRef}
+                      name={"indexProduct"}
+                      placeholder="Index Product"
+                      bg={"var(--divider)"}
+                      border={"2px solid transparent !important"}
+                      pr={"50px !important"}
+                      value={searchProduct}
+                      onChange={(e) => {
+                        setSearchProduct(e.target.value);
+                      }}
+                      onFocus={() => {
+                        inputRef.current?.select();
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          if (searchProductButton.current) {
+                            (
+                              searchProductButton.current as HTMLElement
+                            ).click();
+                          }
+                        }
+                      }}
+                      onSubmit={(e) => {
                         e.preventDefault();
                         if (searchProductButton.current) {
                           (searchProductButton.current as HTMLElement).click();
                         }
-                      }
-                    }}
-                  />
+                      }}
+                    />
+                  </form>
 
                   <Box position={"absolute"} right={0} top={0}>
                     <Tooltip
@@ -208,44 +218,50 @@ export default function Cashier() {
               </Tooltip>
 
               <Box position={"relative"} w={"100%"}>
-                <Input
-                  ref={inputRef}
-                  name={"indexProduct"}
-                  placeholder="Index Product"
-                  bg={"var(--divider)"}
-                  border={"2px solid transparent !important"}
-                  pr={"50px"}
-                  value={searchProduct}
-                  onChange={(e) => {
-                    setSearchProduct(e.target.value);
-                  }}
-                  onFocus={() => {
-                    inputRef.current?.select();
-                  }}
-                  onKeyDown={(e) => {
-                    e.preventDefault();
-                    if (e.key === "Enter") {
-                      if (searchProductButton.current) {
-                        (searchProductButton.current as HTMLElement).click();
+                <form>
+                  <Input
+                    ref={inputRef}
+                    name={"indexProduct"}
+                    placeholder="Index Product"
+                    bg={"var(--divider)"}
+                    border={"2px solid transparent !important"}
+                    pr={"50px"}
+                    value={searchProduct}
+                    onChange={(e) => {
+                      setSearchProduct(e.target.value);
+                    }}
+                    onFocus={() => {
+                      inputRef.current?.select();
+                    }}
+                    onKeyDown={(e) => {
+                      e.preventDefault();
+                      if (e.key === "Enter") {
+                        if (searchProductButton.current) {
+                          (searchProductButton.current as HTMLElement).click();
+                        }
                       }
-                    }
-                  }}
-                />
+                    }}
+                  />
 
-                <Box position={"absolute"} right={0} top={0}>
-                  <Tooltip openDelay={1000} label={"Open Seacrh Tab"} hasArrow>
-                    <IconButton
-                      ref={searchProductButton}
-                      as={Link}
-                      to={"/search-product"}
-                      aria-label="indexProductButton"
-                      icon={<Icon as={MagnifyingGlass} fontSize={18} />}
-                      colorScheme="bnw"
-                      className="clicky"
-                      zIndex={2}
-                    />
-                  </Tooltip>
-                </Box>
+                  <Box position={"absolute"} right={0} top={0}>
+                    <Tooltip
+                      openDelay={1000}
+                      label={"Open Seacrh Tab"}
+                      hasArrow
+                    >
+                      <IconButton
+                        ref={searchProductButton}
+                        as={Link}
+                        to={"/search-product"}
+                        aria-label="indexProductButton"
+                        icon={<Icon as={MagnifyingGlass} fontSize={18} />}
+                        colorScheme="bnw"
+                        className="clicky"
+                        zIndex={2}
+                      />
+                    </Tooltip>
+                  </Box>
+                </form>
               </Box>
             </HStack>
 
