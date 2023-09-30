@@ -27,7 +27,12 @@ export default function Checkout() {
       <Container flex={1}>
         <VStack flex={1} justify={"space-between"}>
           <Box w={"100%"} maxW={"400px"} mx={"auto"}>
-            <HStack justify={"space-between"} mb={4}>
+            <HStack
+              align={"flex-start"}
+              justify={"space-between"}
+              mt={1}
+              mb={4}
+            >
               <Text opacity={0.5}>Total</Text>
 
               <HStack align={"flex-end"}>

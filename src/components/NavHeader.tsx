@@ -16,6 +16,7 @@ export default function NavHeader(props: any) {
       left={0}
       justify={"space-between"}
       bg={props.bg || navHeaderBg}
+      animation={"fade-in 300ms"}
     >
       {props?.left === null ? (
         <Box w={"40px"} h={"40px"} />

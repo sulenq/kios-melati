@@ -152,6 +152,7 @@ export default function SearchProduct() {
             {filteredProducts.map((p, i) => {
               return (
                 <Container
+                  px={[2, 4, 6]}
                   onClick={() => {
                     handleAddOrder(p);
                     setProductSearch("");

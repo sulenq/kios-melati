@@ -345,7 +345,7 @@ export default function Cashier() {
             .slice()
             .reverse()
             .map((o, i) => (
-              <Container>
+              <Container px={[2, 4, 6]}>
                 <Box
                   borderRadius={6}
                   p={2}

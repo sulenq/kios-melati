@@ -26,7 +26,7 @@ export default function OrderItemComponent({ order }: Props) {
   const { setQty, deleteOrder } = useOrder();
   const productCategoryIcon = useProductCategoryIcon;
 
-  return (
+  return sw < 770 ? (
     <HStack gap={3} justify={"space-between"}>
       <HStack gap={3}>
         <VStack h={sw < 770 ? "61px" : "68px"} justify={"space-between"}>
@@ -55,7 +55,7 @@ export default function OrderItemComponent({ order }: Props) {
 
           <HStack gap={1}>
             <Text opacity={0.5} fontSize={[10, null, 12]}>
-              Rp
+              @
             </Text>
             <Text>{fn(order.price)}</Text>
           </HStack>
@@ -112,6 +112,98 @@ export default function OrderItemComponent({ order }: Props) {
           </ButtonGroup>
         </HStack>
       </VStack>
+    </HStack>
+  ) : (
+    <HStack gap={3} justify={"space-between"}>
+      <IconButton
+        w={"5%"}
+        onClick={() => {
+          deleteOrder(order.id);
+        }}
+        aria-label="deleteOrderButton"
+        icon={<Icon as={TrashSimple} fontSize={14} />}
+        className="btn-solid clicky"
+        minW={"30px !important"}
+        flex={1}
+      />
+
+      <Icon
+        w={"5%"}
+        mt={1}
+        as={productCategoryIcon(order.category)}
+        fontSize={25}
+      />
+
+      <VStack
+        w={"50%"}
+        gap={"2px"}
+        justify={"space-between"}
+        align={"flex-start"}
+      >
+        <Tooltip label={order.name} hasArrow placement="right">
+          <Text noOfLines={1}>{order.name}</Text>
+        </Tooltip>
+
+        <Text opacity={0.5} fontSize={[10, null, 12]}>
+          {order.code}
+        </Text>
+      </VStack>
+
+      <HStack w={"10%"} gap={1}>
+        <Text opacity={0.5} fontSize={[10, null, 12]}>
+          @
+        </Text>
+        <Text>{fn(order.price)}</Text>
+      </HStack>
+
+      <HStack gap={1} w={"20%"} justify={"flex-end"}>
+        <ButtonGroup isAttached>
+          <IconButton
+            onClick={() => {
+              setQty(order.id, order.qty > 1 ? order.qty - 1 : 1);
+            }}
+            className="btn-solid clicky"
+            aria-label="qtyMinusButton"
+            icon={<Icon as={Minus} />}
+          />
+
+          <Input
+            value={order.qty}
+            onChange={(e) => {
+              let qty;
+              if (e.target.value === "" || e.target.value === "0") {
+                qty = 1;
+              } else {
+                qty = rfn(e.target.value);
+              }
+              setQty(order.id, qty);
+            }}
+            onFocus={(e) => {
+              e.target.select();
+            }}
+            textAlign={"right"}
+            borderRadius={"0 !important"}
+            placeholder="qty"
+            w={"50px"}
+          />
+
+          <IconButton
+            onClick={() => {
+              setQty(order.id, order.qty + 1);
+            }}
+            className="btn-solid clicky"
+            aria-label="qtyPlusButton"
+            icon={<Icon as={Plus} />}
+          />
+        </ButtonGroup>
+      </HStack>
+
+      <HStack gap={1} w={"10%"} justify={"flex-end"}>
+        <Text opacity={0.5} fontSize={[10, null, 12]}>
+          Rp
+        </Text>
+        <Text fontSize={14}>{fn(order.totalPrice)}</Text>
+      </HStack>
     </HStack>
   );
 }
