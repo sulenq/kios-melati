@@ -18,6 +18,7 @@ import {
   Plus,
   MagnifyingGlass,
   ShoppingBagOpen,
+  X,
 } from "@phosphor-icons/react";
 
 import { Link } from "react-router-dom";
@@ -31,7 +32,8 @@ import useFormatNumber from "../utils/useFormatNumber";
 export default function Cashier() {
   const sw = useScreenWidth();
   const fn = useFormatNumber;
-  const { productSearch, setProductSearch } = useProductSearch();
+  const { productSearch, setProductSearch, resetProductSearch } =
+    useProductSearch();
   const { orderList, resetOrder, orderTotal } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -112,13 +114,10 @@ export default function Cashier() {
                       placeholder="Index Product"
                       bg={"var(--divider)"}
                       border={"2px solid transparent !important"}
-                      pr={"50px !important"}
+                      pr={"70px !important"}
                       value={productSearch}
                       onChange={(e) => {
                         setProductSearch(e.target.value);
-                      }}
-                      onFocus={() => {
-                        inputRef.current?.select();
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -138,7 +137,20 @@ export default function Cashier() {
                       }}
                     />
 
-                    <Box position={"absolute"} right={0} top={0}>
+                    <HStack gap={"2px"} position={"absolute"} right={0} top={0}>
+                      {productSearch && (
+                        <IconButton
+                          onClick={resetProductSearch}
+                          _hover={{ bg: "transparent !important" }}
+                          _active={{ bg: "transparent !Important" }}
+                          zIndex={2}
+                          variant={"ghost"}
+                          className="sm-clicky"
+                          aria-label="clearSearchButton"
+                          icon={<Icon as={X} fontSize={16} />}
+                        />
+                      )}
+
                       <Tooltip
                         openDelay={1000}
                         label={"Open Seacrh Tab"}
@@ -156,7 +168,7 @@ export default function Cashier() {
                           zIndex={2}
                         />
                       </Tooltip>
-                    </Box>
+                    </HStack>
                   </form>
                 </Box>
               </HStack>
@@ -238,9 +250,6 @@ export default function Cashier() {
                     onChange={(e) => {
                       setProductSearch(e.target.value);
                     }}
-                    onFocus={() => {
-                      inputRef.current?.select();
-                    }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -258,6 +267,19 @@ export default function Cashier() {
                   />
 
                   <Box position={"absolute"} right={0} top={0}>
+                    {productSearch && (
+                      <IconButton
+                        onClick={resetProductSearch}
+                        _hover={{ bg: "transparent !important" }}
+                        _active={{ bg: "transparent !Important" }}
+                        zIndex={2}
+                        variant={"ghost"}
+                        className="sm-clicky"
+                        aria-label="clearSearchButton"
+                        icon={<Icon as={X} fontSize={16} />}
+                      />
+                    )}
+
                     <Tooltip
                       openDelay={1000}
                       label={"Open Seacrh Tab"}

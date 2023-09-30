@@ -2,6 +2,7 @@ import {
   Box,
   HStack,
   Icon,
+  IconButton,
   Image,
   Input,
   InputGroup,
@@ -11,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import HeaderContainer from "../components/HeaderContainer";
 import Container from "../components/Container";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import NavHeader from "../components/NavHeader";
 import useProductSearch from "../globalState/useProductSearch";
 import SearchProductResult from "../components/SearchProductResult";
@@ -39,7 +40,8 @@ export default function SearchProduct() {
 
   const sw = useScreenWidth();
   const navigate = useNavigate();
-  const { productSearch, setProductSearch } = useProductSearch();
+  const { productSearch, setProductSearch, resetProductSearch } =
+    useProductSearch();
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     if (inputRef.current) {
@@ -70,7 +72,7 @@ export default function SearchProduct() {
 
       <Container>
         <HStack justify={"center"} py={3}>
-          <InputGroup maxW={"473px"}>
+          <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
               <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />
             </InputLeftElement>
@@ -86,10 +88,23 @@ export default function SearchProduct() {
               onChange={(e) => {
                 setProductSearch(e.target.value);
               }}
-              onFocus={() => {
-                inputRef.current?.select();
-              }}
             />
+
+            {productSearch && (
+              <IconButton
+                position={"absolute"}
+                right={0}
+                top={0}
+                onClick={resetProductSearch}
+                _hover={{ bg: "transparent !important" }}
+                _active={{ bg: "transparent !Important" }}
+                zIndex={2}
+                variant={"ghost"}
+                className="sm-clicky"
+                aria-label="clearSearchButton"
+                icon={<Icon as={X} fontSize={16} />}
+              />
+            )}
           </InputGroup>
         </HStack>
       </Container>

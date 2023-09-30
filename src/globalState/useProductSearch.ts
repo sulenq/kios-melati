@@ -6,13 +6,13 @@ type SearchProduct = {
 
 type Actions = {
   setProductSearch: (search: SearchProduct["productSearch"]) => void;
-  resetSearchProduct: () => void;
+  resetProductSearch: () => void;
 };
 
 const useProductSearch = create<SearchProduct & Actions>((set) => ({
   productSearch: "",
   setProductSearch: (search) => set(() => ({ productSearch: search })),
-  resetSearchProduct: () => set(() => ({ productSearch: "" })),
+  resetProductSearch: () => set(() => ({ productSearch: "" })),
 }));
 
 export default useProductSearch;
