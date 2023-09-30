@@ -10,7 +10,7 @@ import SignIn from "./pages/SignIn";
 import Admin from "./pages/Admin";
 import RequireRole from "./pages/RequireRole";
 import Cashier from "./pages/Cashier";
-import SearchProduct from "./pages/SearchProduct";
+import SearchProduct from "./pages/ProductSearch";
 import Checkout from "./pages/Checkout";
 
 export const App = () => {

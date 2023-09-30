@@ -351,6 +351,9 @@ export default function Cashier() {
                   p={2}
                   mb={2}
                   _hover={{ bg: "var(--divider)" }}
+                  // w={"100%"}
+                  // maxW={"700px"}
+                  // mx={"auto"}
                 >
                   <OrderItem key={i} order={o} />
                 </Box>
