@@ -20,10 +20,11 @@ export default function NotFound() {
       </Text>
 
       <Button
-        h={"50px"}
+        h={"44px"}
         colorScheme="bnw"
         px={8}
         className="clicky"
+        borderRadius={"full"}
         as={Link}
         to={"/"}
       >

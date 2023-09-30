@@ -21,7 +21,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { Link } from "react-router-dom";
-import useSearchProduct from "../globalState/useSearchProduct";
+import useSearchProduct from "../globalState/useProductSearch";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
 import { useRef, useEffect } from "react";
@@ -137,27 +137,27 @@ export default function Cashier() {
                         }
                       }}
                     />
-                  </form>
 
-                  <Box position={"absolute"} right={0} top={0}>
-                    <Tooltip
-                      openDelay={1000}
-                      label={"Open Seacrh Tab"}
-                      hasArrow
-                    >
-                      <IconButton
-                        ref={searchProductButton}
-                        as={Link}
-                        to={"/search-product"}
-                        h={"36px"}
-                        aria-label="indexProductButton"
-                        icon={<Icon as={MagnifyingGlass} fontSize={18} />}
-                        colorScheme="bnw"
-                        className="clicky"
-                        zIndex={2}
-                      />
-                    </Tooltip>
-                  </Box>
+                    <Box position={"absolute"} right={0} top={0}>
+                      <Tooltip
+                        openDelay={1000}
+                        label={"Open Seacrh Tab"}
+                        hasArrow
+                      >
+                        <IconButton
+                          ref={searchProductButton}
+                          as={Link}
+                          to={"/search-product"}
+                          h={"36px"}
+                          aria-label="indexProductButton"
+                          icon={<Icon as={MagnifyingGlass} fontSize={18} />}
+                          // colorScheme="bnw"
+                          className="btn-solid clicky"
+                          zIndex={2}
+                        />
+                      </Tooltip>
+                    </Box>
+                  </form>
                 </Box>
               </HStack>
 
@@ -262,8 +262,7 @@ export default function Cashier() {
                         to={"/search-product"}
                         aria-label="indexProductButton"
                         icon={<Icon as={MagnifyingGlass} fontSize={18} />}
-                        colorScheme="bnw"
-                        className="clicky"
+                        className="btn-solid clicky"
                         zIndex={2}
                       />
                     </Tooltip>

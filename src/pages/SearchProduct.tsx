@@ -13,7 +13,7 @@ import HeaderContainer from "../components/HeaderContainer";
 import Container from "../components/Container";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import NavHeader from "../components/NavHeader";
-import useSearchProduct from "../globalState/useSearchProduct";
+import useSearchProduct from "../globalState/useProductSearch";
 import SearchProductResult from "../components/SearchProductResult";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import products from "../const/products";
@@ -82,7 +82,7 @@ export default function SearchProduct() {
     <Box h={"100vh"}>
       <VStack borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
-          <NavHeader title={"Cashiering - Search Product"} right={null} />
+          <NavHeader title={"Cashiering - Product Search"} right={null} />
         </HeaderContainer>
       </VStack>
 
@@ -96,7 +96,7 @@ export default function SearchProduct() {
             <Input
               ref={inputRef}
               name={"indexProduct"}
-              placeholder="Search Product"
+              placeholder="Product search"
               bg={"var(--divider)"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}

@@ -9,10 +9,10 @@ type Actions = {
   resetSearchProduct: () => void;
 };
 
-const useSearchProduct = create<SearchProduct & Actions>((set) => ({
+const useProductSearch = create<SearchProduct & Actions>((set) => ({
   searchProduct: "",
   setSearchProduct: (search) => set(() => ({ searchProduct: search })),
   resetSearchProduct: () => set(() => ({ searchProduct: "" })),
 }));
 
-export default useSearchProduct;
+export default useProductSearch;

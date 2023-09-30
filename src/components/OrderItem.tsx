@@ -56,12 +56,12 @@ export default function OrderItemComponent({ order, index }: Props) {
         </Box>
       </HStack>
 
-      <VStack align={"flex-end"} gap={2} flexShrink={0}>
+      <VStack align={"flex-end"} gap={1} flexShrink={0}>
         <HStack gap={1}>
           <Text opacity={0.5} fontSize={[10, null, 12]}>
             Rp
           </Text>
-          <Text fontSize={15}>{fn(order.totalPrice)}</Text>
+          <Text fontSize={14}>{fn(order.totalPrice)}</Text>
         </HStack>
 
         <HStack gap={1}>
