@@ -3,6 +3,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Image,
   Input,
   Text,
   Tooltip,
@@ -297,12 +298,36 @@ export default function Cashier() {
         )}
       </Container>
 
+      {order.orderList.length === 0 && (
+        <VStack
+          opacity={0.3}
+          justify={"center"}
+          p={4}
+          pb={"80px"}
+          minH={"400px"}
+          overflow={"auto"}
+          h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
+          position={"relative"}
+          animation={"fade-in-fade 1s"}
+          transition={"300ms"}
+        >
+          <Image
+            bottom={"0"}
+            position={"absolute"}
+            w={"100%"}
+            maxW={"400px"}
+            src={"./img/cashier.png"}
+          />
+        </VStack>
+      )}
+
       {order.orderList.length !== 0 && (
         <Box
+          pb={"72px"}
           overflow={"auto"}
           h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
         >
-          <Container pb={"72px"}>
+          <Container>
             <Text fontSize={24} fontWeight={600}>
               Orders
             </Text>

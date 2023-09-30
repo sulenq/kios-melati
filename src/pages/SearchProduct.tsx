@@ -2,6 +2,7 @@ import {
   Box,
   HStack,
   Icon,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -111,7 +112,47 @@ export default function SearchProduct() {
         </HStack>
       </Container>
 
-      {searchProduct !== "" && (
+      {searchProduct === "" && (
+        <VStack
+          opacity={0.3}
+          justify={"center"}
+          p={4}
+          minH={"400px"}
+          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
+          position={"relative"}
+          animation={"fade-in-fade 1s"}
+          transition={"300ms"}
+        >
+          <Image
+            bottom={"0"}
+            position={"absolute"}
+            w={"100%"}
+            maxW={"400px"}
+            src={"./img/search.png"}
+          />
+        </VStack>
+      )}
+
+      {searchProduct !== "" && filteredProducts.length === 0 && (
+        <VStack
+          opacity={0.3}
+          justify={"space-between"}
+          p={4}
+          minH={"400px"}
+          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
+          position={"relative"}
+          animation={"fade-in-fade 1s"}
+          transition={"300ms"}
+        >
+          <Text fontWeight={500} fontSize={[17, null, 19]} mb={4}>
+            No Result
+          </Text>
+
+          <Image w={"100%"} maxW={"400px"} src={"./img/noResult.png"} />
+        </VStack>
+      )}
+
+      {searchProduct !== "" && filteredProducts.length !== 0 && (
         <Box
           overflow={"auto"}
           h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}

@@ -35,6 +35,7 @@ export default function OrderItemComponent({ order, index }: Props) {
           icon={<Icon as={TrashSimple} fontSize={14} />}
           className="btn-solid clicky"
           minW={"30px !important"}
+          h={"30px !important"}
         />
 
         <Box>
