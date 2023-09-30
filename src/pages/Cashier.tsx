@@ -120,14 +120,10 @@ export default function Cashier() {
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
+                        e.preventDefault();
                         if (searchProductButton.current) {
                           (searchProductButton.current as HTMLElement).click();
                         }
-                      }
-                    }}
-                    onBlur={(e) => {
-                      if (searchProductButton.current) {
-                        (searchProductButton.current as HTMLElement).click();
                       }
                     }}
                   />
@@ -227,15 +223,11 @@ export default function Cashier() {
                     inputRef.current?.select();
                   }}
                   onKeyDown={(e) => {
+                    e.preventDefault();
                     if (e.key === "Enter") {
                       if (searchProductButton.current) {
                         (searchProductButton.current as HTMLElement).click();
                       }
-                    }
-                  }}
-                  onBlur={(e) => {
-                    if (searchProductButton.current) {
-                      (searchProductButton.current as HTMLElement).click();
                     }
                   }}
                 />

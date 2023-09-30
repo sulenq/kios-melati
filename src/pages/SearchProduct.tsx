@@ -81,7 +81,7 @@ export default function SearchProduct() {
     <Box h={"100vh"}>
       <VStack borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
-          <NavHeader title={"Search Product (Cashiering)"} right={null} />
+          <NavHeader title={"Cashiering - Search Product"} right={null} />
         </HeaderContainer>
       </VStack>
 
