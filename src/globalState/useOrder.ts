@@ -22,8 +22,8 @@ type Order = {
 
 type Actions = {
   setOrder: (orderItem: OrderItem) => void;
-  setQty: (index: number, newQty: number) => void;
-  deleteOrder: (index: number) => void;
+  setQty: (id: number, newQty: number) => void;
+  deleteOrder: (id: number) => void;
   resetOrder: () => void;
   setPay: (pay: number) => void;
 };
@@ -70,8 +70,9 @@ const useOrder = create<Order & Actions>((set) => ({
       }
     }),
 
-  setQty: (index, newQty) =>
+  setQty: (id, newQty) =>
     set((state) => {
+      const index = state.order.orderList.findIndex((o) => o.id === id);
       const curentTotal = state.order.total;
       const newTotalPrice = state.order.orderList[index].price * newQty;
       const qtyBefore = state.order.orderList[index].qty;
@@ -96,8 +97,9 @@ const useOrder = create<Order & Actions>((set) => ({
       };
     }),
 
-  deleteOrder: (index) =>
+  deleteOrder: (id) =>
     set((state) => {
+      const index = state.order.orderList.findIndex((o) => o.id === id);
       const curentTotal = state.order.total;
       const totalPriceBefore = state.order.orderList[index].totalPrice;
       const updatedOrderList = [...state.order.orderList];

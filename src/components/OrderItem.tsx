@@ -26,7 +26,17 @@ export default function OrderItemComponent({ order, index }: Props) {
 
   return (
     <HStack gap={3} justify={"space-between"} mb={3}>
-      <HStack gap={3}>
+      <HStack gap={3} align={"flex-start"}>
+        <IconButton
+          onClick={() => {
+            deleteOrder(order.id);
+          }}
+          aria-label="deleteOrderButton"
+          icon={<Icon as={TrashSimple} fontSize={14} />}
+          className="btn-solid clicky"
+          minW={"30px !important"}
+        />
+
         <Box>
           <Tooltip label={order.name} hasArrow placement="right">
             <Text noOfLines={1}>{order.name}</Text>
@@ -54,19 +64,10 @@ export default function OrderItemComponent({ order, index }: Props) {
         </HStack>
 
         <HStack gap={1}>
-          <IconButton
-            onClick={() => {
-              deleteOrder(index);
-            }}
-            aria-label="deleteOrderButton"
-            icon={<Icon as={TrashSimple} fontSize={14} />}
-            className="btn-solid clicky"
-          />
-
           <ButtonGroup isAttached>
             <IconButton
               onClick={() => {
-                setQty(index, order.qty > 1 ? order.qty - 1 : 1);
+                setQty(order.id, order.qty > 1 ? order.qty - 1 : 1);
               }}
               className="btn-solid clicky"
               aria-label="qtyMinusButton"
@@ -82,7 +83,7 @@ export default function OrderItemComponent({ order, index }: Props) {
                 } else {
                   qty = rfn(e.target.value);
                 }
-                setQty(index, qty);
+                setQty(order.id, qty);
               }}
               textAlign={"right"}
               borderRadius={"0 !important"}
@@ -92,7 +93,7 @@ export default function OrderItemComponent({ order, index }: Props) {
 
             <IconButton
               onClick={() => {
-                setQty(index, order.qty + 1);
+                setQty(order.id, order.qty + 1);
               }}
               className="btn-solid clicky"
               aria-label="qtyPlusButton"

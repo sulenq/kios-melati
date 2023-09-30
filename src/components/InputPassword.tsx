@@ -30,7 +30,7 @@ export default function InputPassword({
       <IconButton
         aria-label="showPassword"
         colorScheme="bnw"
-        icon={<Icon as={icon} />}
+        icon={<Icon as={icon} fontSize={18} />}
         className="sm-clicky"
         position={"absolute"}
         right={0}

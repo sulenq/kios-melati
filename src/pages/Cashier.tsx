@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import useSearchProduct from "../globalState/useSearchProduct";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import OrderItem from "../components/OrderItem";
 import useFormatNumber from "../utils/useFormatNumber";
 
@@ -33,9 +33,15 @@ export default function Cashier() {
   const { searchProduct, setSearchProduct } = useSearchProduct();
   const { order, resetOrder } = useOrder();
   const searchProductButton = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   return (
-    <>
+    <Box h={"100vh"}>
       <VStack borderBottom={"1px solid var(--divider)"} p={2}>
         <NavHeader
           title={"Cashiering"}
@@ -99,6 +105,7 @@ export default function Cashier() {
 
                 <Box position={"relative"} w={"100%"}>
                   <Input
+                    ref={inputRef}
                     name={"indexProduct"}
                     placeholder="Index Product"
                     bg={"var(--divider)"}
@@ -107,6 +114,9 @@ export default function Cashier() {
                     value={searchProduct}
                     onChange={(e) => {
                       setSearchProduct(e.target.value);
+                    }}
+                    onFocus={() => {
+                      inputRef.current?.select();
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
@@ -198,6 +208,7 @@ export default function Cashier() {
 
               <Box position={"relative"} w={"100%"}>
                 <Input
+                  ref={inputRef}
                   name={"indexProduct"}
                   placeholder="Index Product"
                   bg={"var(--divider)"}
@@ -206,6 +217,9 @@ export default function Cashier() {
                   value={searchProduct}
                   onChange={(e) => {
                     setSearchProduct(e.target.value);
+                  }}
+                  onFocus={() => {
+                    inputRef.current?.select();
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -259,15 +273,23 @@ export default function Cashier() {
         )}
       </Container>
 
-      <Container pt={1}>
-        <Text fontSize={24} fontWeight={600} my={2}>
-          Orders
-        </Text>
+      <Box
+        overflow={"auto"}
+        h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
+      >
+        <Container pt={1} pb={"72px"}>
+          <Text fontSize={24} fontWeight={600} my={2}>
+            Orders
+          </Text>
 
-        {order.orderList.map((o, i) => (
-          <OrderItem key={i} order={o} index={i} />
-        ))}
-      </Container>
-    </>
+          {order.orderList
+            .slice()
+            .reverse()
+            .map((o, i) => (
+              <OrderItem key={i} order={o} index={i} />
+            ))}
+        </Container>
+      </Box>
+    </Box>
   );
 }

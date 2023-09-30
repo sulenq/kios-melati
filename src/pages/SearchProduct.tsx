@@ -16,8 +16,9 @@ import useSearchProduct from "../globalState/useSearchProduct";
 import SearchProductResult from "../components/SearchProductResult";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import products from "../const/products";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchProduct() {
   type Product = {
@@ -36,7 +37,16 @@ export default function SearchProduct() {
   };
 
   const sw = useScreenWidth();
+  const navigate = useNavigate();
   const { searchProduct, setSearchProduct } = useSearchProduct();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      if (!inputRef.current.value) {
+        inputRef.current.focus();
+      }
+    }
+  }, []);
   const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
   const { setOrder } = useOrder();
   const handleAddOrder = (p: any) => {
@@ -83,6 +93,7 @@ export default function SearchProduct() {
             </InputLeftElement>
 
             <Input
+              ref={inputRef}
               name={"indexProduct"}
               placeholder="Search Product"
               bg={"var(--divider)"}
@@ -92,6 +103,9 @@ export default function SearchProduct() {
               onChange={(e) => {
                 setSearchProduct(e.target.value);
               }}
+              onFocus={() => {
+                inputRef.current?.select();
+              }}
             />
           </InputGroup>
         </HStack>
@@ -100,10 +114,10 @@ export default function SearchProduct() {
       {searchProduct !== "" && (
         <Box
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 120px)" : "calc(100% - 160px)"}
+          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
         >
           <Container>
-            <Text opacity={0.5} mb={2}>
+            <Text opacity={0.5} mb={1}>
               Result
             </Text>
           </Container>
@@ -114,6 +128,8 @@ export default function SearchProduct() {
                 <Container
                   onClick={() => {
                     handleAddOrder(p);
+                    setSearchProduct("");
+                    navigate("/cashier");
                   }}
                   key={i}
                   _hover={{ bg: "var(--divider)" }}
