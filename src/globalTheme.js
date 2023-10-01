@@ -81,6 +81,7 @@ export const globalTheme = extendTheme({
         },
         item: {
           bg: props.colorMode === "dark" ? "#050505" : "white",
+          _hover: { bg: "var(--divider)" },
         },
       }),
     },

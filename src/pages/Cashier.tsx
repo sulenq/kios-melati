@@ -34,7 +34,7 @@ export default function Cashier() {
   const fn = useFormatNumber;
   const { productSearch, setProductSearch, resetProductSearch } =
     useProductSearch();
-  const { orderList, resetOrder, orderTotal } = useOrder();
+  const { orderList, resetOrder, totalPayment } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function Cashier() {
               align={"flex-start"}
               justify={"space-between"}
             >
-              <Text opacity={0.5}>Total Order</Text>
+              <Text opacity={0.5}>Total Payment</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -90,7 +90,7 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {fn(orderTotal) || 0}
+                  {fn(totalPayment) || 0}
                 </Text>
               </HStack>
             </HStack>
@@ -215,7 +215,7 @@ export default function Cashier() {
             // borderBottom={"2px solid var(--divider)"}
           >
             <Box w={"30%"}>
-              <Text opacity={0.5}>Total Order</Text>
+              <Text opacity={0.5}>Total Payment</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -225,7 +225,7 @@ export default function Cashier() {
                   textAlign={"center"}
                   lineHeight={1}
                 >
-                  {fn(orderTotal) || 0}
+                  {fn(totalPayment) || 0}
                 </Text>
               </HStack>
             </Box>
@@ -343,7 +343,7 @@ export default function Cashier() {
           pb={"80px"}
           minH={"400px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 162px)" : "calc(100% - 136px)"}
+          h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
           position={"relative"}
           animation={"fade-in-fade 1s"}
         >

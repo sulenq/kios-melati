@@ -63,7 +63,14 @@ export default function SearchProduct() {
   }, [productSearch]);
 
   return (
-    <VStack h={"100vh"}>
+    <VStack
+      h={"100vh"}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          window.history.back();
+        }
+      }}
+    >
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
           <NavHeader title={"Cashiering - Product Search"} right={null} />
@@ -84,6 +91,7 @@ export default function SearchProduct() {
               bg={"var(--divider)"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}
+              pr={"36px !important"}
               value={productSearch}
               onChange={(e) => {
                 setProductSearch(e.target.value);
