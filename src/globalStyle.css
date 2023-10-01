@@ -61,7 +61,7 @@ button {
 }
 .btn:hover:not(:disabled),
 .btn-solid:hover:not(:disabled) {
-  background: var(--divider) !important;
+  background: var(--divider2) !important;
 }
 .btn:active:not(:disabled),
 .btn-solid:active:not(:disabled) {

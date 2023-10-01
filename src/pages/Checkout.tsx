@@ -1,4 +1,9 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   FormControl,
@@ -14,6 +19,7 @@ import {
   MenuList,
   Text,
   VStack,
+  Wrap,
 } from "@chakra-ui/react";
 import Container from "../components/Container";
 import NavHeader from "../components/NavHeader";
@@ -21,15 +27,26 @@ import useOrder from "../globalState/useOrder";
 import useFormatNumber from "../utils/useFormatNumber";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
 import { ArrowRight, CaretDown, X } from "@phosphor-icons/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import useScreenWidth from "../utils/useGetScreenWidth";
+import { useNavigate } from "react-router-dom";
+import cashList from "../const/cashList";
+import paymentMethods from "../const/paymentMethods";
 
 export default function Checkout() {
-  const { totalPayment, pay, setPay } = useOrder();
+  const { totalPayment, paymentMethod, setPaymentMethod, pay, setPay } =
+    useOrder();
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
   const sw = useScreenWidth();
   const inputPayRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (totalPayment <= 0) {
+      navigate("/cashier");
+    }
+  }, [totalPayment, navigate]);
 
   return (
     <VStack minH={"100vh"}>
@@ -87,7 +104,7 @@ export default function Checkout() {
               </HStack>
             </HStack>
 
-            <FormControl mb={8}>
+            <FormControl mb={4}>
               <HStack align={"flex-start"}>
                 <VStack h={"40px !important"}>
                   <Menu>
@@ -98,13 +115,20 @@ export default function Checkout() {
                       as={Button}
                       rightIcon={<Icon as={CaretDown} />}
                     >
-                      CASH
+                      {paymentMethod}
                     </MenuButton>
 
                     <MenuList>
-                      <MenuItem>
-                        <Text>Cash</Text>
-                      </MenuItem>
+                      {paymentMethods.map((p, i) => (
+                        <MenuItem
+                          key={i}
+                          onClick={() => {
+                            setPaymentMethod(p);
+                          }}
+                        >
+                          <Text>{p}</Text>
+                        </MenuItem>
+                      ))}
                     </MenuList>
                   </Menu>
                 </VStack>
@@ -150,6 +174,39 @@ export default function Checkout() {
               </HStack>
             </FormControl>
 
+            <Accordion allowMultiple mb={4}>
+              <AccordionItem border={"none"}>
+                <AccordionButton className="btn-solid" borderRadius={6} mb={2}>
+                  <Box as="span" flex="1" textAlign="left" opacity={0.5}>
+                    Cash list
+                  </Box>
+
+                  <AccordionIcon opacity={0.5} />
+                </AccordionButton>
+
+                <AccordionPanel p={0}>
+                  <Wrap justify={"center"} alignItems={"stretch"}>
+                    {cashList.map((c, i) => (
+                      <HStack key={i} flex={1}>
+                        <Button
+                          onClick={() => {
+                            setPay(pay + c.nominal);
+                          }}
+                          bg={`${c.color} !important`}
+                          _hover={{ bg: `${c.color} !important` }}
+                          flex={1}
+                          className="btn-solid clicky"
+                          fontWeight={400}
+                        >
+                          {fn(c.nominal)}
+                        </Button>
+                      </HStack>
+                    ))}
+                  </Wrap>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+
             <Button
               w={"100%"}
               h={"44px !important"}
@@ -164,7 +221,7 @@ export default function Checkout() {
             </Button>
           </Box>
 
-          <VStack p={4}>
+          <VStack zIndex={-1} position={"absolute"} bottom={0} p={4}>
             <Image
               animation={"fade-in-fade 1s"}
               opacity={0.3}
