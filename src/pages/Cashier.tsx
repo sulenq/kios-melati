@@ -373,17 +373,14 @@ export default function Cashier() {
             .slice()
             .reverse()
             .map((o, i) => (
-              <Container px={[2, 4, 6]}>
+              <Container key={i} px={[2, 4, 6]}>
                 <Box
                   borderRadius={6}
                   p={2}
                   mb={2}
                   _hover={{ bg: "var(--divider)" }}
-                  // w={"100%"}
-                  // maxW={"700px"}
-                  // mx={"auto"}
                 >
-                  <OrderItem key={i} order={o} />
+                  <OrderItem order={o} />
                 </Box>
               </Container>
             ))}

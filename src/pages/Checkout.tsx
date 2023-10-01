@@ -158,6 +158,7 @@ export default function Checkout() {
               color={"white"}
               className="clicky"
               rightIcon={<Icon as={ArrowRight} fontSize={18} />}
+              mb={4}
             >
               CHECKOUT
             </Button>

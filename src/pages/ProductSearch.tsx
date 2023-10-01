@@ -166,6 +166,7 @@ export default function SearchProduct() {
             {filteredProducts.map((p, i) => {
               return (
                 <Container
+                  key={i}
                   px={[2, 4, 6]}
                   onClick={() => {
                     addOrder({
@@ -181,7 +182,6 @@ export default function SearchProduct() {
                     setProductSearch("");
                     navigate("/cashier");
                   }}
-                  key={i}
                 >
                   <Box
                     cursor="pointer"
