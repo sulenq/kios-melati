@@ -112,13 +112,15 @@ export default function Checkout() {
                       className="btn-solid "
                       flexShrink={0}
                       flex={1}
+                      fontWeight={500}
+                      w={"87px"}
                       as={Button}
                       rightIcon={<Icon as={CaretDown} />}
                     >
                       {paymentMethod}
                     </MenuButton>
 
-                    <MenuList>
+                    <MenuList minW={"87px"}>
                       {paymentMethods.map((p, i) => (
                         <MenuItem
                           key={i}
@@ -180,8 +182,13 @@ export default function Checkout() {
             </FormControl>
 
             <Accordion allowMultiple mb={4}>
-              <AccordionItem border={"none"}>
-                <AccordionButton className="btn-solid" borderRadius={6} mb={2}>
+              <AccordionItem
+                border={"none"}
+                bg={"var(--divider)"}
+                backdropFilter={"blur(10px)"}
+                borderRadius={6}
+              >
+                <AccordionButton h={"40px !important"} borderRadius={6} mb={2}>
                   <Box as="span" flex="1" textAlign="left" opacity={0.5}>
                     Cash list
                   </Box>
@@ -189,7 +196,7 @@ export default function Checkout() {
                   <AccordionIcon opacity={0.5} />
                 </AccordionButton>
 
-                <AccordionPanel p={0}>
+                <AccordionPanel p={2} pt={0}>
                   <Wrap justify={"center"} alignItems={"stretch"}>
                     {cashList.map((c, i) => (
                       <HStack key={i} flex={1}>

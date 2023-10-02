@@ -91,9 +91,8 @@ export default function SignIn() {
       } else if (values.role === "cashier") {
         let isMatch = cashierUsers.find((u) => {
           if (
-            (values.username === u.username &&
-              values.katasandi === "cashier") ||
-            "cashier2"
+            values.username === u.username &&
+            values.katasandi === "cashier"
           ) {
             const token = process.env.REACT_APP_CASHIER_TOKEN;
             // console.log(token);
