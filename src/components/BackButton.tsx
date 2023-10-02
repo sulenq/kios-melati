@@ -11,6 +11,8 @@ export default function BackButton(props: any) {
       }}
       className="btn sm-clicky"
       aria-label="backBtn"
+      borderRadius={"full"}
+      h={"40px !important"}
       icon={
         <Icon
           as={ArrowLeft}

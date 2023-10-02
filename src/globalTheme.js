@@ -77,7 +77,7 @@ export const globalTheme = extendTheme({
     Menu: {
       baseStyle: (props) => ({
         list: {
-          bg: props.colorMode === "dark" ? "#050505cc" : "#fffffcc",
+          bg: props.colorMode === "dark" ? "#050505cc" : "#ffffffcc",
           backdropFilter: "blur(10px)",
           border: "1px solid var(--divider)",
           p: 2,

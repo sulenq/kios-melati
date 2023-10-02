@@ -17,27 +17,12 @@ import NavHeader from "../components/NavHeader";
 import useProductSearch from "../globalState/useProductSearch";
 import SearchProductResult from "../components/SearchProductResult";
 import useScreenWidth from "../utils/useGetScreenWidth";
-import products from "../const/products";
+import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchProduct() {
-  type Product = {
-    id: number;
-    CreatedAt: string;
-    UpdatedAt: string;
-    DeletedAt: string | null;
-    code: string;
-    name: string;
-    price: number;
-    stock: number;
-    user_id: number;
-    modal: number;
-    category: string;
-    color: string;
-  };
-
   const sw = useScreenWidth();
   const navigate = useNavigate();
   const { productSearch, setProductSearch, resetProductSearch } =
@@ -62,15 +47,24 @@ export default function SearchProduct() {
     setFilteredProducts(filteredProducts);
   }, [productSearch]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        window.history.back();
+      }
+    };
+
+    // Menambahkan event listener saat komponen dimuat
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Menghapus event listener saat komponen dilepas
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
-    <VStack
-      h={"100vh"}
-      onKeyDown={(e) => {
-        if (e.key === "Escape") {
-          window.history.back();
-        }
-      }}
-    >
+    <VStack h={"100vh"}>
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
           <NavHeader title={"Cashiering - Product Search"} right={null} />

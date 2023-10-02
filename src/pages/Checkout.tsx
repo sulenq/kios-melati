@@ -195,7 +195,7 @@ export default function Checkout() {
                           bg={`${c.color} !important`}
                           _hover={{ bg: `${c.color} !important` }}
                           flex={1}
-                          className="btn-solid clicky"
+                          className="clicky"
                           fontWeight={400}
                         >
                           {fn(c.nominal)}

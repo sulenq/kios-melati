@@ -5,12 +5,24 @@ export type Cash = {
 
 const cashList: Cash[] = [
   {
+    nominal: 100,
+    color: "#aeaeae50",
+  },
+  {
+    nominal: 200,
+    color: "#aeaeae50",
+  },
+  {
+    nominal: 500,
+    color: "#aeaeae50",
+  },
+  {
     nominal: 1000,
     color: "#d6dd9950",
   },
   {
     nominal: 2000,
-    color: "#a2abb450",
+    color: "#a2bbd450",
   },
   {
     nominal: 5000,
@@ -27,6 +39,10 @@ const cashList: Cash[] = [
   {
     nominal: 50000,
     color: "#87bbd550",
+  },
+  {
+    nominal: 75000,
+    color: "#d3819840",
   },
   {
     nominal: 100000,

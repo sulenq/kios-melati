@@ -24,12 +24,18 @@ export default function Landing() {
             w={"100%"}
             maxW={"420px"}
             justify={"center"}
-            borderRadius={"12px"}
+            borderRadius={6}
             p={5}
             bg={bg}
             backdropFilter={"blur(10px)"}
           >
-            <ColorModeSwitcher position={"absolute"} top={2} right={2} />
+            <ColorModeSwitcher
+              position={"absolute"}
+              borderRadius={"full"}
+              h={"40px !important"}
+              top={2}
+              right={2}
+            />
 
             <HStack gap={4} alignSelf={"flex-start"} mb={1}>
               <Image src={"./logo512.png"} w={"64px"} />

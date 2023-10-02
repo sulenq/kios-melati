@@ -31,7 +31,13 @@ export default function NavHeader(props: any) {
       {props?.right === null ? (
         <Box w={"40px"} h={"40px"} />
       ) : (
-        props?.right || <ColorModeSwitcher className="btn sm-clicky" />
+        props?.right || (
+          <ColorModeSwitcher
+            className="btn sm-clicky"
+            borderRadius={"full"}
+            h={"40px !important"}
+          />
+        )
       )}
     </HStack>
   );

@@ -60,6 +60,8 @@ export default function Cashier() {
                 aria-label="newTransaction"
                 className="btn sm-clicky"
                 variant={"ghost"}
+                borderRadius={"full"}
+                h={"40px !important"}
                 icon={<Icon as={Plus} fontSize={18} weight="bold" />}
                 onClick={resetOrder}
               />
@@ -167,7 +169,7 @@ export default function Cashier() {
                           aria-label="indexProductButton"
                           icon={<Icon as={MagnifyingGlass} fontSize={18} />}
                           // colorScheme="bnw"
-                          className="btn-solid clicky"
+                          className="btn-solid sm-clicky"
                           zIndex={2}
                         />
                       </Tooltip>
@@ -297,7 +299,7 @@ export default function Cashier() {
                         to={"/search-product"}
                         aria-label="indexProductButton"
                         icon={<Icon as={MagnifyingGlass} fontSize={18} />}
-                        className="btn-solid clicky"
+                        className="btn-solid sm-clicky"
                         zIndex={2}
                       />
                     </Tooltip>
