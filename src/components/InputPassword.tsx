@@ -20,7 +20,7 @@ export default function InputPassword({
         ref={inputPasswordRef}
         type="password"
         placeholder="type your password"
-        name="katasandi"
+        name="password"
         onFocus={(e) => {
           e.target.select();
         }}

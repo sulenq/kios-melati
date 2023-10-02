@@ -35,14 +35,14 @@ export default function RequireRole({
           (authState.token && allowedRoles.includes(authState.role)) ||
           allowedRoles.length === 0
         ) {
-          console.log("authorized");
+          // console.log("authorized");
           setPage(<FullPageSpinner />);
           // setTimeout(() => {
           //   setPage(children);
           // }, 500);
           setPage(children);
         } else {
-          console.log("unauthorized");
+          // console.log("unauthorized");
           signOut();
           setPage(<Navigate to={signinPath} />);
         }

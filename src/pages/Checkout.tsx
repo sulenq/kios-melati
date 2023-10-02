@@ -26,7 +26,7 @@ import NavHeader from "../components/NavHeader";
 import useOrder from "../globalState/useOrder";
 import useFormatNumber from "../utils/useFormatNumber";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
-import { ArrowRight, CaretDown, X } from "@phosphor-icons/react";
+import { CaretDown, X } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +36,7 @@ import paymentMethods from "../const/paymentMethods";
 export default function Checkout() {
   const { totalPayment, paymentMethod, setPaymentMethod, pay, setPay } =
     useOrder();
+  const { resetOrder } = useOrder();
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
   const sw = useScreenWidth();
@@ -188,7 +189,7 @@ export default function Checkout() {
                 backdropFilter={"blur(10px)"}
                 borderRadius={6}
               >
-                <AccordionButton h={"40px !important"} borderRadius={6} mb={2}>
+                <AccordionButton h={"40px !important"} borderRadius={6}>
                   <Box as="span" flex="1" textAlign="left" opacity={0.5}>
                     Cash list
                   </Box>
@@ -196,8 +197,8 @@ export default function Checkout() {
                   <AccordionIcon opacity={0.5} />
                 </AccordionButton>
 
-                <AccordionPanel p={2} pt={0}>
-                  <Wrap justify={"center"} alignItems={"stretch"}>
+                <AccordionPanel p={2}>
+                  <Wrap justify={"center"}>
                     {cashList.map((c, i) => (
                       <HStack key={i} flex={1}>
                         <Button
@@ -220,16 +221,19 @@ export default function Checkout() {
             </Accordion>
 
             <Button
+              onClick={() => {
+                resetOrder();
+                navigate("/cashier");
+              }}
               w={"100%"}
               h={"44px !important"}
               borderRadius={"full"}
               colorScheme="ap"
               color={"white"}
               className="clicky"
-              rightIcon={<Icon as={ArrowRight} fontSize={18} />}
               mb={4}
             >
-              CHECKOUT
+              CONFRIM TRANSACTION
             </Button>
           </Box>
 

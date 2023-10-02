@@ -34,14 +34,14 @@ export default function SignIn() {
     initialValues: {
       role: "admin",
       username: "",
-      katasandi: "",
+      password: "",
       staySignedIn: false,
     },
 
     validationSchema: yup.object().shape({
       role: yup.string().required(),
       username: yup.string().required(),
-      katasandi: yup.string().required(),
+      password: yup.string().required(),
     }),
 
     onSubmit: (values, { resetForm }) => {
@@ -59,7 +59,7 @@ export default function SignIn() {
         let isMatch = adminUsers.find((u) => {
           if (
             values.username === u.username &&
-            values.katasandi === u.password
+            values.password === u.password
           ) {
             const token = process.env.REACT_APP_ADMIN_TOKEN;
             // console.log(token);
@@ -87,12 +87,13 @@ export default function SignIn() {
 
         if (!isMatch) {
           console.log("username and password did not match");
+          alert("username and password did not match");
         }
       } else if (values.role === "cashier") {
         let isMatch = cashierUsers.find((u) => {
           if (
             values.username === u.username &&
-            values.katasandi === "cashier"
+            values.password === u.password
           ) {
             const token = process.env.REACT_APP_CASHIER_TOKEN;
             // console.log(token);
@@ -120,9 +121,11 @@ export default function SignIn() {
 
         if (!isMatch) {
           console.log("username and password did not match");
+          alert("username and password did not match");
         }
       } else {
         console.log("Invalid Role, valid roles are ADMIN or CASHIER");
+        alert("Invalid Role, valid roles are ADMIN or CASHIER");
       }
     },
   });
@@ -239,7 +242,7 @@ export default function SignIn() {
                 >
                   <FormLabel>Password</FormLabel>
                   <InputPassword formik={formik} handleForm={handleForm} />
-                  <FormErrorMessage>{formik.errors.katasandi}</FormErrorMessage>
+                  <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
                 </FormControl>
 
                 <HStack justify={"space-between"} mb={4}>
