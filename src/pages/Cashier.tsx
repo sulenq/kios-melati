@@ -47,38 +47,30 @@ export default function Cashier() {
   const handleIndexProductKeydown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      // if (searchProductButton.current) {
-      //   (searchProductButton.current as HTMLElement).click();
-      // }
-    }
-  };
+      if (searchProductButton.current) {
+        const productFound = products.find((p) => p.code === productSearch);
 
-  const handleIndexProductSubmit = (e: React.FormEvent) => {
-    alert('submited')
-    // e.preventDefault();
-    // if (searchProductButton.current) {
-    //   (searchProductButton.current as HTMLElement).click();
-    // }
+        if (productFound) {
+          setProductSearch("");
+          addOrder({
+            id: productFound.id,
+            code: productFound.code,
+            name: productFound.name,
+            price: productFound.price,
+            qty: 1,
+            totalPrice: productFound.price,
+            stock: productFound.stock,
+            category: productFound.category,
+          });
+        } else {
+          (searchProductButton.current as HTMLElement).click();
+        }
+      }
+    }
   };
 
   const handleIndexProduct = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const productFound = products.find((p) => p.code === e.target.value);
-
-    if (productFound) {
-      setProductSearch("");
-      addOrder({
-        id: productFound.id,
-        code: productFound.code,
-        name: productFound.name,
-        price: productFound.price,
-        qty: 1,
-        totalPrice: productFound.price,
-        stock: productFound.stock,
-        category: productFound.category,
-      });
-    } else {
-      setProductSearch(e.target.value);
-    }
+    setProductSearch(e.target.value);
   };
 
   const handleClearIndexProduct = () => {
@@ -163,7 +155,6 @@ export default function Cashier() {
                     value={productSearch}
                     onChange={handleIndexProduct}
                     onKeyDown={handleIndexProductKeydown}
-                    onSubmit={handleIndexProductSubmit}
                   />
 
                   <HStack gap={"2px"} position={"absolute"} right={0} top={0}>
@@ -271,7 +262,6 @@ export default function Cashier() {
                     value={productSearch}
                     onChange={handleIndexProduct}
                     onKeyDown={handleIndexProductKeydown}
-                    onSubmit={handleIndexProductSubmit}
                   />
 
                   <Box position={"absolute"} right={0} top={0}>
