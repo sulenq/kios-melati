@@ -165,7 +165,6 @@ export default function Checkout() {
                       left={0}
                       top={0}
                       onClick={() => {
-                        inputPayRef.current?.focus();
                         setPay(0);
                       }}
                       _hover={{ bg: "transparent !important" }}
