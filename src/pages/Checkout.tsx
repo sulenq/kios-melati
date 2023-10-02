@@ -124,6 +124,11 @@ export default function Checkout() {
                           key={i}
                           onClick={() => {
                             setPaymentMethod(p);
+                            if (p === "QRIS") {
+                              setPay(totalPayment);
+                            } else {
+                              setPay(0);
+                            }
                           }}
                         >
                           <Text>{p}</Text>

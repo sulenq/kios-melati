@@ -34,14 +34,14 @@ export default function SignIn() {
     initialValues: {
       role: "admin",
       username: "",
-      password: "",
+      katasandi: "",
       staySignedIn: false,
     },
 
     validationSchema: yup.object().shape({
       role: yup.string().required(),
       username: yup.string().required(),
-      password: yup.string().required(),
+      katasandi: yup.string().required(),
     }),
 
     onSubmit: (values, { resetForm }) => {
@@ -59,7 +59,7 @@ export default function SignIn() {
         let isMatch = adminUsers.find((u) => {
           if (
             values.username === u.username &&
-            values.password === u.password
+            values.katasandi === u.password
           ) {
             const token = process.env.REACT_APP_ADMIN_TOKEN;
             // console.log(token);
@@ -91,7 +91,8 @@ export default function SignIn() {
       } else if (values.role === "cashier") {
         let isMatch = cashierUsers.find((u) => {
           if (
-            (values.username === u.username && values.password === "cashier") ||
+            (values.username === u.username &&
+              values.katasandi === "cashier") ||
             "cashier2"
           ) {
             const token = process.env.REACT_APP_CASHIER_TOKEN;
@@ -239,7 +240,7 @@ export default function SignIn() {
                 >
                   <FormLabel>Password</FormLabel>
                   <InputPassword formik={formik} handleForm={handleForm} />
-                  <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
+                  <FormErrorMessage>{formik.errors.katasandi}</FormErrorMessage>
                 </FormControl>
 
                 <HStack justify={"space-between"} mb={4}>
