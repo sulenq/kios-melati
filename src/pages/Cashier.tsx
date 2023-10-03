@@ -353,7 +353,7 @@ export default function Cashier() {
         <Box
           pb={"72px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 159px)" : "calc(100% - 136px)"}
+          h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
         >
           <Container>
             <Text fontSize={24} fontWeight={600} mb={2}>

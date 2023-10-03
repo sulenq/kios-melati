@@ -152,7 +152,7 @@ export default function SignIn() {
           py={8}
           justify={"center"}
         >
-          <SimpleGrid columns={[1, null, 2]} gap={12}>
+          <SimpleGrid w={"100%"} columns={[1, null, 2]} gap={12}>
             <>
               <Image
                 src="../img/admin.png"
