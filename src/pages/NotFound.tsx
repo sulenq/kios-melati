@@ -1,5 +1,4 @@
 import { Button, Image, Text, VStack } from "@chakra-ui/react";
-import React from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
@@ -27,8 +26,23 @@ export default function NotFound() {
         borderRadius={"full"}
         as={Link}
         to={"/"}
+        mb={2}
       >
         Back to Landing Page
+      </Button>
+
+      <Button
+        h={"44px !important"}
+        w={"231px"}
+        px={8}
+        variant={"ghost"}
+        className="btn clicky"
+        borderRadius={"full"}
+        onClick={() => {
+          window.history.back();
+        }}
+      >
+        Back
       </Button>
     </VStack>
   );

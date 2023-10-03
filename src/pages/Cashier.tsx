@@ -21,7 +21,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useProductSearch from "../globalState/useProductSearch";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useOrder from "../globalState/useOrder";
@@ -43,6 +43,38 @@ export default function Cashier() {
       inputRef.current.focus();
     }
   }, []);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const handleBackNavigation = (e: PopStateEvent) => {
+      e.preventDefault();
+      if (e.state) {
+        console.log("eek");
+      } else {
+        console.log("forward navigation");
+      }
+    };
+
+    window.addEventListener("popstate", handleBackNavigation);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackNavigation);
+    };
+  }, [navigate]);
+
+  useEffect(() => {
+    const handleEndKey = (e: KeyboardEvent) => {
+      if (e.key === "End") {
+        navigate("/checkout");
+      }
+    };
+
+    document.addEventListener("keydown", handleEndKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEndKey);
+    };
+  }, [navigate]);
 
   const handleIndexProductKeydown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -86,7 +118,7 @@ export default function Cashier() {
           left={null}
           right={
             <Tooltip
-              openDelay={1000}
+              openDelay={500}
               label={"New Transaction"}
               hasArrow
               placement="left"
@@ -133,7 +165,7 @@ export default function Cashier() {
             </HStack>
 
             <HStack gap={1} w={"100%"} maxW={"400px"}>
-              <Tooltip openDelay={1000} label={"Camera Scan"} hasArrow>
+              <Tooltip openDelay={500} label={"Camera Scan"} hasArrow>
                 <IconButton
                   aria-label="cameraScan"
                   icon={<Icon as={Scan} fontSize={20} />}
@@ -171,11 +203,7 @@ export default function Cashier() {
                       />
                     )}
 
-                    <Tooltip
-                      openDelay={1000}
-                      label={"Open Seacrh Tab"}
-                      hasArrow
-                    >
+                    <Tooltip openDelay={500} label={"Open Seacrh Tab"} hasArrow>
                       <IconButton
                         ref={searchProductButton}
                         as={Link}
@@ -241,7 +269,7 @@ export default function Cashier() {
             </Box>
 
             <HStack w={"40%"}>
-              <Tooltip openDelay={1000} label={"Camera Scan"} hasArrow>
+              <Tooltip openDelay={500} label={"Camera Scan"} hasArrow>
                 <IconButton
                   aria-label="cameraScan"
                   icon={<Icon as={Scan} fontSize={20} />}
@@ -278,11 +306,7 @@ export default function Cashier() {
                       />
                     )}
 
-                    <Tooltip
-                      openDelay={1000}
-                      label={"Open Seacrh Tab"}
-                      hasArrow
-                    >
+                    <Tooltip openDelay={500} label={"Open Seacrh Tab"} hasArrow>
                       <IconButton
                         ref={searchProductButton}
                         as={Link}
@@ -299,7 +323,7 @@ export default function Cashier() {
             </HStack>
 
             <HStack w={"30%"} justify={"flex-end"}>
-              <Tooltip openDelay={1000} label={"Chekout"} hasArrow>
+              <Tooltip openDelay={500} label={"Chekout"} hasArrow>
                 <Link to={"/checkout"}>
                   <IconButton
                     isDisabled={orderList.length === 0 ? true : false}
@@ -353,7 +377,7 @@ export default function Cashier() {
         <Box
           pb={"72px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
+          h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>
             <Text fontSize={24} fontWeight={600} mb={2}>

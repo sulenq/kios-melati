@@ -11,7 +11,7 @@ type Props = {
   stock: number;
 };
 
-export default function SearchProductResult({
+export default function ProductSearchResult({
   category,
   name,
   code,

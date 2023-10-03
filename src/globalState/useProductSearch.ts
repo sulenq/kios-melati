@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
-type SearchProduct = {
+type ProductSearch = {
   productSearch: string;
 };
 
 type Actions = {
-  setProductSearch: (search: SearchProduct["productSearch"]) => void;
+  setProductSearch: (search: ProductSearch["productSearch"]) => void;
   resetProductSearch: () => void;
 };
 
-const useProductSearch = create<SearchProduct & Actions>((set) => ({
+const useProductSearch = create<ProductSearch & Actions>((set) => ({
   productSearch: "",
   setProductSearch: (search) => set(() => ({ productSearch: search })),
   resetProductSearch: () => set(() => ({ productSearch: "" })),

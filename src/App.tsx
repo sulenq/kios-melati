@@ -10,8 +10,9 @@ import SignIn from "./pages/SignIn";
 import Admin from "./pages/Admin";
 import RequireRole from "./pages/RequireRole";
 import Cashier from "./pages/Cashier";
-import SearchProduct from "./pages/ProductSearch";
+import ProductSearch from "./pages/ProductSearch";
 import Checkout from "./pages/Checkout";
+import RequireOrder from "./pages/RequireOrder";
 
 export const App = () => {
   document.addEventListener("contextmenu", function (e) {
@@ -54,7 +55,7 @@ export const App = () => {
                 allowedRoles={["admin", "cashier"]}
                 signinPath={"/signin"}
               >
-                <SearchProduct />
+                <ProductSearch />
               </RequireRole>
             }
           />
@@ -63,7 +64,9 @@ export const App = () => {
             path="/checkout"
             element={
               <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
-                <Checkout />
+                <RequireOrder>
+                  <Checkout />
+                </RequireOrder>
               </RequireRole>
             }
           />

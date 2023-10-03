@@ -29,30 +29,42 @@ import useReverseFormatNumber from "../utils/useReverseFormatNumber";
 import { CaretDown, X } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import useScreenWidth from "../utils/useGetScreenWidth";
-import { useNavigate } from "react-router-dom";
 import cashList from "../const/cashList";
 import paymentMethods from "../const/paymentMethods";
+import useProductSearch from "../globalState/useProductSearch";
 
 export default function Checkout() {
   const { totalPayment, paymentMethod, setPaymentMethod, pay, setPay } =
     useOrder();
+  const { setProductSearch } = useProductSearch();
   const { resetOrder } = useOrder();
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
   const sw = useScreenWidth();
   const inputPayRef = useRef<HTMLInputElement | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (totalPayment <= 0) {
-      navigate("/cashier");
-    }
-  }, [totalPayment, navigate]);
+    const handleEndKey = (e: KeyboardEvent) => {
+      if (e.key === "End") {
+        if (inputPayRef.current) inputPayRef.current.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleEndKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEndKey);
+    };
+  }, []);
 
   return (
     <VStack minH={"100vh"}>
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader title={"Checkout"} right={null} />
+        <NavHeader
+          title={"Checkout"}
+          right={null}
+          // backPath={"/cashier"}
+        />
       </VStack>
 
       <Container flex={1}>
@@ -222,7 +234,8 @@ export default function Checkout() {
             <Button
               onClick={() => {
                 resetOrder();
-                navigate("/cashier");
+                setProductSearch("");
+                // window.history.back();
               }}
               w={"100%"}
               h={"44px !important"}
@@ -231,6 +244,9 @@ export default function Checkout() {
               color={"white"}
               className="clicky"
               mb={4}
+              isDisabled={
+                pay - totalPayment < 0 || totalPayment <= 0 ? true : false
+              }
             >
               CONFRIM TRANSACTION
             </Button>

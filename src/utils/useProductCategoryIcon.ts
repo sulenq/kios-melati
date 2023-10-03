@@ -1,4 +1,5 @@
 import {
+  Basket,
   BeerStein,
   DotsThreeCircle,
   FirstAidKit,
@@ -13,6 +14,8 @@ const useProductCategoryIcon = (category: string) => {
   switch (category) {
     case "Food":
       return ForkKnife;
+    case "Ingredient":
+      return Basket;
     case "Drink":
       return BeerStein;
     case "Stationery":

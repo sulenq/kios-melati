@@ -15,16 +15,14 @@ import Container from "../components/Container";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import NavHeader from "../components/NavHeader";
 import useProductSearch from "../globalState/useProductSearch";
-import SearchProductResult from "../components/SearchProductResult";
+import ProductSearchResult from "../components/ProductSearchResult";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
-import { useNavigate } from "react-router-dom";
 
-export default function SearchProduct() {
+export default function ProductSearch() {
   const sw = useScreenWidth();
-  const navigate = useNavigate();
   const { productSearch, setProductSearch, resetProductSearch } =
     useProductSearch();
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -67,7 +65,11 @@ export default function SearchProduct() {
     <VStack h={"100vh"}>
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
         <HeaderContainer>
-          <NavHeader title={"Cashiering - Product Search"} right={null} />
+          <NavHeader
+            title={"Cashiering - Product Search"}
+            right={null}
+            // backPath={"/cashier"}
+          />
         </HeaderContainer>
       </VStack>
 
@@ -174,7 +176,7 @@ export default function SearchProduct() {
                       category: p.category,
                     });
                     setProductSearch("");
-                    navigate("/cashier");
+                    window.history.back();
                   }}
                 >
                   <Box
@@ -183,7 +185,7 @@ export default function SearchProduct() {
                     borderRadius={6}
                     p={2}
                   >
-                    <SearchProductResult
+                    <ProductSearchResult
                       category={p?.category}
                       name={p?.name}
                       code={p?.code}

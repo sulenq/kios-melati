@@ -67,6 +67,7 @@ button {
 .btn-solid:active:not(:disabled) {
   background: var(--divider2) !important;
 }
+
 .clicky:active:not(:disabled) {
   transform: scale(0.95);
 }

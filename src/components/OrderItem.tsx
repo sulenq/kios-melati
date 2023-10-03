@@ -134,12 +134,7 @@ export default function OrderItemComponent({ order }: Props) {
         flex={1}
       />
 
-      <Icon
-        w={"5%"}
-        mt={1}
-        as={productCategoryIcon(order.category)}
-        fontSize={25}
-      />
+      <Icon w={"5%"} as={productCategoryIcon(order.category)} fontSize={25} />
 
       <VStack
         w={"50%"}

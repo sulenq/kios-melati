@@ -22,11 +22,13 @@ import adminUsers from "../const/adminUsers";
 import { setCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
 import cashierUsers from "../const/cashierUsers";
+import { useComponentsBg } from "../const/colorModeValues";
 
 export default function SignIn() {
   const signInRoleBg = useColorModeValue("b", "w");
   const signInRoleColor = useColorModeValue("wt", "bt");
   const navigate = useNavigate();
+  const cfg = useComponentsBg();
 
   const formik = useFormik({
     validateOnChange: false,
@@ -141,8 +143,8 @@ export default function SignIn() {
 
   return (
     <>
-      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader title={"Sign In"} />
+      <VStack zIndex={99} position={"sticky"} top={0} left={0} {...cfg} p={2}>
+        <NavHeader title={"Sign In"} backPath={"/"} />
       </VStack>
 
       <Container>

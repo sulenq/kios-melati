@@ -113,7 +113,13 @@ const useOrder = create<Order & Actions>((set) => ({
     }),
 
   resetOrder: () =>
-    set(() => ({ orderList: [], totalPayment: 0, pay: 0, change: 0 })),
+    set(() => ({
+      orderList: [],
+      totalPayment: 0,
+      paymentMethod: "Cash",
+      pay: 0,
+      change: 0,
+    })),
 
   setPaymentMethod: (paymentMethod) =>
     set((state) => ({ ...state, paymentMethod: paymentMethod })),
@@ -124,7 +130,7 @@ const useOrder = create<Order & Actions>((set) => ({
         orderList: [...state.orderList],
         totalPayment: state.totalPayment,
         pay: pay,
-        change: state.pay - state.totalPayment,
+        change: pay - state.totalPayment,
       };
     }),
 }));

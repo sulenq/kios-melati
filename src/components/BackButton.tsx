@@ -7,6 +7,7 @@ export default function BackButton(props: any) {
       {...props}
       id="backBtn"
       onClick={() => {
+        // window.history.replaceState(null, "", props.backPath);
         window.history.back();
       }}
       className="btn sm-clicky"
