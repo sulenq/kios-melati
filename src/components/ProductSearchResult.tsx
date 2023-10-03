@@ -55,11 +55,11 @@ export default function ProductSearchResult({
         <Icon as={productCategoryIcon(category)} fontSize={20} weight="light" />
       </HStack>
 
-      <Tooltip label={name} hasArrow placement="right">
-        <Text w={"40%"} noOfLines={1}>
-          {name}
-        </Text>
-      </Tooltip>
+      <Box w={"40%"}>
+        <Tooltip label={name} hasArrow placement="right">
+          <Text w={'max-content'} noOfLines={1}>{name}</Text>
+        </Tooltip>
+      </Box>
 
       <Text w={"30%"} opacity={0.5} fontSize={[10, null, 12]}>
         {code}
