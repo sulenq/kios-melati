@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   HStack,
   Icon,
+  IconButton,
   Image,
   Input,
   InputGroup,
@@ -18,12 +19,13 @@ import Container from "../components/Container";
 import { Order } from "../globalState/useOrder";
 import NavHeader from "../components/NavHeader";
 import CashierNav from "../components/CashierNav";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import TransactionItem from "../components/TransactionItem";
 import Page from "../components/Page";
 import useScreenWidth from "../utils/useGetScreenWidth";
+import useTransactionSearch from "../globalState/useTransactionSearch";
 
-export type Transaction = { id: number } & Order;
+export type Transaction = { id: string } & Order;
 
 export default function CashierTransaction() {
   const [cashierTransaction, setCashierTransaction] = useState<
@@ -37,6 +39,18 @@ export default function CashierTransaction() {
   }, []);
 
   const sw = useScreenWidth();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { transactionSearch, setTransactionSearch } = useTransactionSearch();
+  useEffect(() => {
+    const filteredTransaction = cashierTransaction.filter(
+      (transaction) => transaction.id === transactionSearch
+    );
+    setFilteredTransaction(filteredTransaction);
+  }, [transactionSearch, cashierTransaction]);
+
+  const [filteredTransaction, setFilteredTransaction] = useState<
+    Transaction[] | []
+  >([]);
 
   return (
     <Page>
@@ -48,34 +62,34 @@ export default function CashierTransaction() {
 
       {/* Search Component */}
       <Container>
-        <HStack justify={"center"} py={3}>
+        <HStack justify={"center"} py={"19px"}>
           <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
               <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />
             </InputLeftElement>
 
             <Input
-              //   ref={inputRef}
+              ref={inputRef}
               name={"indexProduct"}
-              placeholder="Transaction search"
+              placeholder="Transaction search by ID"
               bg={"var(--divider)"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}
               pr={"36px !important"}
-              //   value={productSearch}
-              //   onChange={(e) => {
-              //     setProductSearch(e.target.value);
-              //   }}
+              value={transactionSearch}
+              onChange={(e) => {
+                setTransactionSearch(e.target.value);
+              }}
             />
 
-            {/* {productSearch && (
+            {transactionSearch && (
               <IconButton
                 position={"absolute"}
                 right={0}
                 top={0}
                 onClick={() => {
                   inputRef.current?.focus();
-                  resetProductSearch();
+                  setTransactionSearch("");
                 }}
                 _hover={{ bg: "transparent !important" }}
                 _active={{ bg: "transparent !Important" }}
@@ -85,7 +99,7 @@ export default function CashierTransaction() {
                 aria-label="clearSearchButton"
                 icon={<Icon as={X} fontSize={16} />}
               />
-            )} */}
+            )}
           </InputGroup>
         </HStack>
       </Container>
@@ -159,14 +173,33 @@ export default function CashierTransaction() {
           </Thead>
 
           <Tbody>
-            {cashierTransaction
-              .slice()
-              .reverse()
-              ?.map((t, i) => (
-                <Tr key={i} cursor="pointer" _hover={{ bg: "var(--divider)" }}>
-                  <TransactionItem key={i} t={t} />
-                </Tr>
-              ))}
+            {transactionSearch !== "" &&
+              filteredTransaction
+                .slice()
+                .reverse()
+                ?.map((t, i) => (
+                  <Tr
+                    key={i}
+                    cursor="pointer"
+                    _hover={{ bg: "var(--divider)" }}
+                  >
+                    <TransactionItem key={i} t={t} />
+                  </Tr>
+                ))}
+
+            {transactionSearch === "" &&
+              cashierTransaction
+                .slice()
+                .reverse()
+                ?.map((t, i) => (
+                  <Tr
+                    key={i}
+                    cursor="pointer"
+                    _hover={{ bg: "var(--divider)" }}
+                  >
+                    <TransactionItem key={i} t={t} />
+                  </Tr>
+                ))}
           </Tbody>
         </Table>
       </Container>

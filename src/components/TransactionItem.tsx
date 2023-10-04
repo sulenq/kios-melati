@@ -45,7 +45,7 @@ export default function TransactionItem({ t }: Props) {
       <>
         <IconButton
           aria-label="orderListButton"
-          icon={<Icon as={ShoppingBag} fontSize={[15, null, 18]} />}
+          icon={<Icon as={ShoppingBag} fontSize={[17, null, 19]} />}
           className="btn-solid clicky"
           onClick={onOpen}
         />

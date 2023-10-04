@@ -66,11 +66,11 @@ export default function Checkout() {
     if (ctc) {
       const ct = JSON.parse(ctc);
       // console.log(ct[ct.length - 1]);
-      const id = ct[ct.length - 1].id + 1;
+      const id = (parseInt(ct[ct.length - 1].id) + 1).toString();
       ct.push({ id: id, ...order });
       setCookie("cashierTransaction", JSON.stringify(ct));
     } else {
-      const ct = JSON.stringify([{ id: 1, ...order }]);
+      const ct = JSON.stringify([{ id: "1", ...order }]);
       setCookie("cashierTransaction", ct);
     }
   };
