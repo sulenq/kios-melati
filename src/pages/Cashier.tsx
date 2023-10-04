@@ -184,7 +184,7 @@ export default function Cashier() {
                     placeholder="Index Product"
                     bg={"var(--divider)"}
                     border={"2px solid transparent !important"}
-                    pr={"70px !important"}
+                    pr={"80px !important"}
                     pl={"12px !important"}
                     value={productSearch}
                     onChange={handleIndexProduct}
@@ -288,7 +288,7 @@ export default function Cashier() {
                     placeholder="Index Product"
                     bg={"var(--divider)"}
                     border={"2px solid transparent !important"}
-                    pr={"50px"}
+                    pr={"80px"}
                     value={productSearch}
                     onChange={handleIndexProduct}
                     onKeyDown={handleIndexProductKeydown}
