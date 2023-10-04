@@ -31,8 +31,7 @@ export default function ProductSearch() {
     }
   }, []);
 
-  const { productSearch, setProductSearch, resetProductSearch } =
-    useProductSearch();
+  const { productSearch, setProductSearch } = useProductSearch();
   useEffect(() => {
     const filteredProducts = products.filter(
       (product) =>
@@ -100,7 +99,7 @@ export default function ProductSearch() {
                 top={0}
                 onClick={() => {
                   inputRef.current?.focus();
-                  resetProductSearch();
+                  setProductSearch("");
                 }}
                 _hover={{ bg: "transparent !important" }}
                 _active={{ bg: "transparent !Important" }}

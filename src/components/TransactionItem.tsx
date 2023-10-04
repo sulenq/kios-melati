@@ -1,7 +1,8 @@
 import {
   Box,
-  Button,
   HStack,
+  Icon,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -18,6 +19,7 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 import { OrderItem } from "../globalState/useOrder";
 import TransactionOrderList from "./TransactionOrderList";
 import { useEffect } from "react";
+import { ShoppingBag } from "@phosphor-icons/react";
 
 type Props = { t: Transaction };
 
@@ -42,9 +44,12 @@ export default function TransactionItem({ t }: Props) {
 
     return (
       <>
-        <Button className="btn-solid clicky" onClick={onOpen}>
-          Order List
-        </Button>
+        <IconButton
+          aria-label="orderListButton"
+          icon={<Icon as={ShoppingBag} fontSize={[15, null, 18]} />}
+          className="btn-solid clicky"
+          onClick={onOpen}
+        />
 
         <Modal
           isOpen={isOpen}
@@ -53,7 +58,7 @@ export default function TransactionItem({ t }: Props) {
           size={"xl"}
         >
           <ModalOverlay
-          // backdropFilter={"blur(10px)"}
+          backdropFilter={"blur(5px)"}
           />
 
           <ModalContent>
@@ -84,24 +89,39 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItemMobile = ({ t }: Props) => {
     return (
       <HStack gap={8} justify={"space-between"}>
-        <Box w={"35%"}>
+        <Box w={"40%"}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
-          <Text color={"p.500"} fontWeight={500}>
-            {fn(t.totalPayment)}
-          </Text>
+          <HStack gap={1}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text color={"p.500"} fontWeight={500}>
+              {fn(t.totalPayment)}
+            </Text>
+          </HStack>
         </Box>
 
         <Box w={"20%"}>
-          <Text opacity={0.5}>{t.paymentMethod}</Text>
-          <Text>{fn(t.pay)}</Text>
+          <Text opacity={0.8}>{t.paymentMethod}</Text>
+          <HStack gap={1}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text>{fn(t.pay)}</Text>
+          </HStack>
         </Box>
 
         <Box w={"20%"}>
           <Text opacity={0}>Change</Text>
-          <Text textAlign={"right"}>{fn(t.change) || 0}</Text>
+          <HStack gap={1} justify={"flex-end"}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text>{fn(t.change) || 0}</Text>
+          </HStack>
         </Box>
 
-        <VStack align={"flex-end"} w={"25%"}>
+        <VStack align={"flex-end"} w={"20%"}>
           <OrderListModal orderList={t.orderList} />
         </VStack>
       </HStack>
@@ -115,22 +135,36 @@ export default function TransactionItem({ t }: Props) {
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Box>
 
-        <Text w={"15%"} color={"p.500"} fontWeight={500} textAlign={"right"}>
-          {fn(t.totalPayment)}
-        </Text>
+        <HStack
+          gap={1}
+          w={"15%"}
+          color={"p.500"}
+          fontWeight={500}
+          justify={"flex-end"}
+        >
+          <Text fontSize={11} opacity={0.5}>
+            Rp
+          </Text>
+          <Text>{fn(t.totalPayment)}</Text>
+        </HStack>
 
         <Text w={"15%"} textAlign={"right"}>
           {t.paymentMethod}
         </Text>
 
-        <Text w={"20%"} textAlign={"right"}>
-          {fn(t.pay)}
-        </Text>
+        <HStack gap={1} w={"20%"} justify={"flex-end"}>
+          <Text fontSize={11} opacity={0.5}>
+            Rp
+          </Text>
+          <Text>{fn(t.pay)}</Text>
+        </HStack>
 
-        <Text w={"15%"} textAlign={"right"}>
-          {fn(t.change) || 0}
-        </Text>
-
+        <HStack gap={1} w={"15%"} justify={"flex-end"}>
+          <Text fontSize={11} opacity={0.5}>
+            Rp
+          </Text>
+          <Text>{fn(t.change) || 0}</Text>
+        </HStack>
         <VStack w={"20%"} align={"flex-end"}>
           <OrderListModal orderList={t.orderList} />
         </VStack>

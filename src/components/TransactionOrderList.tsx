@@ -24,8 +24,8 @@ export default function TransactionOrderList({
           justify={"space-between"}
           borderRadius={i === orderList.length - 1 ? "0 0 6px 6px" : ""}
         >
-          <HStack gap={3}>
-            <Icon as={pci(o.category)} fontSize={20} />
+          <HStack gap={3} w={"45%"}>
+            <Icon as={pci(o.category)} fontSize={18} />
 
             <Box>
               <Tooltip label={o.name} hasArrow>
@@ -37,17 +37,24 @@ export default function TransactionOrderList({
             </Box>
           </HStack>
 
-          <HStack gap={4} w={"50%"} justify={"flex-end"}>
-            <HStack gap={1} opacity={0.5} w={"40%"}>
-              <Text opacity={0.5} fontSize={[10, null, 12]}>
-                @
-              </Text>
-              <Text>{fn(o.price)}</Text>
+          <HStack gap={4} w={"55%"} justify={"flex-end"}>
+            <HStack w={"60%"} align={"flex-end"} gap={2}>
+              <HStack gap={1} opacity={0.5} w={"70%"} justify={"flex-end"}>
+                <Text opacity={0.5} fontSize={[10, null, 12]}>
+                  @
+                </Text>
+                <Text>{fn(o.price)}</Text>
+              </HStack>
+
+              <Text
+                opacity={0.5}
+                w={"30%"}
+                flexShrink={0}
+                textAlign={"right"}
+              >{`x${o.qty}`}</Text>
             </HStack>
 
-            <Text opacity={0.5} w={"20%"}>{`x${o.qty}`}</Text>
-
-            <HStack gap={1} w={"40%"} justify={"flex-end"}>
+            <HStack w={"40%"} gap={1} justify={"flex-end"}>
               <Text opacity={0.5} fontSize={[10, null, 12]}>
                 Rp
               </Text>

@@ -34,8 +34,7 @@ import Page from "../components/Page";
 export default function Cashier() {
   const sw = useScreenWidth();
   const fn = useFormatNumber;
-  const { productSearch, setProductSearch, resetProductSearch } =
-    useProductSearch();
+  const { productSearch, setProductSearch } = useProductSearch();
   const { addOrder, orderList, resetOrder, totalPayment } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -110,7 +109,7 @@ export default function Cashier() {
 
   const handleClearIndexProduct = () => {
     inputRef.current?.focus();
-    resetProductSearch();
+    setProductSearch("");
   };
 
   return (
