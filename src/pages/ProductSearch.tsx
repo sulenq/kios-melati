@@ -150,6 +150,7 @@ export default function ProductSearch() {
           pb={"16px"}
           overflow={"auto"}
           flex={1}
+          gap={0}
           // h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
         >
           <Container>

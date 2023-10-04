@@ -82,7 +82,7 @@ export default function TransactionItem({ t }: Props) {
 
   const TransactionItemMobile = ({ t }: Props) => {
     return (
-      <HStack h={"36px"} gap={8} justify={"space-between"} align={"flex-end"}>
+      <HStack gap={8} justify={"space-between"}>
         <Box w={"35%"}>
           <Badge colorScheme="p">{`${t.id}`}</Badge>
           <Text color={"p.500"} fontWeight={500}>
@@ -96,7 +96,7 @@ export default function TransactionItem({ t }: Props) {
         </Box>
 
         <Box w={"20%"}>
-          <Text opacity={0}>Change</Text>
+          {/* <Text opacity={0}>Change</Text> */}
           <Text textAlign={"right"}>{fn(t.change) || 0}</Text>
         </Box>
 

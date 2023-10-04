@@ -163,19 +163,22 @@ export default function CashierTransaction() {
         </VStack>
       )}
 
-      {cashierTransaction?.map((t, i) => (
-        <Container key={i} px={[0, null, 6]}>
-          <Box
-            cursor="pointer"
-            _hover={{ bg: "var(--divider)" }}
-            borderRadius={sw >= 770 ? 6 : ""}
-            px={[4, null, 2]}
-            py={2}
-          >
-            <TransactionItem key={i} t={t} />
-          </Box>
-        </Container>
-      ))}
+      {cashierTransaction
+        .slice()
+        .reverse()
+        ?.map((t, i) => (
+          <Container key={i} px={[0, null, 6]}>
+            <Box
+              cursor="pointer"
+              _hover={{ bg: "var(--divider)" }}
+              borderRadius={sw >= 770 ? 6 : ""}
+              px={[4, null, 2]}
+              py={2}
+            >
+              <TransactionItem key={i} t={t} />
+            </Box>
+          </Container>
+        ))}
     </Page>
   );
 }
