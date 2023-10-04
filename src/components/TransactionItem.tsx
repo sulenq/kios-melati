@@ -52,7 +52,9 @@ export default function TransactionItem({ t }: Props) {
           scrollBehavior="inside"
           size={"xl"}
         >
-          <ModalOverlay backdropFilter={"blur(10px)"} />
+          <ModalOverlay
+          // backdropFilter={"blur(10px)"}
+          />
 
           <ModalContent>
             <ModalCloseButton
