@@ -111,7 +111,7 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItem = ({ t }: Props) => {
     return (
       <HStack gap={8}>
-        <Box w={"20%"}>
+        <Box w={"15%"}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Box>
 
@@ -119,7 +119,7 @@ export default function TransactionItem({ t }: Props) {
           {fn(t.totalPayment)}
         </Text>
 
-        <Text w={"10%"} textAlign={"right"}>
+        <Text w={"15%"} textAlign={"right"}>
           {t.paymentMethod}
         </Text>
 

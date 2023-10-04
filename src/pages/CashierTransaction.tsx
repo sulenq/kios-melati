@@ -90,7 +90,7 @@ export default function CashierTransaction() {
       {sw >= 770 && cashierTransaction.length > 0 && (
         <Container mt={4} mb={2}>
           <HStack gap={8} opacity={0.5}>
-            <Text w={"20%"} fontWeight={500} fontSize={"12px !important"}>
+            <Text w={"15%"} fontWeight={500} fontSize={"12px !important"}>
               ID
             </Text>
 
@@ -104,7 +104,7 @@ export default function CashierTransaction() {
             </Text>
 
             <Text
-              w={"10%"}
+              w={"15%"}
               fontWeight={500}
               textAlign={"right"}
               fontSize={"12px !important"}
