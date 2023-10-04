@@ -19,30 +19,31 @@ export default function NotFound() {
       </Text>
 
       <Button
-        h={"44px"}
+        h={"44px !important"}
+        w={"231px"}
         colorScheme="bnw"
         px={8}
         className="clicky"
         borderRadius={"full"}
-        as={Link}
-        to={"/"}
+        onClick={() => {
+          window.history.back();
+        }}
         mb={2}
       >
-        Back to Landing Page
+        Back
       </Button>
 
       <Button
-        h={"44px !important"}
-        w={"231px"}
+        h={"44px"}
+        colorScheme="bnw"
         px={8}
         variant={"ghost"}
         className="btn clicky"
         borderRadius={"full"}
-        onClick={() => {
-          window.history.back();
-        }}
+        as={Link}
+        to={"/"}
       >
-        Back
+        Back to Landing Page
       </Button>
     </VStack>
   );

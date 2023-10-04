@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import Container from "../components/Container";
 import NavHeader from "../components/NavHeader";
-import useOrder from "../globalState/useOrder";
+import useOrder, { Order } from "../globalState/useOrder";
 import useFormatNumber from "../utils/useFormatNumber";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
 import { CaretDown, X } from "@phosphor-icons/react";
@@ -32,17 +32,48 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 import cashList from "../const/cashList";
 import paymentMethods from "../const/paymentMethods";
 import useProductSearch from "../globalState/useProductSearch";
+import { getCookie, setCookie } from "typescript-cookie";
 
 export default function Checkout() {
-  const { totalPayment, paymentMethod, setPaymentMethod, pay, setPay } =
-    useOrder();
+  const {
+    orderList,
+    totalPayment,
+    paymentMethod,
+    setPaymentMethod,
+    pay,
+    setPay,
+    change,
+    resetOrder,
+  } = useOrder();
   const { setProductSearch } = useProductSearch();
-  const { resetOrder } = useOrder();
   const fn = useFormatNumber;
   const rfn = useReverseFormatNumber;
   const sw = useScreenWidth();
   const inputPayRef = useRef<HTMLInputElement | null>(null);
   const confirmTransactionButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleConfirmTransaction = () => {
+    resetOrder();
+    setProductSearch("");
+    const ctc = getCookie("cashierTransaction");
+    const order: Order = {
+      orderList: orderList,
+      totalPayment: totalPayment,
+      paymentMethod: paymentMethod,
+      pay: pay,
+      change: change,
+    };
+    if (ctc) {
+      const ct = JSON.parse(ctc);
+      // console.log(ct[ct.length - 1]);
+      const id = ct[ct.length - 1].id + 1;
+      ct.push({ id: id, ...order });
+      setCookie("cashierTransaction", JSON.stringify(ct));
+    } else {
+      const ct = JSON.stringify([{ id: 1, ...order }]);
+      setCookie("cashierTransaction", ct);
+    }
+  };
 
   useEffect(() => {
     const handleEndKey = (e: KeyboardEvent) => {
@@ -244,11 +275,7 @@ export default function Checkout() {
 
             <Button
               ref={confirmTransactionButtonRef}
-              onClick={() => {
-                resetOrder();
-                setProductSearch("");
-                // window.history.back();
-              }}
+              onClick={handleConfirmTransaction}
               w={"100%"}
               h={"44px !important"}
               borderRadius={"full"}

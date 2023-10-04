@@ -1,6 +1,6 @@
 import { Box, HStack, Icon, Text, Tooltip, VStack } from "@chakra-ui/react";
 import useScreenWidth from "../utils/useGetScreenWidth";
-import useProductCategoryIcon from "../utils/useProductCategoryIcon";
+import useProductCategoryIcon from "../const/productCategoryIcon";
 import useFormatNumber from "../utils/useFormatNumber";
 
 type Props = {
@@ -50,14 +50,16 @@ export default function ProductSearchResult({
       </VStack>
     </HStack>
   ) : (
-    <HStack gap={3} justify={"space-between"}>
+    <HStack gap={3}>
       <HStack w={"5%"} justify={"flex-start"}>
         <Icon as={productCategoryIcon(category)} fontSize={20} weight="light" />
       </HStack>
 
       <Box w={"40%"}>
         <Tooltip label={name} hasArrow placement="right">
-          <Text w={'max-content'} noOfLines={1}>{name}</Text>
+          <Text w={"max-content"} noOfLines={1}>
+            {name}
+          </Text>
         </Tooltip>
       </Box>
 

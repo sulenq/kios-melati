@@ -12,7 +12,7 @@ export type OrderItem = {
   category: string;
 };
 
-type Order = {
+export type Order = {
   orderList: OrderItem[] | [];
   totalPayment: number;
   paymentMethod: PaymentMethod;

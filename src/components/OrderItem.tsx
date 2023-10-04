@@ -12,7 +12,7 @@ import useFormatNumber from "../utils/useFormatNumber";
 import useOrder, { OrderItem } from "../globalState/useOrder";
 import { Minus, Plus, TrashSimple } from "@phosphor-icons/react";
 import useReverseFormatNumber from "../utils/useReverseFormatNumber";
-import useProductCategoryIcon from "../utils/useProductCategoryIcon";
+import useProductCategoryIcon from "../const/productCategoryIcon";
 import useScreenWidth from "../utils/useGetScreenWidth";
 
 type Props = {
@@ -45,7 +45,7 @@ export default function OrderItemComponent({ order }: Props) {
         </VStack>
 
         <VStack gap={"2px"} justify={"space-between"} align={"flex-start"}>
-          <Tooltip label={order.name} hasArrow placement="right">
+          <Tooltip label={order.name} hasArrow>
             <Text noOfLines={1}>{order.name}</Text>
           </Tooltip>
 
@@ -142,7 +142,7 @@ export default function OrderItemComponent({ order }: Props) {
         justify={"space-between"}
         align={"flex-start"}
       >
-        <Tooltip label={order.name} hasArrow placement="right">
+        <Tooltip label={order.name} hasArrow>
           <Text noOfLines={1}>{order.name}</Text>
         </Tooltip>
 

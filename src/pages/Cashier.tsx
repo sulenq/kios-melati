@@ -29,6 +29,7 @@ import { useRef, useEffect } from "react";
 import OrderItem from "../components/OrderItem";
 import useFormatNumber from "../utils/useFormatNumber";
 import products from "../const/products";
+import Page from "../components/Page";
 
 export default function Cashier() {
   const sw = useScreenWidth();
@@ -113,8 +114,10 @@ export default function Cashier() {
   };
 
   return (
-    <Box h={"100vh"}>
-      <VStack borderBottom={"1px solid var(--divider)"} p={2}>
+    <Page>
+      <CashierNav />
+
+      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
         <NavHeader
           title={"Cashiering"}
           left={null}
@@ -140,8 +143,6 @@ export default function Cashier() {
       </VStack>
 
       <Container>
-        <CashierNav />
-
         {sw < 770 ? (
           <VStack gap={3} py={3} justify={"space-between"}>
             <HStack
@@ -359,6 +360,7 @@ export default function Cashier() {
           justify={"center"}
           p={4}
           pb={"80px"}
+          w={"100%"}
           minH={"400px"}
           overflow={"auto"}
           h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
@@ -376,10 +378,12 @@ export default function Cashier() {
       )}
 
       {orderList.length !== 0 && (
-        <Box
+        <VStack
+          w={"100%"}
           pb={"72px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
+          flex={1}
+          // h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>
             <Text fontSize={24} fontWeight={600} mb={2}>
@@ -402,8 +406,8 @@ export default function Cashier() {
                 </Box>
               </Container>
             ))}
-        </Box>
+        </VStack>
       )}
-    </Box>
+    </Page>
   );
 }

@@ -10,19 +10,17 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import HeaderContainer from "../components/HeaderContainer";
 import Container from "../components/Container";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import NavHeader from "../components/NavHeader";
 import useProductSearch from "../globalState/useProductSearch";
 import ProductSearchResult from "../components/ProductSearchResult";
-import useScreenWidth from "../utils/useGetScreenWidth";
 import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
+import Page from "../components/Page";
 
 export default function ProductSearch() {
-  const sw = useScreenWidth();
   const { productSearch, setProductSearch, resetProductSearch } =
     useProductSearch();
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -62,15 +60,13 @@ export default function ProductSearch() {
   }, []);
 
   return (
-    <VStack h={"100vh"}>
+    <Page>
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <HeaderContainer>
-          <NavHeader
-            title={"Cashiering - Product Search"}
-            right={null}
-            // backPath={"/cashier"}
-          />
-        </HeaderContainer>
+        <NavHeader
+          title={"Cashiering - Product Search"}
+          right={null}
+          // backPath={"/cashier"}
+        />
       </VStack>
 
       <Container>
@@ -146,11 +142,12 @@ export default function ProductSearch() {
       )}
 
       {productSearch !== "" && filteredProducts.length !== 0 && (
-        <Box
+        <VStack
           w={"100%"}
           pb={"16px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
+          flex={1}
+          // h={sw < 770 ? "calc(100% - 120.8px)" : "calc(100% - 128.67px)"}
         >
           <Container>
             <Text opacity={0.5} mb={1}>
@@ -158,7 +155,7 @@ export default function ProductSearch() {
             </Text>
           </Container>
 
-          <Box>
+          <Box w={"100%"}>
             {filteredProducts.map((p, i) => {
               return (
                 <Container
@@ -197,8 +194,8 @@ export default function ProductSearch() {
               );
             })}
           </Box>
-        </Box>
+        </VStack>
       )}
-    </VStack>
+    </Page>
   );
 }
