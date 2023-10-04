@@ -83,7 +83,7 @@ export default function TransactionItem({ t }: Props) {
     return (
       <HStack gap={8} justify={"space-between"}>
         <Box w={"35%"}>
-          <Text opacity={0.5} color={"p.500"}>{`${t.id}`}</Text>
+          <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
           <Text color={"p.500"} fontWeight={500}>
             {fn(t.totalPayment)}
           </Text>
@@ -110,7 +110,7 @@ export default function TransactionItem({ t }: Props) {
     return (
       <HStack gap={8}>
         <Box w={"20%"}>
-          <Text opacity={0.5} color={"p.500"}>{`${t.id}`}</Text>
+          <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Box>
 
         <Text w={"15%"} color={"p.500"} fontWeight={500} textAlign={"right"}>

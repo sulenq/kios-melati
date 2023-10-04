@@ -110,7 +110,7 @@ export default function Checkout() {
               mt={1}
               mb={4}
             >
-              <Text opacity={0.5} color={"p.500"}>
+              <Text opacity={0.8} color={"p.500"}>
                 Total Payment
               </Text>
 
