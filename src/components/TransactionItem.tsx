@@ -1,5 +1,4 @@
 import {
-  Badge,
   Box,
   Button,
   HStack,
@@ -84,7 +83,7 @@ export default function TransactionItem({ t }: Props) {
     return (
       <HStack gap={8} justify={"space-between"}>
         <Box w={"35%"}>
-          <Badge colorScheme="p">{`${t.id}`}</Badge>
+          <Text opacity={0.5} color={"p.500"}>{`${t.id}`}</Text>
           <Text color={"p.500"} fontWeight={500}>
             {fn(t.totalPayment)}
           </Text>
@@ -96,7 +95,7 @@ export default function TransactionItem({ t }: Props) {
         </Box>
 
         <Box w={"20%"}>
-          {/* <Text opacity={0}>Change</Text> */}
+          <Text opacity={0}>Change</Text>
           <Text textAlign={"right"}>{fn(t.change) || 0}</Text>
         </Box>
 
@@ -111,7 +110,7 @@ export default function TransactionItem({ t }: Props) {
     return (
       <HStack gap={8}>
         <Box w={"20%"}>
-          <Badge colorScheme="p">{`${t.id}`}</Badge>
+          <Text opacity={0.5} color={"p.500"}>{`${t.id}`}</Text>
         </Box>
 
         <Text w={"15%"} color={"p.500"} fontWeight={500} textAlign={"right"}>
