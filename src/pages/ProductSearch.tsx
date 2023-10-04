@@ -121,8 +121,9 @@ export default function ProductSearch() {
           justify={"flex-end"}
           p={4}
           animation={"fade-in-fade 1s"}
+          maxW={"600px"}
         >
-          <Image w={"100%"} maxW={"600px"} src={"../img/search.png"} />
+          <Image w={"100%"} src={"../img/search.png"} />
         </VStack>
       )}
 

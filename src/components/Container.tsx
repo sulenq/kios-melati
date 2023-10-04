@@ -5,7 +5,7 @@ export default function Container(props: any) {
     <VStack
       {...props}
       gap={0}
-      className="page"
+      className="container"
       align={"stretch"}
       w={"100%"}
       maxW={"1280px"}

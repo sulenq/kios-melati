@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import {
-  Box,
   HStack,
   Icon,
   Image,
   Input,
   InputGroup,
   InputLeftElement,
-  Text,
+  Table,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
   VStack,
 } from "@chakra-ui/react";
 import { getCookie } from "typescript-cookie";
@@ -87,58 +90,6 @@ export default function CashierTransaction() {
         </HStack>
       </Container>
 
-      {sw >= 770 && cashierTransaction.length > 0 && (
-        <Container mt={4} mb={2}>
-          <HStack gap={8} opacity={0.5}>
-            <Text w={"15%"} fontWeight={500} fontSize={"12px !important"}>
-              ID
-            </Text>
-
-            <Text
-              w={"15%"}
-              fontWeight={500}
-              textAlign={"right"}
-              fontSize={"12px !important"}
-            >
-              TOTAL PAYMENT
-            </Text>
-
-            <Text
-              w={"15%"}
-              fontWeight={500}
-              textAlign={"right"}
-              fontSize={"12px !important"}
-            >
-              PAY METHOD
-            </Text>
-
-            <Text
-              w={"20%"}
-              fontWeight={500}
-              textAlign={"right"}
-              fontSize={"12px !important"}
-            >
-              PAY
-            </Text>
-
-            <Text
-              w={"15%"}
-              fontWeight={500}
-              textAlign={"right"}
-              fontSize={"12px !important"}
-            >
-              CHANGE
-            </Text>
-
-            <VStack w={"20%"} align={"flex-end"}>
-              <Text fontWeight={500} fontSize={"12px !important"}>
-                ORDER LIST
-              </Text>
-            </VStack>
-          </HStack>
-        </Container>
-      )}
-
       {cashierTransaction.length === 0 && (
         <VStack
           opacity={0.2}
@@ -146,6 +97,7 @@ export default function CashierTransaction() {
           p={4}
           pb={"80px"}
           w={"100%"}
+          maxW={"600px"}
           minH={"400px"}
           overflow={"auto"}
           //   h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
@@ -157,28 +109,67 @@ export default function CashierTransaction() {
             bottom={"0"}
             position={"absolute"}
             w={"100%"}
-            maxW={"600px"}
             src={"../img/transaction.png"}
           />
         </VStack>
       )}
 
-      {cashierTransaction
-        .slice()
-        .reverse()
-        ?.map((t, i) => (
-          <Container key={i} px={[0, null, 6]}>
-            <Box
-              cursor="pointer"
-              _hover={{ bg: "var(--divider)" }}
-              borderRadius={sw >= 770 ? 6 : ""}
-              px={[4, null, 2]}
-              py={2}
-            >
-              <TransactionItem key={i} t={t} />
-            </Box>
-          </Container>
-        ))}
+      <Container px={[0, null, 8]}>
+        <Table variant={"unstyled"}>
+          <Thead opacity={0.5}>
+            <Tr>
+              {sw < 770 ? (
+                <>
+                  <Th px={[4, null, 2]} py={2}>
+                    ID/Total
+                  </Th>
+                  <Th px={[4, null, 2]} py={2}>
+                    Payment
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Change
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Order
+                  </Th>
+                </>
+              ) : (
+                <>
+                  <Th px={[4, null, 2]} py={2}>
+                    ID
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Total Payment
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Payment Method
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Pay Amount
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Change
+                  </Th>
+                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    Order
+                  </Th>
+                </>
+              )}
+            </Tr>
+          </Thead>
+
+          <Tbody>
+            {cashierTransaction
+              .slice()
+              .reverse()
+              ?.map((t, i) => (
+                <Tr key={i} cursor="pointer" _hover={{ bg: "var(--divider)" }}>
+                  <TransactionItem key={i} t={t} />
+                </Tr>
+              ))}
+          </Tbody>
+        </Table>
+      </Container>
     </Page>
   );
 }

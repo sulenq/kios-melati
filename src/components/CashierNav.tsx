@@ -11,7 +11,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 export default function CashierNav(props: any) {
   const location = useLocation();
-  const bg = useColorModeValue("#ffffffaa", "#050505aa");
+  const bg = useColorModeValue("#ffffff50", "#05050550");
 
   const NavContainer = (props: any) => {
     return (

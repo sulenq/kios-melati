@@ -107,6 +107,10 @@ input:focus-visible {
   background: #555;
 }
 
+th {
+  font-size: 10px !important;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

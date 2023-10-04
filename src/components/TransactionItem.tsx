@@ -1,5 +1,4 @@
 import {
-  Box,
   HStack,
   Icon,
   IconButton,
@@ -9,8 +8,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Td,
   Text,
-  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import useFormatNumber from "../utils/useFormatNumber";
@@ -86,8 +85,8 @@ export default function TransactionItem({ t }: Props) {
 
   const TransactionItemMobile = ({ t }: Props) => {
     return (
-      <HStack gap={8} justify={"space-between"}>
-        <Box w={"40%"}>
+      <>
+        <Td px={[4, null, 2]} py={2}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
           <HStack gap={1}>
             <Text fontSize={11} opacity={0.5}>
@@ -95,9 +94,9 @@ export default function TransactionItem({ t }: Props) {
             </Text>
             <Text fontWeight={500}>{fn(t.totalPayment)}</Text>
           </HStack>
-        </Box>
+        </Td>
 
-        <Box w={"20%"}>
+        <Td px={[4, null, 2]} py={2}>
           <Text opacity={0.8}>{t.paymentMethod}</Text>
           <HStack gap={1}>
             <Text fontSize={11} opacity={0.5}>
@@ -105,9 +104,9 @@ export default function TransactionItem({ t }: Props) {
             </Text>
             <Text>{fn(t.pay)}</Text>
           </HStack>
-        </Box>
+        </Td>
 
-        <Box w={"20%"}>
+        <Td px={[4, null, 2]} py={2}>
           <Text opacity={0}>Change</Text>
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
@@ -115,50 +114,61 @@ export default function TransactionItem({ t }: Props) {
             </Text>
             <Text>{fn(t.change) || 0}</Text>
           </HStack>
-        </Box>
+        </Td>
 
-        <VStack align={"flex-end"} w={"20%"}>
-          <OrderListModal orderList={t.orderList} />
-        </VStack>
-      </HStack>
+        <Td px={[4, null, 2]} py={2}>
+          <HStack justify={"flex-end"}>
+            <OrderListModal orderList={t.orderList} />
+          </HStack>
+        </Td>
+      </>
     );
   };
 
   const TransactionItem = ({ t }: Props) => {
     return (
-      <HStack gap={8}>
-        <Box w={"15%"}>
+      <>
+        <Td px={[4, null, 2]} py={2} borderRadius={"6px 0 0 6px"}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
-        </Box>
+        </Td>
 
-        <HStack gap={1} w={"15%"} fontWeight={500} justify={"flex-end"}>
-          <Text fontSize={11} opacity={0.5}>
-            Rp
-          </Text>
-          <Text>{fn(t.totalPayment)}</Text>
-        </HStack>
+        <Td px={[4, null, 2]} py={2}>
+          <HStack gap={1} justify={"flex-end"}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text>{fn(t.totalPayment)}</Text>
+          </HStack>
+        </Td>
 
-        <Text w={"15%"} textAlign={"right"}>
-          {t.paymentMethod}
-        </Text>
+        <Td textAlign={"right"} px={[4, null, 2]} py={2}>
+          <Text>{`${t.paymentMethod}`}</Text>
+        </Td>
 
-        <HStack gap={1} w={"20%"} justify={"flex-end"}>
-          <Text fontSize={11} opacity={0.5}>
-            Rp
-          </Text>
-          <Text>{fn(t.pay)}</Text>
-        </HStack>
+        <Td px={[4, null, 2]} py={2}>
+          <HStack gap={1} justify={"flex-end"}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text>{fn(t.pay)}</Text>
+          </HStack>
+        </Td>
 
-        <HStack gap={1} w={"15%"} justify={"flex-end"}>
-          <Text fontSize={11} opacity={0.5}>
-            Rp
-          </Text>
-          <Text>{fn(t.change) || 0}</Text>
-        </HStack>
-        <VStack w={"20%"} align={"flex-end"}>
-          <OrderListModal orderList={t.orderList} />
-        </VStack>
-      </HStack>
+        <Td px={[4, null, 2]} py={2}>
+          <HStack gap={1} justify={"flex-end"}>
+            <Text fontSize={11} opacity={0.5}>
+              Rp
+            </Text>
+            <Text>{fn(t.change) || 0}</Text>
+          </HStack>
+        </Td>
+
+        <Td px={[4, null, 2]} py={2} borderRadius={"0 6px 6px 0"}>
+          <HStack justify={"flex-end"}>
+            <OrderListModal orderList={t.orderList} />
+          </HStack>
+        </Td>
+      </>
     );
   };
 
