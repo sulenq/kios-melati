@@ -19,10 +19,9 @@ import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
 import Page from "../components/Page";
+import useScreenWidth from "../utils/useGetScreenWidth";
 
 export default function ProductSearch() {
-  const { productSearch, setProductSearch, resetProductSearch } =
-    useProductSearch();
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     if (inputRef.current) {
@@ -31,9 +30,9 @@ export default function ProductSearch() {
       }
     }
   }, []);
-  const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
-  const { addOrder } = useOrder();
 
+  const { productSearch, setProductSearch, resetProductSearch } =
+    useProductSearch();
   useEffect(() => {
     const filteredProducts = products.filter(
       (product) =>
@@ -42,6 +41,10 @@ export default function ProductSearch() {
     );
     setFilteredProducts(filteredProducts);
   }, [productSearch]);
+
+  const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
+  const { addOrder } = useOrder();
+  const sw = useScreenWidth();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -160,7 +163,7 @@ export default function ProductSearch() {
               return (
                 <Container
                   key={i}
-                  px={[2, 4, 6]}
+                  px={[0, null, 6]}
                   onClick={() => {
                     addOrder({
                       id: p.id,
@@ -179,8 +182,9 @@ export default function ProductSearch() {
                   <Box
                     cursor="pointer"
                     _hover={{ bg: "var(--divider)" }}
-                    borderRadius={6}
-                    p={2}
+                    borderRadius={sw >= 770 ? 6 : ""}
+                    px={[4, null, 2]}
+                    py={2}
                   >
                     <ProductSearchResult
                       category={p?.category}

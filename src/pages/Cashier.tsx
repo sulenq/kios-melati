@@ -363,7 +363,8 @@ export default function Cashier() {
           w={"100%"}
           minH={"400px"}
           overflow={"auto"}
-          h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
+          flex={1}
+          // h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
           position={"relative"}
           animation={"fade-in-fade 1s"}
         >
@@ -395,10 +396,11 @@ export default function Cashier() {
             .slice()
             .reverse()
             .map((o, i) => (
-              <Container key={i} px={[2, 4, 6]}>
+              <Container key={i} px={[0, null, 6]}>
                 <Box
-                  borderRadius={6}
-                  p={2}
+                  borderRadius={sw >= 770 ? 6 : ""}
+                  px={[4, null, 2]}
+                  py={2}
                   mb={2}
                   _hover={{ bg: "var(--divider)" }}
                 >

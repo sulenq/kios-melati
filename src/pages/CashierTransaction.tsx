@@ -3,6 +3,7 @@ import {
   Box,
   HStack,
   Icon,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
@@ -86,15 +87,15 @@ export default function CashierTransaction() {
         </HStack>
       </Container>
 
-      {sw >= 770 && (
-        <Container mt={4}>
+      {sw >= 770 && cashierTransaction.length > 0 && (
+        <Container mt={4} mb={2}>
           <HStack gap={8} opacity={0.5}>
-            <Text w={"5%"} fontWeight={500} fontSize={"12px !important"}>
+            <Text w={"20%"} fontWeight={500} fontSize={"12px !important"}>
               ID
             </Text>
 
             <Text
-              w={"20%"}
+              w={"15%"}
               fontWeight={500}
               textAlign={"right"}
               fontSize={"12px !important"}
@@ -102,8 +103,13 @@ export default function CashierTransaction() {
               TOTAL PAYMENT
             </Text>
 
-            <Text w={"20%"} fontWeight={500} fontSize={"12px !important"}>
-              PAYMENT METHOD
+            <Text
+              w={"10%"}
+              fontWeight={500}
+              textAlign={"right"}
+              fontSize={"12px !important"}
+            >
+              PAY METHOD
             </Text>
 
             <Text
@@ -116,7 +122,7 @@ export default function CashierTransaction() {
             </Text>
 
             <Text
-              w={"10%"}
+              w={"15%"}
               fontWeight={500}
               textAlign={"right"}
               fontSize={"12px !important"}
@@ -124,7 +130,7 @@ export default function CashierTransaction() {
               CHANGE
             </Text>
 
-            <VStack w={"25%"} align={"flex-end"}>
+            <VStack w={"20%"} align={"flex-end"}>
               <Text fontWeight={500} fontSize={"12px !important"}>
                 ORDER LIST
               </Text>
@@ -133,13 +139,38 @@ export default function CashierTransaction() {
         </Container>
       )}
 
+      {cashierTransaction.length === 0 && (
+        <VStack
+          opacity={0.3}
+          justify={"center"}
+          p={4}
+          pb={"80px"}
+          w={"100%"}
+          minH={"400px"}
+          overflow={"auto"}
+          //   h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
+          flex={1}
+          position={"relative"}
+          animation={"fade-in-fade 1s"}
+        >
+          <Image
+            bottom={"0"}
+            position={"absolute"}
+            w={"100%"}
+            maxW={"400px"}
+            src={"../img/transaction.png"}
+          />
+        </VStack>
+      )}
+
       {cashierTransaction?.map((t, i) => (
-        <Container key={i} px={[2, 4, 6]}>
+        <Container key={i} px={[0, null, 6]}>
           <Box
             cursor="pointer"
             _hover={{ bg: "var(--divider)" }}
-            borderRadius={6}
-            p={2}
+            borderRadius={sw >= 770 ? 6 : ""}
+            px={[4, null, 2]}
+            py={2}
           >
             <TransactionItem key={i} t={t} />
           </Box>

@@ -12,7 +12,7 @@ export default function TransactionOrderList({
   const fn = useFormatNumber;
 
   return (
-    <VStack gap={4}>
+    <VStack gap={0}>
       {orderList.map((o, i) => (
         <HStack
           _hover={{ bg: "var(--divider)" }}

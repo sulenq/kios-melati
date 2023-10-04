@@ -59,8 +59,9 @@ export default function TransactionItem({ t }: Props) {
             <ModalCloseButton
               borderRadius={"full"}
               h={"32px !important"}
+              fontSize={"11px !important"}
               right={3}
-              top={3}
+              top={2}
             />
 
             <ModalHeader
@@ -84,7 +85,9 @@ export default function TransactionItem({ t }: Props) {
       <HStack h={"36px"} gap={8} justify={"space-between"} align={"flex-end"}>
         <Box w={"35%"}>
           <Badge colorScheme="p">{`${t.id}`}</Badge>
-          <Text>{fn(t.totalPayment)}</Text>
+          <Text color={"p.500"} fontWeight={500}>
+            {fn(t.totalPayment)}
+          </Text>
         </Box>
 
         <Box w={"20%"}>
@@ -107,25 +110,27 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItem = ({ t }: Props) => {
     return (
       <HStack gap={8}>
-        <Box w={"5%"}>
+        <Box w={"20%"}>
           <Badge colorScheme="p">{`${t.id}`}</Badge>
         </Box>
 
-        <Text w={"20%"} textAlign={"right"}>
+        <Text w={"15%"} color={"p.500"} fontWeight={500} textAlign={"right"}>
           {fn(t.totalPayment)}
         </Text>
 
-        <Text w={"20%"}>{t.paymentMethod}</Text>
+        <Text w={"10%"} textAlign={"right"}>
+          {t.paymentMethod}
+        </Text>
 
         <Text w={"20%"} textAlign={"right"}>
           {fn(t.pay)}
         </Text>
 
-        <Text w={"10%"} textAlign={"right"}>
+        <Text w={"15%"} textAlign={"right"}>
           {fn(t.change) || 0}
         </Text>
 
-        <VStack w={"25%"} align={"flex-end"}>
+        <VStack w={"20%"} align={"flex-end"}>
           <OrderListModal orderList={t.orderList} />
         </VStack>
       </HStack>

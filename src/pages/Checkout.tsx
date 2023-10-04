@@ -110,10 +110,12 @@ export default function Checkout() {
               mt={1}
               mb={4}
             >
-              <Text opacity={0.5}>Total Payment</Text>
+              <Text opacity={0.5} color={"p.500"}>
+                Total Payment
+              </Text>
 
               <HStack align={"flex-end"}>
-                <Text>Rp</Text>
+                <Text color={"p.500"}>Rp</Text>
                 <Text
                   fontSize={32}
                   fontWeight={800}
