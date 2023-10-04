@@ -375,10 +375,11 @@ export default function Cashier() {
           pb={"72px"}
           overflow={"auto"}
           flex={1}
+          gap={0}
           // h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>
-            <Text fontSize={23} fontWeight={600} mb={2}>
+            <Text fontSize={23} fontWeight={600} mb={1}>
               Orders
             </Text>
           </Container>
