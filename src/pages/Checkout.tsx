@@ -42,11 +42,14 @@ export default function Checkout() {
   const rfn = useReverseFormatNumber;
   const sw = useScreenWidth();
   const inputPayRef = useRef<HTMLInputElement | null>(null);
+  const confirmTransactionButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const handleEndKey = (e: KeyboardEvent) => {
       if (e.key === "End") {
         if (inputPayRef.current) inputPayRef.current.focus();
+      } else if (e.key === "Escape") {
+        window.history.back();
       }
     };
 
@@ -165,6 +168,14 @@ export default function Checkout() {
                     onChange={(e) => {
                       setPay(rfn(e.target.value));
                     }}
+                    onKeyDown={(e) => {
+                      if (
+                        e.key === "Enter" &&
+                        confirmTransactionButtonRef.current
+                      ) {
+                        confirmTransactionButtonRef.current.click();
+                      }
+                    }}
                     name={"indexProduct"}
                     bg={"var(--divider)"}
                     border={"2px solid transparent !important"}
@@ -232,6 +243,7 @@ export default function Checkout() {
             </Accordion>
 
             <Button
+              ref={confirmTransactionButtonRef}
               onClick={() => {
                 resetOrder();
                 setProductSearch("");

@@ -49,7 +49,7 @@ export default function Cashier() {
     const handleBackNavigation = (e: PopStateEvent) => {
       e.preventDefault();
       if (e.state) {
-        console.log("eek");
+        navigate("/signin");
       } else {
         console.log("forward navigation");
       }
@@ -66,6 +66,8 @@ export default function Cashier() {
     const handleEndKey = (e: KeyboardEvent) => {
       if (e.key === "End") {
         navigate("/checkout");
+      } else if (e.key === "Home") {
+        inputRef.current?.focus();
       }
     };
 
