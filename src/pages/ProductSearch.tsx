@@ -117,19 +117,19 @@ export default function ProductSearch() {
       {productSearch === "" && (
         <VStack
           flex={1}
-          opacity={0.3}
+          opacity={0.2}
           justify={"flex-end"}
           p={4}
           animation={"fade-in-fade 1s"}
         >
-          <Image w={"100%"} maxW={"400px"} src={"../img/search.png"} />
+          <Image w={"100%"} maxW={"600px"} src={"../img/search.png"} />
         </VStack>
       )}
 
       {productSearch !== "" && filteredProducts.length === 0 && (
         <VStack
           flex={1}
-          opacity={0.3}
+          opacity={0.2}
           justify={"space-between"}
           p={4}
           animation={"fade-in-fade 1s"}
@@ -139,7 +139,7 @@ export default function ProductSearch() {
             No Result
           </Text>
 
-          <Image w={"100%"} maxW={"400px"} src={"../img/noResult.png"} />
+          <Image w={"100%"} maxW={"600px"} src={"../img/noResult.png"} />
         </VStack>
       )}
 

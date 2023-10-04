@@ -57,9 +57,7 @@ export default function TransactionItem({ t }: Props) {
           scrollBehavior="inside"
           size={"xl"}
         >
-          <ModalOverlay
-          backdropFilter={"blur(5px)"}
-          />
+          <ModalOverlay backdropFilter={"blur(5px)"} />
 
           <ModalContent>
             <ModalCloseButton
@@ -95,9 +93,7 @@ export default function TransactionItem({ t }: Props) {
             <Text fontSize={11} opacity={0.5}>
               Rp
             </Text>
-            <Text color={"p.500"} fontWeight={500}>
-              {fn(t.totalPayment)}
-            </Text>
+            <Text fontWeight={500}>{fn(t.totalPayment)}</Text>
           </HStack>
         </Box>
 
@@ -135,13 +131,7 @@ export default function TransactionItem({ t }: Props) {
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Box>
 
-        <HStack
-          gap={1}
-          w={"15%"}
-          color={"p.500"}
-          fontWeight={500}
-          justify={"flex-end"}
-        >
+        <HStack gap={1} w={"15%"} fontWeight={500} justify={"flex-end"}>
           <Text fontSize={11} opacity={0.5}>
             Rp
           </Text>

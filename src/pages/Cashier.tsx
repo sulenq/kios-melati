@@ -355,25 +355,17 @@ export default function Cashier() {
 
       {orderList.length === 0 && (
         <VStack
-          opacity={0.3}
-          justify={"center"}
+          opacity={0.2}
           p={4}
-          pb={"80px"}
           w={"100%"}
-          minH={"400px"}
-          overflow={"auto"}
+          maxW={"600px"}
+          animation={"fade-in-fade 1s"}
+          position={"absolute"}
+          bottom={"0"}
           flex={1}
           // h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
-          position={"relative"}
-          animation={"fade-in-fade 1s"}
         >
-          <Image
-            bottom={"0"}
-            position={"absolute"}
-            w={"100%"}
-            maxW={"400px"}
-            src={"../img/cashier.png"}
-          />
+          <Image src={"../img/cashier.png"} />
         </VStack>
       )}
 
@@ -386,7 +378,7 @@ export default function Cashier() {
           // h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>
-            <Text fontSize={24} fontWeight={600} mb={2}>
+            <Text fontSize={23} fontWeight={600} mb={2}>
               Orders
             </Text>
           </Container>

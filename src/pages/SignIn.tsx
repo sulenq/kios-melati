@@ -48,12 +48,15 @@ export default function SignIn() {
 
     onSubmit: (values, { resetForm }) => {
       type AuthState = {
-        token: string | undefined;
-        idPublic: number | undefined;
-        username: string | undefined;
-        role: "admin" | "cashier" | undefined;
-        storeName: string | undefined;
-        expires: number | undefined;
+        token: string;
+        idPublic: number;
+        username: string;
+        role: "admin" | "cashier";
+        name: string;
+        age: number;
+        phone: string;
+        storeName: string;
+        expires: number;
       };
       let authState: AuthState;
 
@@ -70,14 +73,19 @@ export default function SignIn() {
             });
             resetForm();
 
-            authState = {
-              token: token,
-              idPublic: u.idPublic,
-              username: u.username,
-              role: u.role,
-              storeName: u.storeName,
-              expires: values.staySignedIn ? 7 : 1,
-            };
+            if (token) {
+              authState = {
+                token: token,
+                idPublic: u.idPublic,
+                username: u.username,
+                role: u.role,
+                name: u.name,
+                age: u.age,
+                phone: u.phone,
+                storeName: u.storeName,
+                expires: values.staySignedIn ? 7 : 1,
+              };
+            }
             setCookie("authState", JSON.stringify(authState), {
               expires: authState.expires,
             });
@@ -104,14 +112,19 @@ export default function SignIn() {
             });
             resetForm();
 
-            authState = {
-              token: token,
-              idPublic: u.idPublic,
-              username: u.username,
-              role: u.role,
-              storeName: u.storeName,
-              expires: values.staySignedIn ? 7 : 1,
-            };
+            if (token) {
+              authState = {
+                token: token,
+                idPublic: u.idPublic,
+                username: u.username,
+                role: u.role,
+                name: u.name,
+                age: u.age,
+                phone: u.phone,
+                storeName: u.storeName,
+                expires: values.staySignedIn ? 7 : 1,
+              };
+            }
             setCookie("authState", JSON.stringify(authState), {
               expires: authState.expires,
             });

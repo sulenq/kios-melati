@@ -1,10 +1,17 @@
-import { HStack, Icon, IconButton, Tooltip } from "@chakra-ui/react";
+import {
+  HStack,
+  Icon,
+  IconButton,
+  Tooltip,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import cashierNav from "../const/cashierNav";
 import { Link, useLocation } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 export default function CashierNav(props: any) {
   const location = useLocation();
+  const bg = useColorModeValue("#ffffffaa", "#050505aa");
 
   const NavContainer = (props: any) => {
     return (
@@ -25,7 +32,7 @@ export default function CashierNav(props: any) {
   return (
     <NavContainer {...props}>
       <HStack
-        bg={"var(--divider)"}
+        bg={bg}
         backdropFilter={"blur(10px)"}
         borderRadius={"full"}
         p={"5px"}

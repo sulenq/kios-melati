@@ -141,7 +141,7 @@ export default function CashierTransaction() {
 
       {cashierTransaction.length === 0 && (
         <VStack
-          opacity={0.3}
+          opacity={0.2}
           justify={"center"}
           p={4}
           pb={"80px"}
@@ -157,7 +157,7 @@ export default function CashierTransaction() {
             bottom={"0"}
             position={"absolute"}
             w={"100%"}
-            maxW={"400px"}
+            maxW={"600px"}
             src={"../img/transaction.png"}
           />
         </VStack>

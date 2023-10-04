@@ -4,6 +4,9 @@ type AdminUser = {
   username: string;
   password: string;
   role: "admin";
+  name: string;
+  age: number;
+  phone: string;
   storeName: string;
 };
 
@@ -14,15 +17,10 @@ const adminUsers: AdminUser[] = [
     username: "admin",
     password: "admin",
     role: "admin",
+    name: "Alber Leo",
+    age: 21,
+    phone: "08584543151",
     storeName: "Kios Melati",
-  },
-  {
-    id: "e3e15077-7ceb-44b4-bc19-3fdb22f8fce3",
-    idPublic: 2,
-    username: "admin2",
-    password: "admin2",
-    role: "admin",
-    storeName: "Kios Mawar",
   },
 ];
 

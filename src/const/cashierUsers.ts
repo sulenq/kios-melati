@@ -4,6 +4,9 @@ type CashierUser = {
   username: string;
   password: string;
   role: "cashier";
+  name: string;
+  age: number;
+  phone: string;
   storeName: string;
 };
 
@@ -14,14 +17,9 @@ const cashierUsers: CashierUser[] = [
     username: "cashier",
     password: "cashier",
     role: "cashier",
-    storeName: "Kios Melati",
-  },
-  {
-    id: "21531a53-7b38-4deb-90bb-6d4b2a26d873",
-    idPublic: 2,
-    username: "cashier2",
-    password: "cashier2",
-    role: "cashier",
+    name: "Jolitos Kurniawan",
+    age: 22,
+    phone: "08584223123",
     storeName: "Kios Melati",
   },
 ];

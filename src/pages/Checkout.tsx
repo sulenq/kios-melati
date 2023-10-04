@@ -296,9 +296,9 @@ export default function Checkout() {
           <VStack zIndex={-1} position={"absolute"} bottom={0} p={4}>
             <Image
               animation={"fade-in-fade 1s"}
-              opacity={0.3}
+              opacity={0.2}
               w={"100%"}
-              maxW={"400px"}
+              maxW={"600px"}
               src={"../img/pay.png"}
             />
           </VStack>

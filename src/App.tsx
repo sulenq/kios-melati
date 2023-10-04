@@ -14,6 +14,7 @@ import ProductSearch from "./pages/ProductSearch";
 import Checkout from "./pages/Checkout";
 import RequireOrder from "./pages/RequireOrder";
 import CashierTransaction from "./pages/CashierTransaction";
+import CashierProfile from "./pages/CashierProfile";
 
 export const App = () => {
   document.addEventListener("contextmenu", function (e) {
@@ -40,10 +41,7 @@ export const App = () => {
           <Route
             path="/cashier"
             element={
-              <RequireRole
-                allowedRoles={["admin", "cashier"]}
-                signinPath={"/signin"}
-              >
+              <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
                 <Cashier />
               </RequireRole>
             }
@@ -75,11 +73,17 @@ export const App = () => {
           <Route
             path="/cashier/transaction"
             element={
-              <RequireRole
-                allowedRoles={["admin", "cashier"]}
-                signinPath={"/signin"}
-              >
+              <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
                 <CashierTransaction />
+              </RequireRole>
+            }
+          />
+
+          <Route
+            path="/cashier/profile"
+            element={
+              <RequireRole allowedRoles={["cashier"]} signinPath={"/signin"}>
+                <CashierProfile />
               </RequireRole>
             }
           />
