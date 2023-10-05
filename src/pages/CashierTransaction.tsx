@@ -14,7 +14,6 @@ import {
   Tr,
   VStack,
 } from "@chakra-ui/react";
-import { getCookie } from "typescript-cookie";
 import Container from "../components/Container";
 import { Order } from "../globalState/useOrder";
 import NavHeader from "../components/NavHeader";
@@ -32,7 +31,7 @@ export default function CashierTransaction() {
     Transaction[] | []
   >([]);
   useEffect(() => {
-    const ctc = getCookie("cashierTransaction");
+    const ctc = localStorage.getItem("cashierTransaction");
     if (ctc) {
       setCashierTransaction(JSON.parse(ctc));
     }

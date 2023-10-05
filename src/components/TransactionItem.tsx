@@ -17,7 +17,7 @@ import { Transaction } from "../pages/CashierTransaction";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import { OrderItem } from "../globalState/useOrder";
 import TransactionOrderList from "./TransactionOrderList";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ShoppingBag } from "@phosphor-icons/react";
 
 type Props = { t: Transaction };
@@ -28,9 +28,10 @@ export default function TransactionItem({ t }: Props) {
 
   const OrderListModal = ({ orderList }: { orderList: OrderItem[] }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const modalContentRef = useRef(null);
 
     useEffect(() => {
-      const handleBackNavigation = (e: PopStateEvent) => {
+      const handleBackNavigation = () => {
         onClose();
       };
 
@@ -55,20 +56,22 @@ export default function TransactionItem({ t }: Props) {
           onClose={onClose}
           scrollBehavior="inside"
           size={"xl"}
+          initialFocusRef={undefined}
         >
           <ModalOverlay backdropFilter={"blur(5px)"} />
 
-          <ModalContent>
+          <ModalContent ref={modalContentRef}>
             <ModalCloseButton
               borderRadius={"full"}
               h={"32px !important"}
               fontSize={"11px !important"}
-              right={3}
+              right={2}
               top={2}
+              className="btn sm-clicky"
             />
 
             <ModalHeader
-              px={[4, 6, 8]}
+              px={[4, null, 6]}
               py={3}
               fontSize={[15, null, 17]}
               borderBottom={"1px solid var(--divider)"}
@@ -107,7 +110,7 @@ export default function TransactionItem({ t }: Props) {
         </Td>
 
         <Td px={[4, null, 2]} py={2}>
-          <Text opacity={0}>Change</Text>
+          {/* <Text opacity={0}>Change</Text> */}
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
               Rp
