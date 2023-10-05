@@ -120,10 +120,9 @@ export default function ProductSearch() {
           opacity={0.2}
           justify={"flex-end"}
           p={4}
-          animation={"fade-in-fade 1s"}
           maxW={"600px"}
         >
-          <Image w={"100%"} src={"../img/search.png"} />
+          <Image w={"100%"} src={"/img/search.png"} />
         </VStack>
       )}
 
@@ -133,14 +132,13 @@ export default function ProductSearch() {
           opacity={0.2}
           justify={"space-between"}
           p={4}
-          animation={"fade-in-fade 1s"}
           transition={"300ms"}
         >
           <Text fontWeight={500} fontSize={[17, null, 19]} mb={4}>
             No Result
           </Text>
 
-          <Image w={"100%"} maxW={"600px"} src={"../img/noResult.png"} />
+          <Image w={"100%"} maxW={"600px"} src={"/img/noResult.png"} />
         </VStack>
       )}
 

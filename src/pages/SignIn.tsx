@@ -171,14 +171,14 @@ export default function SignIn() {
           <SimpleGrid w={"100%"} columns={[1, null, 2]} gap={12}>
             <>
               <Image
-                src="../img/admin.png"
+                src="/img/admin.png"
                 animation={"fade-in 1s"}
                 transition={"300ms"}
                 display={formik?.values?.role === "admin" ? "block" : "none"}
               />
 
               <Image
-                src="../img/cashier.png"
+                src="/img/cashier.png"
                 animation={"fade-in 1s"}
                 transition={"300ms"}
                 display={formik?.values?.role === "cashier" ? "block" : "none"}

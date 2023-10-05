@@ -35,6 +35,8 @@ import useProductSearch from "../globalState/useProductSearch";
 import { getCookie } from "typescript-cookie";
 // import { getCookie, setCookie } from "typescript-cookie";
 
+export type Transaction = { id: string } & Order;
+
 export default function Checkout() {
   const {
     orderList,
@@ -56,28 +58,29 @@ export default function Checkout() {
   const handleConfirmTransaction = () => {
     resetOrder();
     setProductSearch("");
-    const ctc = localStorage.getItem("cashierTransaction");
+    const ctc = localStorage.getItem("transaction");
     const authStateCookie = getCookie("authState");
     const order: Order = {
       orderList: orderList,
       totalPayment: totalPayment,
       paymentMethod: paymentMethod,
+      date: new Date(),
       pay: pay,
       change: change,
     };
 
     if (ctc && authStateCookie) {
-      const ct = JSON.parse(ctc);
+      const ct: Transaction[] = JSON.parse(ctc);
       const as = JSON.parse(authStateCookie);
-      const id = `${as.idPublic}${ct.length + 1}`;
+      const id = `${as.idPublic}-${ct.length + 1}`;
       ct.push({ id: id, ...order });
-      localStorage.setItem("cashierTransaction", JSON.stringify(ct));
+      localStorage.setItem("transaction", JSON.stringify(ct));
     } else {
       if (authStateCookie) {
         const as = JSON.parse(authStateCookie);
-        const id = `${as.idPublic}1`;
+        const id = `${as.idPublic}-1`;
         const ct = JSON.stringify([{ id: id, ...order }]);
-        localStorage.setItem("cashierTransaction", ct);
+        localStorage.setItem("transaction", ct);
       }
     }
   };
@@ -302,11 +305,10 @@ export default function Checkout() {
 
           <VStack zIndex={-1} position={"absolute"} bottom={0} p={4}>
             <Image
-              animation={"fade-in-fade 1s"}
               opacity={0.2}
               w={"100%"}
               maxW={"600px"}
-              src={"../img/pay.png"}
+              src={"/img/pay.png"}
             />
           </VStack>
         </VStack>

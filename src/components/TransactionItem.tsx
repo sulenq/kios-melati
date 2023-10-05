@@ -1,23 +1,25 @@
 import {
+  Button,
   HStack,
   Icon,
   IconButton,
   Modal,
   ModalBody,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Td,
   Text,
+  Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
 import useFormatNumber from "../utils/useFormatNumber";
-import { Transaction } from "../pages/CashierTransaction";
 import useScreenWidth from "../utils/useGetScreenWidth";
-import { OrderItem } from "../globalState/useOrder";
-import TransactionOrderList from "./TransactionOrderList";
 import { useEffect, useRef } from "react";
-import { ShoppingCartSimple, X } from "@phosphor-icons/react";
+import { ListMagnifyingGlass, Printer } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
+import { Transaction } from "../pages/Checkout";
 
 type Props = { t: Transaction };
 
@@ -25,7 +27,21 @@ export default function TransactionItem({ t }: Props) {
   const fn = useFormatNumber;
   const sw = useScreenWidth();
 
-  const OrderListModal = ({ orderList }: { orderList: OrderItem[] }) => {
+  const TransactionDetail = () => {
+    return (
+      <Tooltip label="Transaction Detail" hasArrow openDelay={500}>
+        <Link to={`/transaction/${t.id}`}>
+          <IconButton
+            aria-label="orderListButton"
+            icon={<Icon as={ListMagnifyingGlass} fontSize={[17, null, 19]} />}
+            className="btn-solid clicky"
+          />
+        </Link>
+      </Tooltip>
+    );
+  };
+
+  const PrintReceiptModal = ({ id }: { id: string }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const modalContentRef = useRef(null);
 
@@ -43,59 +59,48 @@ export default function TransactionItem({ t }: Props) {
 
     return (
       <>
-        <IconButton
-          aria-label="orderListButton"
-          icon={<Icon as={ShoppingCartSimple} fontSize={[17, null, 19]} />}
-          className="btn-solid clicky"
-          onClick={onOpen}
-        />
+        <Tooltip label={"Print Receipt"} hasArrow openDelay={500}>
+          <IconButton
+            aria-label="orderListButton"
+            icon={<Icon as={Printer} fontSize={[17, null, 19]} />}
+            className="btn-solid clicky"
+            onClick={onOpen}
+          />
+        </Tooltip>
 
         <Modal
           isOpen={isOpen}
           onClose={onClose}
           scrollBehavior="inside"
-          size={"xl"}
           initialFocusRef={undefined}
+          isCentered
         >
           <ModalOverlay backdropFilter={"blur(5px)"} />
 
           <ModalContent ref={modalContentRef}>
-            <ModalHeader
-              px={[4, null, 6]}
-              py={3}
-              fontSize={[15, null, 17]}
-              borderBottom={"1px solid var(--divider)"}
-            >
-              <HStack>
-                <HStack>
-                  <Text opacity={0.5}>ID :</Text>
-                  <Text>{t.id}</Text>
-                </HStack>
-
-                <HStack>
-                  <Text opacity={0.5}>Order Count :</Text>
-                  <Text>{orderList.length}</Text>
-                </HStack>
-
-                <IconButton
-                  position={"absolute"}
-                  right={[0, null, 2]}
-                  top={1}
-                  onClick={onClose}
-                  _hover={{ bg: "transparent !important" }}
-                  _active={{ bg: "transparent !Important" }}
-                  zIndex={2}
-                  variant={"ghost"}
-                  className="sm-clicky"
-                  aria-label="clearSearchButton"
-                  icon={<Icon as={X} fontSize={16} />}
-                />
-              </HStack>
+            <ModalHeader px={4} py={3} pt={4}>
+              Printing Receipt
             </ModalHeader>
 
-            <ModalBody px={0} py={0}>
-              <TransactionOrderList orderList={orderList} />
+            <ModalBody px={4}>
+              <Text>{`Are you sure want to print this transaction (ID : ${id}) receipt?`}</Text>
             </ModalBody>
+
+            <ModalFooter>
+              <HStack w={"100%"}>
+                <Button
+                  w={"50%"}
+                  colorScheme="bnw"
+                  className="clicky"
+                  onClick={onClose}
+                >
+                  CANCEL
+                </Button>
+                <Button className="btn clicky" variant={"ghost"} w={"50%"}>
+                  PRINT RECEIPT
+                </Button>
+              </HStack>
+            </ModalFooter>
           </ModalContent>
         </Modal>
       </>
@@ -105,7 +110,7 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItemMobile = ({ t }: Props) => {
     return (
       <>
-        <Td px={[4, null, 2]} py={2}>
+        <Td pl={4} pr={2} py={2}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
           <HStack gap={1}>
             <Text fontSize={11} opacity={0.5}>
@@ -115,7 +120,7 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
+        <Td px={2} py={2}>
           <Text opacity={0.8}>{t.paymentMethod}</Text>
           <HStack gap={1}>
             <Text fontSize={11} opacity={0.5}>
@@ -125,8 +130,8 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
-          {/* <Text opacity={0}>Change</Text> */}
+        <Td px={2} py={2}>
+          <Text opacity={0}>Change</Text>
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
               Rp
@@ -135,9 +140,11 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
+        <Td pl={2} pr={4} py={2}>
           <HStack justify={"flex-end"}>
-            <OrderListModal orderList={t.orderList} />
+            <TransactionDetail />
+
+            <PrintReceiptModal id={t.id} />
           </HStack>
         </Td>
       </>
@@ -147,11 +154,11 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItem = ({ t }: Props) => {
     return (
       <>
-        <Td px={[4, null, 2]} py={2} borderRadius={"6px 0 0 6px"}>
+        <Td px={2} py={2} borderRadius={"6px 0 0 6px"}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
+        <Td px={2} py={2}>
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
               Rp
@@ -160,11 +167,11 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td textAlign={"right"} px={[4, null, 2]} py={2}>
+        <Td textAlign={"right"} px={2} py={2}>
           <Text>{`${t.paymentMethod}`}</Text>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
+        <Td px={2} py={2}>
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
               Rp
@@ -173,7 +180,7 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={[4, null, 2]} py={2}>
+        <Td px={2} py={2}>
           <HStack gap={1} justify={"flex-end"}>
             <Text fontSize={11} opacity={0.5}>
               Rp
@@ -182,9 +189,11 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={[4, null, 2]} py={2} borderRadius={"0 6px 6px 0"}>
+        <Td px={2} py={2} borderRadius={"0 6px 6px 0"}>
           <HStack justify={"flex-end"}>
-            <OrderListModal orderList={t.orderList} />
+            <TransactionDetail />
+
+            <PrintReceiptModal id={t.id} />
           </HStack>
         </Td>
       </>

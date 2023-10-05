@@ -17,7 +17,7 @@ export default function Landing() {
 
   return (
     <VStack
-      bgImage={"../img/grocery.jpg"}
+      bgImage={"/img/grocery.jpg"}
       bgSize={"cover"}
       minH={"100vh"}
       justify={"center"}
@@ -142,7 +142,7 @@ export default function Landing() {
             </Box>
           </Box>
 
-          <Image src="../img/profile.png" w={"140px"} />
+          <Image src="/img/profile.png" w={"140px"} />
         </HStack>
       </Container>
     </VStack>

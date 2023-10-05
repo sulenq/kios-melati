@@ -133,7 +133,7 @@ export default function Cashier() {
                 variant={"ghost"}
                 borderRadius={"full"}
                 h={"40px !important"}
-                icon={<Icon as={Plus} fontSize={18} weight="bold" />}
+                icon={<Icon as={Plus} fontSize={18} />}
                 onClick={resetOrder}
               />
             </Tooltip>
@@ -232,7 +232,7 @@ export default function Cashier() {
                     fontSize={15}
                     px={5}
                     icon={
-                      <HStack>
+                      <HStack gap={1}>
                         <Icon
                           as={ShoppingCartSimple}
                           fontSize={22}
@@ -339,18 +339,13 @@ export default function Cashier() {
                     fontSize={15}
                     px={5}
                     icon={
-                      <HStack>
+                      <HStack gap={1}>
                         <Icon
                           as={ShoppingCartSimple}
                           fontSize={22}
                           color={"wt"}
                         />
-                        <Icon
-                          as={ArrowRight}
-                          fontSize={18}
-                          weight="bold"
-                          color={"wt"}
-                        />
+                        <Icon as={ArrowRight} fontSize={18} color={"wt"} />
                       </HStack>
                     }
                   />
@@ -367,13 +362,12 @@ export default function Cashier() {
           p={4}
           w={"100%"}
           maxW={"600px"}
-          animation={"fade-in-fade 1s"}
           position={"absolute"}
           bottom={"0"}
           flex={1}
           // h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
         >
-          <Image src={"../img/cashier.png"} />
+          <Image src={"/img/cashier.png"} />
         </VStack>
       )}
 

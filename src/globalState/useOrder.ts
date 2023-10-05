@@ -16,6 +16,7 @@ export type Order = {
   orderList: OrderItem[] | [];
   totalPayment: number;
   paymentMethod: PaymentMethod;
+  date: Date;
   pay: number;
   change: number;
 };
@@ -34,6 +35,7 @@ const useOrder = create<Order & Actions>((set) => ({
   totalPayment: 0,
   paymentMethod: "Cash",
   pay: 0,
+  date: new Date(),
   change: 0,
 
   addOrder: (newOrderItem) =>

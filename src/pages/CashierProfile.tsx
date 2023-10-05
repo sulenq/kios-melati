@@ -21,7 +21,6 @@ import NavHeader from "../components/NavHeader";
 import Container from "../components/Container";
 import { getCookie, removeCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
-import { useComponentsBg } from "../const/colorModeValues";
 
 export type Profile = {
   idPublic: number;
@@ -35,7 +34,6 @@ export type Profile = {
 
 export default function CashierProfile() {
   const [profile, setProfile] = useState<Profile>();
-  const bg = useComponentsBg();
   useEffect(() => {
     const pc = getCookie("authState");
     if (pc) {
@@ -71,14 +69,14 @@ export default function CashierProfile() {
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay backdropFilter={"blur(10px)"} />
 
-          <ModalContent {...bg}>
+          <ModalContent>
             <ModalHeader px={4} py={3} pt={4}>
               Signing Out
             </ModalHeader>
             <ModalBody px={4}>
               <Text>Finish working, wanna sign out?</Text>
             </ModalBody>
-            <ModalFooter px={4}>
+            <ModalFooter>
               <HStack w={"100%"}>
                 <Button
                   w={"50%"}
@@ -112,7 +110,13 @@ export default function CashierProfile() {
         <NavHeader title={"Cashier Profile"} left={null} right={null} />
       </VStack>
 
-      <VStack flex={1} w={"100%"} position={"relative"} pb={"52px"}>
+      <VStack
+        flex={1}
+        overflow={"auto"}
+        w={"100%"}
+        position={"relative"}
+        pb={"52px"}
+      >
         <Container>
           <SimpleGrid
             my={5}
@@ -130,7 +134,7 @@ export default function CashierProfile() {
                 w={"100%"}
                 h={"100%"}
                 minH={"300px"}
-                bgImage={"../img/users/cashier.jpg"}
+                bgImage={"/img/users/cashier.jpg"}
                 bgPos={"center top"}
                 bgSize={"cover"}
               />
@@ -193,10 +197,10 @@ export default function CashierProfile() {
           bottom={0}
           zIndex={-1}
           opacity={0.2}
-          animation={"fade-in-fade 1s"}
+          
           p={4}
         >
-          <Image src="../img/profile.png" />
+          <Image src="/img/profile.png" />
         </VStack> */}
       </VStack>
     </Page>

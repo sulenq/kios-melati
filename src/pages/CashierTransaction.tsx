@@ -16,7 +16,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Container from "../components/Container";
-import { Order } from "../globalState/useOrder";
 import NavHeader from "../components/NavHeader";
 import CashierNav from "../components/CashierNav";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
@@ -24,15 +23,14 @@ import TransactionItem from "../components/TransactionItem";
 import Page from "../components/Page";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useTransactionSearch from "../globalState/useTransactionSearch";
-
-export type Transaction = { id: string } & Order;
+import { Transaction } from "./Checkout";
 
 export default function CashierTransaction() {
   const [cashierTransaction, setCashierTransaction] = useState<
     Transaction[] | []
   >([]);
   useEffect(() => {
-    const ctc = localStorage.getItem("cashierTransaction");
+    const ctc = localStorage.getItem("transaction");
     if (ctc) {
       setCashierTransaction(JSON.parse(ctc));
     }
@@ -104,7 +102,7 @@ export default function CashierTransaction() {
         </HStack>
       </Container>
 
-      {cashierTransaction.length <= 0 && (
+      {transactionSearch === "" && cashierTransaction.length <= 0 && (
         <VStack
           opacity={0.2}
           justify={"center"}
@@ -117,13 +115,12 @@ export default function CashierTransaction() {
           //   h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
           flex={1}
           position={"relative"}
-          animation={"fade-in-fade 1s"}
         >
           <Image
-            bottom={"0"}
+            bottom={4}
             position={"absolute"}
             w={"100%"}
-            src={"../img/transaction.png"}
+            src={"/img/transaction.png"}
           />
         </VStack>
       )}
@@ -134,14 +131,13 @@ export default function CashierTransaction() {
           opacity={0.2}
           justify={"space-between"}
           p={4}
-          animation={"fade-in-fade 1s"}
           transition={"300ms"}
         >
           <Text fontWeight={500} fontSize={[17, null, 19]} mb={4}>
             No Result
           </Text>
 
-          <Image w={"100%"} maxW={"600px"} src={"../img/transaction.png"} />
+          <Image w={"100%"} maxW={"600px"} src={"/img/transaction.png"} />
         </VStack>
       )}
 
@@ -152,17 +148,17 @@ export default function CashierTransaction() {
               <Tr>
                 {sw < 770 ? (
                   <>
-                    <Th px={[4, null, 2]} py={2}>
+                    <Th pl={4} pr={2} py={2}>
                       ID/Total
                     </Th>
-                    <Th px={[4, null, 2]} py={2}>
+                    <Th px={2} py={2}>
                       Payment
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} px={2} py={2}>
                       Change
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                      Order
+                    <Th textAlign={"right"} pl={2} pr={4} py={2}>
+                      Action
                     </Th>
                   </>
                 ) : (
@@ -183,7 +179,7 @@ export default function CashierTransaction() {
                       Change
                     </Th>
                     <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                      Order
+                      Action
                     </Th>
                   </>
                 )}
