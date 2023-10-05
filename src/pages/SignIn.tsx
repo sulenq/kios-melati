@@ -24,6 +24,18 @@ import { useNavigate } from "react-router-dom";
 import cashierUsers from "../const/cashierUsers";
 import { useComponentsBg } from "../const/colorModeValues";
 
+export type AuthState = {
+  token: string;
+  idPublic: number;
+  username: string;
+  role: "admin" | "cashier";
+  name: string;
+  age: number;
+  phone: string;
+  storeName: string;
+  expires: number;
+};
+
 export default function SignIn() {
   const signInRoleBg = useColorModeValue("b", "w");
   const signInRoleColor = useColorModeValue("wt", "bt");
@@ -47,17 +59,6 @@ export default function SignIn() {
     }),
 
     onSubmit: (values, { resetForm }) => {
-      type AuthState = {
-        token: string;
-        idPublic: number;
-        username: string;
-        role: "admin" | "cashier";
-        name: string;
-        age: number;
-        phone: string;
-        storeName: string;
-        expires: number;
-      };
       let authState: AuthState;
 
       if (values.role === "admin") {

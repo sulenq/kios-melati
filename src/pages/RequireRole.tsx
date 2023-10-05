@@ -2,6 +2,8 @@ import { getCookie, removeCookie } from "typescript-cookie";
 import { useEffect, useState } from "react";
 import FullPageSpinner from "../components/FullPageSpinner";
 import { Navigate } from "react-router-dom";
+import useRequireRole from "../globalState/useRequireRole";
+import { AuthState } from "./SignIn";
 
 type Role = "admin" | "cashier" | "";
 type AllowedRoles = Role[];
@@ -11,52 +13,67 @@ type Props = {
   signinPath: string;
 };
 
-// For production, use authenticate api from backend
 export default function RequireRole({
   allowedRoles,
   children,
   signinPath,
 }: Props) {
+  const { isVerified, setIsVerified } = useRequireRole();
   const [page, setPage] = useState(<FullPageSpinner />);
+  const [authState, setAuthState] = useState<AuthState>();
 
-  function signOut() {
+  const signOut = () => {
     removeCookie("authState");
     removeCookie("token");
-  }
+  };
 
-  useEffect(() => {
+  const tokenCheck = () => {
     const authStateCookie = getCookie("authState");
     if (authStateCookie) {
       try {
         const authState = JSON.parse(authStateCookie);
-        // console.log(authState);
-
-        if (
-          (authState.token && allowedRoles.includes(authState.role)) ||
-          allowedRoles.length === 0
-        ) {
-          // console.log("authorized");
-          setPage(<FullPageSpinner />);
-          // setTimeout(() => {
-          //   setPage(children);
-          // }, 500);
-          setPage(children);
-        } else {
-          // console.log("unauthorized");
-          signOut();
-          setPage(<Navigate to={signinPath} />);
-        }
+        setAuthState(authState);
       } catch (error) {
         console.error("Error parsing authState:", error);
         signOut();
         setPage(<Navigate to={signinPath} />);
       }
     } else {
-      console.log("signin to get authenticated");
       signOut();
       setPage(<Navigate to={signinPath} />);
     }
-  }, [allowedRoles, children, signinPath]);
+  };
+
+  if (authState) {
+    if (!isVerified) {
+      //TODO real case -> GET verified token to server, header token : Bearer {token}
+
+      if (
+        (authState.token && allowedRoles.includes(authState.role)) ||
+        allowedRoles.length === 0
+      ) {
+        // console.log("authorized");
+        // simulasi loading azaa aowkaowk (start)
+        setTimeout(() => {
+          setIsVerified(true);
+        }, 1000);
+        // simulasi loading azaa aowkaowk (end)
+      } else {
+        // console.log("unauthorized");
+        signOut();
+        setPage(<Navigate to={signinPath} />);
+      }
+    }
+  } else {
+    tokenCheck();
+  }
+
+  useEffect(() => {
+    if (isVerified) {
+      setPage(<FullPageSpinner />);
+      setPage(children);
+    }
+  }, [isVerified, setPage, children]);
 
   return page;
 }

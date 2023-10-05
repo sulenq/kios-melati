@@ -65,8 +65,8 @@ export default function TransactionItem({ t }: Props) {
               borderRadius={"full"}
               h={"32px !important"}
               fontSize={"11px !important"}
-              right={2}
-              top={2}
+              right={"6px"}
+              top={"6px"}
               className="btn sm-clicky"
             />
 
@@ -75,7 +75,19 @@ export default function TransactionItem({ t }: Props) {
               py={3}
               fontSize={[15, null, 17]}
               borderBottom={"1px solid var(--divider)"}
-            >{`ID : ${t.id}`}</ModalHeader>
+            >
+              <HStack>
+                <HStack>
+                  <Text opacity={0.5}>ID :</Text>
+                  <Text>{t.id}</Text>
+                </HStack>
+
+                <HStack>
+                  <Text opacity={0.5}>Order Count :</Text>
+                  <Text>{orderList.length}</Text>
+                </HStack>
+              </HStack>
+            </ModalHeader>
 
             <ModalBody px={0} py={0}>
               <TransactionOrderList orderList={orderList} />

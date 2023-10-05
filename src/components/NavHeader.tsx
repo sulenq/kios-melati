@@ -21,11 +21,7 @@ export default function NavHeader(props: any) {
       {props?.left === null ? (
         <Box w={"40px"} h={"40px"} />
       ) : (
-        props?.left || (
-          <BackButton
-          // backPath={props?.backPath}
-          />
-        )
+        props?.left || <BackButton backPath={props?.backPath} />
       )}
 
       <Text fontWeight={600} color={"p.500"} fontSize={15}>

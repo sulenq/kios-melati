@@ -307,7 +307,7 @@ const products: Products = [
     stock: 100,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Orange",
   },
   {
@@ -685,7 +685,7 @@ const products: Products = [
     stock: 99,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Yellow",
   },
   {
@@ -825,7 +825,7 @@ const products: Products = [
     stock: 99,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Orange",
   },
   {
@@ -895,7 +895,7 @@ const products: Products = [
     stock: 98,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Red",
   },
   {
@@ -909,7 +909,7 @@ const products: Products = [
     stock: 99,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Purple",
   },
   {
@@ -923,7 +923,7 @@ const products: Products = [
     stock: 99,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Red",
   },
   {
@@ -979,7 +979,7 @@ const products: Products = [
     stock: 98,
     user_id: 13,
     modal: 0,
-    category: "Other",
+    category: "Hygiene",
     color: "Purple",
   },
   {

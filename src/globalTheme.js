@@ -125,7 +125,7 @@ export const globalTheme = extendTheme({
       baseStyle: {
         bg: "p.500",
         color: "w",
-        "--popper-arrow-bg": "#5281e1",
+        "--popper-arrow-bg": "#6699ff",
       },
     },
   },

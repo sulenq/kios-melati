@@ -1,14 +1,20 @@
 import { IconButton, Icon } from "@chakra-ui/react";
 import { ArrowLeft } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 export default function BackButton(props: any) {
+  const navigate = useNavigate();
+
   return (
     <IconButton
-      {...props}
       id="backBtn"
       onClick={() => {
         // window.history.replaceState(null, "", props.backPath);
-        window.history.back();
+        if (props.backPath) {
+          navigate(props.backPath);
+        } else {
+          window.history.back();
+        }
       }}
       className="btn sm-clicky"
       aria-label="backBtn"

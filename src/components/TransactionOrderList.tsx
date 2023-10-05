@@ -28,14 +28,15 @@ export default function TransactionOrderList({
           {orderList.map((o, i) => (
             <Tr key={i} cursor="pointer" _hover={{ bg: "var(--divider)" }}>
               <Td
-                px={[4, null, 6]}
+                pl={[4, null, 6]}
+                pr={2}
                 py={2}
                 borderRadius={i === orderList.length - 1 ? "0 0 0 6px" : ""}
               >
                 <Icon as={pci(o.category)} fontSize={18} />
               </Td>
 
-              <Td px={[4, null, 6]} py={2}>
+              <Td px={2} py={2}>
                 <Tooltip label={o.name} hasArrow>
                   <Text noOfLines={1}>{o.name}</Text>
                 </Tooltip>
@@ -45,8 +46,8 @@ export default function TransactionOrderList({
                 </Text>
               </Td>
 
-              <Td px={[4, null, 6]} py={2}>
-                <HStack gap={1} opacity={0.5} w={"70%"} justify={"flex-end"}>
+              <Td px={2} py={2}>
+                <HStack gap={1} opacity={0.5} justify={"flex-end"}>
                   <Text opacity={0.5} fontSize={[10, null, 12]}>
                     @
                   </Text>
@@ -54,14 +55,15 @@ export default function TransactionOrderList({
                 </HStack>
               </Td>
 
-              <Td px={[4, null, 6]} py={2}>
+              <Td px={2} py={2}>
                 <Text opacity={0.5} fontSize={[10, null, 12]}>
                   {`x${o.qty}`}
                 </Text>
               </Td>
 
               <Td
-                px={[4, null, 6]}
+                pr={[4, null, 6]}
+                pl={2}
                 py={2}
                 borderRadius={i === orderList.length - 1 ? "0 0 6px 0" : ""}
               >
