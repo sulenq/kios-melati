@@ -4,7 +4,6 @@ import {
   IconButton,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
@@ -18,7 +17,7 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 import { OrderItem } from "../globalState/useOrder";
 import TransactionOrderList from "./TransactionOrderList";
 import { useEffect, useRef } from "react";
-import { ShoppingBag } from "@phosphor-icons/react";
+import { ShoppingCartSimple, X } from "@phosphor-icons/react";
 
 type Props = { t: Transaction };
 
@@ -46,7 +45,7 @@ export default function TransactionItem({ t }: Props) {
       <>
         <IconButton
           aria-label="orderListButton"
-          icon={<Icon as={ShoppingBag} fontSize={[17, null, 19]} />}
+          icon={<Icon as={ShoppingCartSimple} fontSize={[17, null, 19]} />}
           className="btn-solid clicky"
           onClick={onOpen}
         />
@@ -61,15 +60,6 @@ export default function TransactionItem({ t }: Props) {
           <ModalOverlay backdropFilter={"blur(5px)"} />
 
           <ModalContent ref={modalContentRef}>
-            <ModalCloseButton
-              borderRadius={"full"}
-              h={"32px !important"}
-              fontSize={"11px !important"}
-              right={"6px"}
-              top={"6px"}
-              className="btn sm-clicky"
-            />
-
             <ModalHeader
               px={[4, null, 6]}
               py={3}
@@ -86,6 +76,20 @@ export default function TransactionItem({ t }: Props) {
                   <Text opacity={0.5}>Order Count :</Text>
                   <Text>{orderList.length}</Text>
                 </HStack>
+
+                <IconButton
+                  position={"absolute"}
+                  right={[0, null, 2]}
+                  top={1}
+                  onClick={onClose}
+                  _hover={{ bg: "transparent !important" }}
+                  _active={{ bg: "transparent !Important" }}
+                  zIndex={2}
+                  variant={"ghost"}
+                  className="sm-clicky"
+                  aria-label="clearSearchButton"
+                  icon={<Icon as={X} fontSize={16} />}
+                />
               </HStack>
             </ModalHeader>
 

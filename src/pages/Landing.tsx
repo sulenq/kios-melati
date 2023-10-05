@@ -98,24 +98,28 @@ export default function Landing() {
             <Text
               color={"p.500"}
               fontWeight={700}
-              fontSize={17}
-              mb={2}
+              fontSize={19}
+              mb={4}
               lineHeight={1}
             >
               Demo Account
             </Text>
 
-            <Box>
+            <Box mb={2}>
               <Text fontWeight={500} mr={2}>
                 Admin Sign in
               </Text>
               <HStack>
-                <Text opacity={0.5}>username :</Text>
-                <Text>admin</Text>
+                <Text fontSize={11} opacity={0.5}>
+                  username :
+                </Text>
+                <Text fontSize={11}>admin</Text>
               </HStack>
               <HStack>
-                <Text opacity={0.5}>password :</Text>
-                <Text>admin</Text>
+                <Text fontSize={11} opacity={0.5}>
+                  password :
+                </Text>
+                <Text fontSize={11}>admin</Text>
               </HStack>
             </Box>
 
@@ -124,12 +128,16 @@ export default function Landing() {
                 Cashier Sign in
               </Text>
               <HStack>
-                <Text opacity={0.5}>username :</Text>
-                <Text>cashier</Text>
+                <Text opacity={0.5} fontSize={11}>
+                  username :
+                </Text>
+                <Text fontSize={11}>cashier</Text>
               </HStack>
               <HStack>
-                <Text opacity={0.5}>password :</Text>
-                <Text>cashier</Text>
+                <Text fontSize={11} opacity={0.5}>
+                  password :
+                </Text>
+                <Text fontSize={11}>cashier</Text>
               </HStack>
             </Box>
           </Box>

@@ -32,6 +32,7 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 import cashList from "../const/cashList";
 import paymentMethods from "../const/paymentMethods";
 import useProductSearch from "../globalState/useProductSearch";
+import { getCookie } from "typescript-cookie";
 // import { getCookie, setCookie } from "typescript-cookie";
 
 export default function Checkout() {
@@ -56,6 +57,7 @@ export default function Checkout() {
     resetOrder();
     setProductSearch("");
     const ctc = localStorage.getItem("cashierTransaction");
+    const authStateCookie = getCookie("authState");
     const order: Order = {
       orderList: orderList,
       totalPayment: totalPayment,
@@ -64,14 +66,19 @@ export default function Checkout() {
       change: change,
     };
 
-    if (ctc) {
+    if (ctc && authStateCookie) {
       const ct = JSON.parse(ctc);
-      const id = (parseInt(ct[ct.length - 1].id) + 1).toString();
+      const as = JSON.parse(authStateCookie);
+      const id = `${as.idPublic}${ct.length + 1}`;
       ct.push({ id: id, ...order });
       localStorage.setItem("cashierTransaction", JSON.stringify(ct));
     } else {
-      const ct = JSON.stringify([{ id: "1", ...order }]);
-      localStorage.setItem("cashierTransaction", ct);
+      if (authStateCookie) {
+        const as = JSON.parse(authStateCookie);
+        const id = `${as.idPublic}1`;
+        const ct = JSON.stringify([{ id: id, ...order }]);
+        localStorage.setItem("cashierTransaction", ct);
+      }
     }
   };
 

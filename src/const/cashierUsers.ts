@@ -1,6 +1,6 @@
 type CashierUser = {
   id: string;
-  idPublic: number;
+  idPublic: string;
   username: string;
   password: string;
   role: "cashier";
@@ -13,7 +13,7 @@ type CashierUser = {
 const cashierUsers: CashierUser[] = [
   {
     id: "7885ad23-da66-4987-aaf1-a23789b93397",
-    idPublic: 1,
+    idPublic: "c1",
     username: "cashier",
     password: "cashier",
     role: "cashier",

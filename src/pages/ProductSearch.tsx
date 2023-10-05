@@ -72,7 +72,7 @@ export default function ProductSearch() {
       </VStack>
 
       <Container>
-        <HStack justify={"center"} py={'19px'}>
+        <HStack justify={"center"} py={"19px"}>
           <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
               <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />

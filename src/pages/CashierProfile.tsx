@@ -48,6 +48,7 @@ export default function CashierProfile() {
 
   const handleSignOut = () => {
     removeCookie("authState");
+    removeCookie("token");
     navigate("/");
   };
 
@@ -114,7 +115,7 @@ export default function CashierProfile() {
       <VStack flex={1} w={"100%"} position={"relative"} pb={"52px"}>
         <Container>
           <SimpleGrid
-            my={8}
+            my={5}
             w={"100%"}
             maxW={["400px", null, "720px"]}
             mx={"auto"}
@@ -139,7 +140,7 @@ export default function CashierProfile() {
 
             <VStack align={"flex-start"} gap={4} flex={1}>
               <Text
-                fontWeight={600}
+                fontWeight={700}
                 fontSize={23}
                 //   textAlign={"center"}
               >

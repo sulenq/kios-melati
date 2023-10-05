@@ -26,7 +26,7 @@ import { useComponentsBg } from "../const/colorModeValues";
 
 export type AuthState = {
   token: string;
-  idPublic: number;
+  idPublic: string;
   username: string;
   role: "admin" | "cashier";
   name: string;

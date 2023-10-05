@@ -9,6 +9,7 @@ import {
   InputLeftElement,
   Table,
   Tbody,
+  Text,
   Th,
   Thead,
   Tr,
@@ -41,8 +42,8 @@ export default function CashierTransaction() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { transactionSearch, setTransactionSearch } = useTransactionSearch();
   useEffect(() => {
-    const filteredTransaction = cashierTransaction.filter(
-      (transaction) => transaction.id === transactionSearch
+    const filteredTransaction = cashierTransaction.filter((transaction) =>
+      transaction.id.includes(transactionSearch)
     );
     setFilteredTransaction(filteredTransaction);
   }, [transactionSearch, cashierTransaction]);
@@ -103,7 +104,7 @@ export default function CashierTransaction() {
         </HStack>
       </Container>
 
-      {cashierTransaction.length === 0 && (
+      {cashierTransaction.length <= 0 && (
         <VStack
           opacity={0.2}
           justify={"center"}
@@ -127,8 +128,25 @@ export default function CashierTransaction() {
         </VStack>
       )}
 
-      {transactionSearch !== "" && (
-        <Container px={[0, null, 8]}>
+      {transactionSearch !== "" && filteredTransaction.length <= 0 && (
+        <VStack
+          flex={1}
+          opacity={0.2}
+          justify={"space-between"}
+          p={4}
+          animation={"fade-in-fade 1s"}
+          transition={"300ms"}
+        >
+          <Text fontWeight={500} fontSize={[17, null, 19]} mb={4}>
+            No Result
+          </Text>
+
+          <Image w={"100%"} maxW={"600px"} src={"../img/transaction.png"} />
+        </VStack>
+      )}
+
+      {cashierTransaction.length > 0 && filteredTransaction.length > 0 && (
+        <Container px={[0, null, 8]} overflow={"auto"}>
           <Table variant={"unstyled"}>
             <Thead opacity={0.5}>
               <Tr>
@@ -173,18 +191,20 @@ export default function CashierTransaction() {
             </Thead>
 
             <Tbody>
-              {filteredTransaction
-                .slice()
-                .reverse()
-                ?.map((t, i) => (
-                  <Tr
-                    key={i}
-                    cursor="pointer"
-                    _hover={{ bg: "var(--divider)" }}
-                  >
-                    <TransactionItem key={i} t={t} />
-                  </Tr>
-                ))}
+              {transactionSearch !== "" &&
+                filteredTransaction.length > 0 &&
+                filteredTransaction
+                  .slice()
+                  .reverse()
+                  ?.map((t, i) => (
+                    <Tr
+                      key={i}
+                      cursor="pointer"
+                      _hover={{ bg: "var(--divider)" }}
+                    >
+                      <TransactionItem key={i} t={t} />
+                    </Tr>
+                  ))}
 
               {transactionSearch === "" &&
                 cashierTransaction

@@ -14,11 +14,11 @@ import Container from "../components/Container";
 import NavHeader from "../components/NavHeader";
 import {
   Scan,
-  ArrowElbowDownLeft,
   Plus,
   MagnifyingGlass,
-  ShoppingBagOpen,
   X,
+  ArrowRight,
+  ShoppingCartSimple,
 } from "@phosphor-icons/react";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -233,10 +233,14 @@ export default function Cashier() {
                     px={5}
                     icon={
                       <HStack>
-                        <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
                         <Icon
-                          as={ArrowElbowDownLeft}
-                          fontSize={16}
+                          as={ShoppingCartSimple}
+                          fontSize={22}
+                          color={"wt"}
+                        />
+                        <Icon
+                          as={ArrowRight}
+                          fontSize={18}
                           weight="bold"
                           color={"wt"}
                         />
@@ -336,10 +340,14 @@ export default function Cashier() {
                     px={5}
                     icon={
                       <HStack>
-                        <Icon as={ShoppingBagOpen} fontSize={24} color={"wt"} />
                         <Icon
-                          as={ArrowElbowDownLeft}
-                          fontSize={16}
+                          as={ShoppingCartSimple}
+                          fontSize={22}
+                          color={"wt"}
+                        />
+                        <Icon
+                          as={ArrowRight}
+                          fontSize={18}
                           weight="bold"
                           color={"wt"}
                         />

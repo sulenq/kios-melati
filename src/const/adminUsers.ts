@@ -1,6 +1,6 @@
 type AdminUser = {
   id: string;
-  idPublic: number;
+  idPublic: string;
   username: string;
   password: string;
   role: "admin";
@@ -13,7 +13,7 @@ type AdminUser = {
 const adminUsers: AdminUser[] = [
   {
     id: "ec5301c9-2ffb-4bec-9c99-ed48249b15ec",
-    idPublic: 1,
+    idPublic: 'a1',
     username: "admin",
     password: "admin",
     role: "admin",
