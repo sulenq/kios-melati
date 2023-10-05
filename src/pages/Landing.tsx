@@ -83,55 +83,59 @@ export default function Landing() {
           </HStack>
         </VStack>
 
-        <VStack
+        <HStack
           mx={"auto"}
-          gap={1}
+          gap={4}
           w={"100%"}
           maxW={"420px"}
           justify={"center"}
-          align={"flex-start"}
           borderRadius={6}
           p={5}
           bg={bg}
           backdropFilter={"blur(10px)"}
         >
-          <Text
-            color={"p.500"}
-            fontWeight={700}
-            fontSize={17}
-            mb={2}
-            lineHeight={1}
-          >
-            Demo Account
-          </Text>
-          <Box>
-            <Text fontWeight={500} mr={2}>
-              Admin Sign in
+          <Box flex={1}>
+            <Text
+              color={"p.500"}
+              fontWeight={700}
+              fontSize={17}
+              mb={2}
+              lineHeight={1}
+            >
+              Demo Account
             </Text>
-            <HStack>
-              <Text opacity={0.5}>username & password :</Text>
-              <Text>admin</Text>
-            </HStack>
+
+            <Box>
+              <Text fontWeight={500} mr={2}>
+                Admin Sign in
+              </Text>
+              <HStack>
+                <Text opacity={0.5}>username :</Text>
+                <Text>admin</Text>
+              </HStack>
+              <HStack>
+                <Text opacity={0.5}>password :</Text>
+                <Text>admin</Text>
+              </HStack>
+            </Box>
+
+            <Box>
+              <Text fontWeight={500} mr={2}>
+                Cashier Sign in
+              </Text>
+              <HStack>
+                <Text opacity={0.5}>username :</Text>
+                <Text>cashier</Text>
+              </HStack>
+              <HStack>
+                <Text opacity={0.5}>password :</Text>
+                <Text>cashier</Text>
+              </HStack>
+            </Box>
           </Box>
 
-          <Box>
-            <Text fontWeight={500} mr={2}>
-              Cashier Sign in
-            </Text>
-            <HStack>
-              <Text opacity={0.5}>username & password :</Text>
-              <Text>cashier</Text>
-            </HStack>
-          </Box>
-
-          <Image
-            src="../img/profile.png"
-            w={"140px"}
-            position={"absolute"}
-            right={4}
-            opacity={0.2}
-          />
-        </VStack>
+          <Image src="../img/profile.png" w={"140px"} />
+        </HStack>
       </Container>
     </VStack>
   );
