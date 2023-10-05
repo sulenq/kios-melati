@@ -127,53 +127,53 @@ export default function CashierTransaction() {
         </VStack>
       )}
 
-      <Container px={[0, null, 8]}>
-        <Table variant={"unstyled"}>
-          <Thead opacity={0.5}>
-            <Tr>
-              {sw < 770 ? (
-                <>
-                  <Th px={[4, null, 2]} py={2}>
-                    ID/Total
-                  </Th>
-                  <Th px={[4, null, 2]} py={2}>
-                    Payment
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Change
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Order
-                  </Th>
-                </>
-              ) : (
-                <>
-                  <Th px={[4, null, 2]} py={2}>
-                    ID
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Total Payment
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Payment Method
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Pay Amount
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Change
-                  </Th>
-                  <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                    Order
-                  </Th>
-                </>
-              )}
-            </Tr>
-          </Thead>
+      {transactionSearch !== "" && (
+        <Container px={[0, null, 8]}>
+          <Table variant={"unstyled"}>
+            <Thead opacity={0.5}>
+              <Tr>
+                {sw < 770 ? (
+                  <>
+                    <Th px={[4, null, 2]} py={2}>
+                      ID/Total
+                    </Th>
+                    <Th px={[4, null, 2]} py={2}>
+                      Payment
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Change
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Order
+                    </Th>
+                  </>
+                ) : (
+                  <>
+                    <Th px={[4, null, 2]} py={2}>
+                      ID
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Total Payment
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Payment Method
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Pay Amount
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Change
+                    </Th>
+                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                      Order
+                    </Th>
+                  </>
+                )}
+              </Tr>
+            </Thead>
 
-          <Tbody>
-            {transactionSearch !== "" &&
-              filteredTransaction
+            <Tbody>
+              {filteredTransaction
                 .slice()
                 .reverse()
                 ?.map((t, i) => (
@@ -186,22 +186,23 @@ export default function CashierTransaction() {
                   </Tr>
                 ))}
 
-            {transactionSearch === "" &&
-              cashierTransaction
-                .slice()
-                .reverse()
-                ?.map((t, i) => (
-                  <Tr
-                    key={i}
-                    cursor="pointer"
-                    _hover={{ bg: "var(--divider)" }}
-                  >
-                    <TransactionItem key={i} t={t} />
-                  </Tr>
-                ))}
-          </Tbody>
-        </Table>
-      </Container>
+              {transactionSearch === "" &&
+                cashierTransaction
+                  .slice()
+                  .reverse()
+                  ?.map((t, i) => (
+                    <Tr
+                      key={i}
+                      cursor="pointer"
+                      _hover={{ bg: "var(--divider)" }}
+                    >
+                      <TransactionItem key={i} t={t} />
+                    </Tr>
+                  ))}
+            </Tbody>
+          </Table>
+        </Container>
+      )}
     </Page>
   );
 }
