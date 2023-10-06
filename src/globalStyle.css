@@ -23,9 +23,9 @@
   --bt: #333333;
   --w: #ffffff;
   --wt: #ececec;
-  --divider: #aeaeae20;
-  --divider2: #aeaeae30;
-  --divider3: #aeaeaeaa;
+  --divider: #b4bdc920;
+  --divider2: #b4bdc930;
+  --divider3: #b4bdc9aa;
   --trans: #ff000000;
 }
 
@@ -110,6 +110,14 @@ input:focus-visible {
 
 th {
   font-size: 10px !important;
+}
+
+.inputlike {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 6px;
+  /* border: 2px solid var(--divider); */
+  background: var(--divider);
 }
 
 @keyframes fade-in {

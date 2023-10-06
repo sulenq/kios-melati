@@ -6,6 +6,9 @@ type CashierUser = {
   role: "cashier";
   name: string;
   age: number;
+  gender: "Male" | "Female";
+  address: string;
+  status: boolean;
   phone: string;
   storeName: string;
 };
@@ -19,6 +22,9 @@ const cashierUsers: CashierUser[] = [
     role: "cashier",
     name: "Jolitos Kurniawan",
     age: 22,
+    gender: "Male",
+    address: "Jalan jalan ke kota malang, pulangnya bawa oleh oleh",
+    status: true,
     phone: "08584223123",
     storeName: "Kios Melati",
   },

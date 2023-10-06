@@ -11,7 +11,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 export default function CashierNav(props: any) {
   const location = useLocation();
-  const bg = useColorModeValue("#ffffff50", "#05050550");
+  const bg = useColorModeValue("#ffffffaa", "#050505aa");
 
   const NavContainer = (props: any) => {
     return (
@@ -33,7 +33,7 @@ export default function CashierNav(props: any) {
     <NavContainer {...props}>
       <HStack
         bg={bg}
-        backdropFilter={"blur(10px)"}
+        backdropFilter={"blur(5px)"}
         borderRadius={"full"}
         p={"5px"}
         gap={1}
@@ -50,8 +50,15 @@ export default function CashierNav(props: any) {
                   borderRadius={"full"}
                   className="btn sm-clicky"
                   variant={"ghost"}
-                  icon={<Icon as={n.icon} fontSize={18} />}
+                  icon={
+                    <Icon
+                      as={n.icon}
+                      fontSize={18}
+                      weight={location.pathname === n.link ? "bold" : "regular"}
+                    />
+                  }
                   bg={location.pathname === n.link ? "var(--divider)" : ""}
+                  color={location.pathname === n.link ? "p.500" : ""}
                 />
               </Link>
             </Tooltip>

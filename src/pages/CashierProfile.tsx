@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   HStack,
   Modal,
   ModalBody,
@@ -21,28 +22,48 @@ import NavHeader from "../components/NavHeader";
 import Container from "../components/Container";
 import { getCookie, removeCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
+import useScreenWidth from "../utils/useGetScreenWidth";
 
-export type Profile = {
+export type typeCashierProfile = {
   idPublic: number;
   username: string;
   role: "cashier";
   name: string;
   age: number;
   phone: string;
+  gender: "Male" | "Female";
+  address: string;
+  status: boolean;
   storeName: string;
 };
 
 export default function CashierProfile() {
-  const [profile, setProfile] = useState<Profile>();
+  const [profile, setProfile] = useState<typeCashierProfile>();
   useEffect(() => {
     const pc = getCookie("authState");
     if (pc) {
-      const profileData: Profile = JSON.parse(pc);
+      const profileData: typeCashierProfile = JSON.parse(pc);
       setProfile(profileData);
     }
   }, []);
 
   const navigate = useNavigate();
+  const sw = useScreenWidth();
+
+  const profileData = [
+    { key: "ID", value: profile?.idPublic },
+    { key: "Store Name", value: profile?.storeName },
+    { key: "Role", value: profile?.role },
+    { key: "Username", value: profile?.username },
+    { key: "Name", value: profile?.name },
+  ];
+  const profileData2 = [
+    { key: "Age", value: profile?.age },
+    { key: "Gender", value: profile?.gender },
+    { key: "Address", value: profile?.address },
+    { key: "Phone", value: profile?.phone },
+    { key: "Status", value: profile?.status },
+  ];
 
   const handleSignOut = () => {
     removeCookie("authState");
@@ -57,7 +78,8 @@ export default function CashierProfile() {
       <>
         <Button
           onClick={onOpen}
-          w={"100%"}
+          w={"200px"}
+          // maxW={"300px"}
           colorScheme="bnw"
           className="clicky"
           borderRadius={"full"}
@@ -111,97 +133,94 @@ export default function CashierProfile() {
       </VStack>
 
       <VStack
-        flex={1}
-        overflow={"auto"}
         w={"100%"}
         position={"relative"}
-        pb={"52px"}
+        pb={"72px"}
+        flex={1}
+        overflow={"auto"}
       >
-        <Container>
+        <Container justify={"center"}>
           <SimpleGrid
             my={5}
-            w={"100%"}
-            maxW={["400px", null, "720px"]}
             mx={"auto"}
-            columns={[1, null, 2]}
-            gap={[4, 6, 8]}
+            w={"100%"}
+            columns={[1, null, 1]}
+            gap={6}
+            maxW={"680px"}
           >
             <VStack>
-              <Box
+              <Center
                 borderRadius={6}
-                overflow={"hidden"}
-                bg={"var(--divider)"}
+                flexDir={"column"}
                 w={"100%"}
+                minH={"500px"}
                 h={"100%"}
-                minH={"300px"}
-                bgImage={"/img/users/cashier.jpg"}
-                bgPos={"center top"}
-                bgSize={"cover"}
-              />
+                // bg={"var(--divider)"}
+              >
+                <Box
+                  borderRadius={"full"}
+                  overflow={"hidden"}
+                  w={"300px"}
+                  h={"300px"}
+                  bgImage={"/img/users/cashier.jpg"}
+                  bgPos={"center top"}
+                  bgSize={"cover"}
+                  mb={4}
+                />
 
-              {/* <VStack w={"100%"} align={"flex-start"} gap={4}></VStack> */}
+                <Text fontSize={19} fontWeight={600} mb={1}>
+                  {profile?.name}
+                </Text>
+
+                <Badge fontSize={15} colorScheme="yellow" mb={4}>
+                  {profile?.role}
+                </Badge>
+
+                <SignoutModal />
+              </Center>
             </VStack>
 
-            <VStack align={"flex-start"} gap={4} flex={1}>
-              <Text
-                fontWeight={700}
-                fontSize={23}
-                //   textAlign={"center"}
-              >
+            <VStack align={"flex-start"} justify={"center"} gap={4}>
+              <Text fontWeight={700} fontSize={23}>
                 Account Details
               </Text>
 
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>ID</Text>
-                <Text>{profile?.idPublic}</Text>
-              </HStack>
+              <SimpleGrid
+                w={"100%"}
+                gap={sw < 770 ? 0 : 6}
+                columns={[1, null, 2]}
+              >
+                <Box w={"100%"}>
+                  {profileData.map((p, i) => (
+                    <HStack key={i} mb={3} w={"100%"}>
+                      <Text w={"100%"} maxW={"100px"} flexShrink={0}>
+                        {p.key}
+                      </Text>
 
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Store Name</Text>
-                <Text>{profile?.storeName}</Text>
-              </HStack>
+                      <Box className="inputlike">
+                        <Text>{p.value || "No Data"}</Text>
+                      </Box>
+                    </HStack>
+                  ))}
+                </Box>
 
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Role</Text>
-                <Badge colorScheme={"yellow"}>{profile?.role}</Badge>
-              </HStack>
+                <Box w={"100%"}>
+                  {profileData2.map((p, i) => (
+                    <HStack key={i} mb={3} w={"100%"}>
+                      <Text w={"100%"} maxW={"100px"} flexShrink={0}>
+                        {p.key}
+                      </Text>
 
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Username</Text>
-                <Text>{profile?.username}</Text>
-              </HStack>
-
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Name</Text>
-                <Text>{profile?.name}</Text>
-              </HStack>
-
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Age</Text>
-                <Text>{profile?.age}</Text>
-              </HStack>
-
-              <HStack w={"100%"} justify={"space-between"}>
-                <Text opacity={0.5}>Phone</Text>
-                <Text>{profile?.phone}</Text>
-              </HStack>
-
-              <SignoutModal />
+                      <Box className="inputlike">
+                        <Text>{p.value || "No Data"}</Text>
+                      </Box>
+                    </HStack>
+                  ))}
+                </Box>
+              </SimpleGrid>
             </VStack>
           </SimpleGrid>
         </Container>
-
-        {/* <VStack
-          maxW={"600px"}
-          position={"absolute"}
-          bottom={0}
-          zIndex={-1}
-          opacity={0.2}
-          
-          p={4}
-        >
-          <Image src="/img/profile.png" />
-        </VStack> */}
       </VStack>
     </Page>
   );
