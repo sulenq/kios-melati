@@ -141,7 +141,7 @@ export default function Cashier() {
         />
       </VStack>
 
-      <Container mt={2}>
+      <Container>
         {sw < 770 ? (
           <VStack gap={3} py={3} justify={"space-between"}>
             <HStack
