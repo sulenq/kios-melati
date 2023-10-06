@@ -136,6 +136,22 @@ export default function TransactionDetail() {
         />
       </VStack>
 
+      {!td && (
+        <VStack
+          p={4}
+          w={"100%"}
+          maxW={"600px"}
+          flex={1}
+          justify={"space-between"}
+          // h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
+        >
+          <Text fontWeight={500} fontSize={[15, null, 17]} mb={4}>
+            No Result
+          </Text>
+          <Image opacity={0.2} src={"/img/transaction.png"} />
+        </VStack>
+      )}
+
       {td && (
         <Box position={"relative"} w={"100%"} maxW={"640px"}>
           <VStack
@@ -191,7 +207,7 @@ export default function TransactionDetail() {
                       <Td
                         pl={0}
                         fontWeight={600}
-                        fontSize={15}
+                        fontSize={17}
                         lineHeight={1.4}
                       >
                         Total Payment
@@ -207,7 +223,7 @@ export default function TransactionDetail() {
                           <Text opacity={0.5} fontSize={[10, null, 12]}>
                             Rp
                           </Text>
-                          <Text fontSize={14}>{fn(td.totalPayment)}</Text>
+                          <Text fontSize={17}>{fn(td.totalPayment)}</Text>
                         </HStack>
                       </Td>
                     </Tr>

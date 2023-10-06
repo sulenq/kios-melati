@@ -127,18 +127,17 @@ export default function ProductSearch() {
       )}
 
       {productSearch !== "" && filteredProducts.length === 0 && (
-        <VStack
-          flex={1}
-          opacity={0.2}
-          justify={"space-between"}
-          p={4}
-          transition={"300ms"}
-        >
-          <Text fontWeight={500} fontSize={[17, null, 19]} mb={4}>
+        <VStack flex={1} justify={"space-between"} p={4} transition={"300ms"}>
+          <Text fontWeight={500} fontSize={[15, null, 17]} mb={4}>
             No Result
           </Text>
 
-          <Image w={"100%"} maxW={"600px"} src={"/img/noResult.png"} />
+          <Image
+            opacity={0.2}
+            w={"100%"}
+            maxW={"600px"}
+            src={"/img/noResult.png"}
+          />
         </VStack>
       )}
 
