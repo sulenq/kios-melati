@@ -202,50 +202,44 @@ export default function TransactionDetail() {
                         Total Payment
                       </Td>
 
-                      <Td></Td>
-                      <Td></Td>
-
-                      <Td px={2} opacity={0.5} fontSize={[10, null, 12]}>
-                        Rp
-                      </Td>
-
                       <Td
                         pr={0}
                         fontSize={15}
                         fontWeight={600}
                         textAlign={"right"}
                       >
-                        {fn(td.totalPayment)}
+                        <HStack gap={1} justify={"flex-end"}>
+                          <Text opacity={0.5} fontSize={[10, null, 12]}>
+                            Rp
+                          </Text>
+                          <Text fontSize={14}>{fn(td.totalPayment)}</Text>
+                        </HStack>
                       </Td>
                     </Tr>
 
                     <Tr>
                       <Td pl={0}>{td.paymentMethod}</Td>
 
-                      <Td></Td>
-                      <Td></Td>
-
-                      <Td px={2} opacity={0.5} fontSize={[10, null, 12]}>
-                        Rp
-                      </Td>
-
                       <Td pr={0} textAlign={"right"}>
-                        {fn(td.totalPayment)}
+                        <HStack gap={1} justify={"flex-end"}>
+                          <Text opacity={0.5} fontSize={[10, null, 12]}>
+                            Rp
+                          </Text>
+                          <Text fontSize={14}>{fn(td.pay)}</Text>
+                        </HStack>
                       </Td>
                     </Tr>
 
                     <Tr>
                       <Td pl={0}>Change</Td>
 
-                      <Td></Td>
-                      <Td></Td>
-
-                      <Td px={2} opacity={0.5} fontSize={[10, null, 12]}>
-                        Rp
-                      </Td>
-
                       <Td pr={0} textAlign={"right"}>
-                        {fn(td.change) || 0}
+                        <HStack gap={1} justify={"flex-end"}>
+                          <Text opacity={0.5} fontSize={[10, null, 12]}>
+                            Rp
+                          </Text>
+                          <Text fontSize={14}>{fn(td.change) || 0}</Text>
+                        </HStack>
                       </Td>
                     </Tr>
                   </Tbody>
