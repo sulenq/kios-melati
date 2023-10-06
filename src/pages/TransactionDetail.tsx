@@ -10,7 +10,6 @@ import {
   Text,
   Tr,
   VStack,
-  useColorModeValue,
   Button,
   Modal,
   ModalBody,
@@ -46,8 +45,6 @@ export default function TransactionDetail() {
   }, []);
 
   const { id } = useParams();
-  const bg = useColorModeValue("white", "#05050550");
-  const color = useColorModeValue("bt", "wt");
   const tc = localStorage.getItem("transaction");
   const [td, setTd] = useState<Transaction>();
   const fn = useFormatNumber;
@@ -143,13 +140,11 @@ export default function TransactionDetail() {
         <Box position={"relative"} w={"100%"} maxW={"640px"}>
           <VStack
             gap={0}
-            bg={bg}
-            color={color}
             backdropFilter={"blur(100px)"}
             // border={"1px solid var(--divider)"}
             borderRadius={6}
           >
-            <Box px={5} pt={5} pb={4} w={"100%"}>
+            <Box px={5} mt={5} mb={4} w={"100%"}>
               <HStack
                 justify={"space-between"}
                 pb={4}
