@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Page from "../components/Page";
 import {
   Box,
@@ -11,12 +11,24 @@ import {
   Tr,
   VStack,
   useColorModeValue,
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+  Tooltip,
+  IconButton,
+  Icon,
 } from "@chakra-ui/react";
 import NavHeader from "../components/NavHeader";
 import { useParams } from "react-router-dom";
 import { Transaction } from "./Checkout";
 import TransactionOrderList from "../components/TransactionOrderList";
 import useFormatNumber from "../utils/useFormatNumber";
+import { Printer } from "@phosphor-icons/react";
 
 export default function TransactionDetail() {
   useEffect(() => {
@@ -49,20 +61,92 @@ export default function TransactionDetail() {
     }
   }, [tc, id]);
 
+  const PrintReceiptModal = ({ id }: { id: string }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const modalContentRef = useRef(null);
+
+    useEffect(() => {
+      const handleBackNavigation = () => {
+        onClose();
+      };
+
+      window.addEventListener("popstate", handleBackNavigation);
+
+      return () => {
+        window.removeEventListener("popstate", handleBackNavigation);
+      };
+    }, [onClose]);
+
+    return (
+      <>
+        <Tooltip label={"Print Receipt"} hasArrow openDelay={500}>
+          <IconButton
+            aria-label="orderListButton"
+            icon={<Icon as={Printer} fontSize={[17, null, 19]} />}
+            className="btn clicky"
+            variant={"ghost"}
+            onClick={onOpen}
+            borderRadius={"full"}
+            h={"40px !important"}
+          />
+        </Tooltip>
+
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          scrollBehavior="inside"
+          initialFocusRef={undefined}
+          isCentered
+        >
+          <ModalOverlay backdropFilter={"blur(5px)"} />
+
+          <ModalContent ref={modalContentRef}>
+            <ModalHeader px={4} py={3} pt={4}>
+              Printing Receipt
+            </ModalHeader>
+
+            <ModalBody px={4}>
+              <Text>{`Are you sure want to print this transaction (ID : ${id}) receipt?`}</Text>
+            </ModalBody>
+
+            <ModalFooter>
+              <HStack w={"100%"}>
+                <Button
+                  w={"50%"}
+                  colorScheme="bnw"
+                  className="clicky"
+                  onClick={onClose}
+                >
+                  CANCEL
+                </Button>
+                <Button className="btn clicky" variant={"ghost"} w={"50%"}>
+                  PRINT RECEIPT
+                </Button>
+              </HStack>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  };
+
   return (
     <Page>
       <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader title={"Transaction Detail"} right={null} />
+        <NavHeader
+          title={`Transaction Detail`}
+          right={<PrintReceiptModal id={id ? id : ""} />}
+        />
       </VStack>
 
       {td && (
-        <Box p={4} position={"relative"} w={"100%"} maxW={"500px"}>
+        <Box position={"relative"} w={"100%"} maxW={"640px"}>
           <VStack
             gap={0}
             bg={bg}
             color={color}
             backdropFilter={"blur(100px)"}
-            border={"2px solid var(--divider)"}
+            // border={"1px solid var(--divider)"}
             borderRadius={6}
           >
             <Box px={5} pt={5} pb={4} w={"100%"}>
@@ -74,7 +158,7 @@ export default function TransactionDetail() {
                 <Image w={"50px"} src="/logo.svg" />
 
                 <VStack align="flex-end" gap={0} opacity={0.5}>
-                  <Text>{td.id}</Text>
+                  <Text fontSize={17}>{td.id}</Text>
                   <Text>5 October 2023</Text>
                 </VStack>
               </HStack>
@@ -85,6 +169,7 @@ export default function TransactionDetail() {
                 <Text fontSize={15} fontWeight={600}>
                   Order
                 </Text>
+
                 <Text fontSize={15} fontWeight={600}>
                   {`Total : ${td.orderList.length}`}
                 </Text>
@@ -97,19 +182,10 @@ export default function TransactionDetail() {
                   </Tbody>
                 </Table>
               </VStack>
-
-              {/* <Box
-                w={"100%"}
-                maxW={"460px"}
-                mx={"auto"}
-                pb={4}
-                borderBottom={"2px dashed var(--divider)"}
-              /> */}
             </Box>
 
-            <Box mt={4} px={5} w={"100%"}>
+            <Box mt={4} px={5} w={"100%"} overflow={"auto"}>
               <VStack
-                w={"100%"}
                 py={4}
                 borderTop={"2px dashed var(--divider)"}
                 // borderBottom={"2px dashed var(--divider)"}
@@ -177,17 +253,6 @@ export default function TransactionDetail() {
               </VStack>
             </Box>
           </VStack>
-
-          {/* <VStack
-            p={4}
-            maxW={"500px"}
-            position={"absolute"}
-            bottom={0}
-            zIndex={-1}
-            opacity={0.2}
-          >
-            <Image w={"100%"} src="/img/transaction.png" />
-          </VStack> */}
         </Box>
       )}
     </Page>

@@ -10,7 +10,6 @@ import {
   HStack,
   Icon,
   IconButton,
-  Image,
   Input,
   InputGroup,
   Menu,
@@ -111,7 +110,7 @@ export default function Checkout() {
         />
       </VStack>
 
-      <Container flex={1}>
+      <Container flex={1} mt={2}>
         <VStack flex={1} justify={"space-between"}>
           <Box w={"100%"} maxW={"400px"} mx={"auto"}>
             <HStack
@@ -303,14 +302,14 @@ export default function Checkout() {
             </Button>
           </Box>
 
-          <VStack zIndex={-1} position={"absolute"} bottom={0} p={4}>
+          {/* <VStack zIndex={-1} position={"absolute"} bottom={0} p={4}>
             <Image
               opacity={0.2}
               w={"100%"}
               maxW={"600px"}
               src={"/img/pay.png"}
             />
-          </VStack>
+          </VStack> */}
         </VStack>
       </Container>
     </VStack>

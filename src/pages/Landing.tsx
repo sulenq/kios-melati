@@ -1,10 +1,16 @@
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import Container from "../components/Container";
 import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
   HStack,
   Image,
+  SimpleGrid,
   Text,
   VStack,
   useColorModeValue,
@@ -33,7 +39,6 @@ export default function Landing() {
           p={5}
           bg={bg}
           backdropFilter={"blur(10px)"}
-          mb={4}
         >
           <ColorModeSwitcher
             position={"absolute"}
@@ -63,8 +68,8 @@ export default function Landing() {
             colorScheme="bnw"
             w={"100%"}
             h={"44px"}
-            // h={["40px", null, "50px"]}
             borderRadius={"full"}
+            // h={["40px", null, "50px"]}
           >
             SIGN IN
           </Button>
@@ -82,68 +87,78 @@ export default function Landing() {
             </Text>
           </HStack>
         </VStack>
+      </Container>
 
-        <HStack
-          mx={"auto"}
-          gap={4}
-          w={"100%"}
-          maxW={"420px"}
-          justify={"center"}
-          borderRadius={6}
-          p={5}
-          bg={bg}
-          backdropFilter={"blur(10px)"}
-        >
-          <Box flex={1}>
-            <Text
-              color={"p.500"}
-              fontWeight={700}
-              fontSize={19}
-              mb={4}
-              lineHeight={1}
+      <Container>
+        <VStack w={"100%"} maxW={"420px"} mx={"auto"}>
+          <Accordion allowMultiple mb={4} w={"100%"}>
+            <AccordionItem
+              border={"none"}
+              bg={bg}
+              backdropFilter={"blur(10px)"}
+              borderRadius={6}
             >
-              Demo Account
-            </Text>
+              <AccordionButton h={"40px !important"} borderRadius={6}>
+                <Text
+                  flex="1"
+                  fontWeight={600}
+                  // fontSize={15}
+                  color={"p.500"}
+                  textAlign={"left"}
+                >
+                  Demo Account
+                </Text>
 
-            <Box mb={2}>
-              <Text fontWeight={500} mr={2}>
-                Admin Sign in
-              </Text>
-              <HStack>
-                <Text fontSize={11} opacity={0.5}>
-                  username :
-                </Text>
-                <Text fontSize={11}>admin</Text>
-              </HStack>
-              <HStack>
-                <Text fontSize={11} opacity={0.5}>
-                  password :
-                </Text>
-                <Text fontSize={11}>admin</Text>
-              </HStack>
-            </Box>
+                <AccordionIcon opacity={0.5} />
+              </AccordionButton>
 
-            <Box>
-              <Text fontWeight={500} mr={2}>
-                Cashier Sign in
-              </Text>
-              <HStack>
-                <Text opacity={0.5} fontSize={11}>
-                  username :
-                </Text>
-                <Text fontSize={11}>cashier</Text>
-              </HStack>
-              <HStack>
-                <Text fontSize={11} opacity={0.5}>
-                  password :
-                </Text>
-                <Text fontSize={11}>cashier</Text>
-              </HStack>
-            </Box>
-          </Box>
+              <AccordionPanel px={4} pt={2} pb={4}>
+                <HStack justify={"space-between"}>
+                  <SimpleGrid columns={[1, null, 2]} gap={2}>
+                    <Box>
+                      <Text fontWeight={500} mb={1}>
+                        Admin Sign in
+                      </Text>
 
-          <Image src="/img/profile.png" w={"140px"} />
-        </HStack>
+                      <HStack>
+                        <Text fontSize={11} opacity={0.5}>
+                          username :
+                        </Text>
+                        <Text fontSize={11}>admin</Text>
+                      </HStack>
+                      <HStack>
+                        <Text fontSize={11} opacity={0.5}>
+                          password :
+                        </Text>
+                        <Text fontSize={11}>admin</Text>
+                      </HStack>
+                    </Box>
+
+                    <Box>
+                      <Text fontWeight={500} mb={1}>
+                        Cashier Sign in
+                      </Text>
+                      <HStack>
+                        <Text opacity={0.5} fontSize={11}>
+                          username :
+                        </Text>
+                        <Text fontSize={11}>cashier</Text>
+                      </HStack>
+                      <HStack>
+                        <Text fontSize={11} opacity={0.5}>
+                          password :
+                        </Text>
+                        <Text fontSize={11}>cashier</Text>
+                      </HStack>
+                    </Box>
+                  </SimpleGrid>
+
+                  <Image src="/img/profile.png" w={"140px"} />
+                </HStack>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        </VStack>
       </Container>
     </VStack>
   );

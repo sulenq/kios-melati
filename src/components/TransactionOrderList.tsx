@@ -33,7 +33,7 @@ export default function TransactionOrderList({
                 py={2}
                 // borderRadius={i === orderList.length - 1 ? "0 0 0 6px" : ""}
               >
-                <Icon as={pci(o.category)} fontSize={18} />
+                <Icon as={pci(o.category)} fontSize={18} mt={1} />
               </Td>
 
               <Td px={2} py={2}>

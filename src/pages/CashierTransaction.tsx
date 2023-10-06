@@ -158,7 +158,7 @@ export default function CashierTransaction() {
                       Change
                     </Th>
                     <Th textAlign={"right"} pl={2} pr={4} py={2}>
-                      Action
+                      Detail
                     </Th>
                   </>
                 ) : (
@@ -179,7 +179,7 @@ export default function CashierTransaction() {
                       Change
                     </Th>
                     <Th textAlign={"right"} px={[4, null, 2]} py={2}>
-                      Action
+                      Detail
                     </Th>
                   </>
                 )}
