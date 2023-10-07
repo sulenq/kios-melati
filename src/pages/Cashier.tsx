@@ -9,9 +9,7 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import CashierNav from "../components/CashierNav";
 import Container from "../components/Container";
-import NavHeader from "../components/NavHeader";
 import {
   Scan,
   Plus,
@@ -29,7 +27,7 @@ import { useRef, useEffect } from "react";
 import OrderItem from "../components/OrderItem";
 import useFormatNumber from "../utils/useFormatNumber";
 import products from "../const/products";
-import Page from "../components/Page";
+import PageWithMainNav from "../components/PageWithMainNav";
 
 export default function Cashier() {
   const sw = useScreenWidth();
@@ -113,40 +111,33 @@ export default function Cashier() {
   };
 
   return (
-    <Page>
-      <CashierNav />
-
-      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader
-          title={"Cashiering"}
-          left={null}
-          right={
-            <Tooltip
-              openDelay={500}
-              label={"New Transaction"}
-              hasArrow
-              placement="left"
-            >
-              <IconButton
-                aria-label="newTransaction"
-                className="btn sm-clicky"
-                variant={"ghost"}
-                borderRadius={"full"}
-                h={"40px !important"}
-                icon={<Icon as={Plus} fontSize={18} />}
-                onClick={resetOrder}
-              />
-            </Tooltip>
-          }
-        />
-      </VStack>
-
+    <PageWithMainNav
+      title="cashiering"
+      headerLeft={null}
+      headerRight={
+        <Tooltip
+          openDelay={500}
+          label={"New Transaction"}
+          hasArrow
+          placement="left"
+        >
+          <IconButton
+            aria-label="newTransaction"
+            className="btn sm-clicky"
+            variant={"ghost"}
+            borderRadius={"full"}
+            h={"40px !important"}
+            icon={<Icon as={Plus} fontSize={18} />}
+            onClick={resetOrder}
+          />
+        </Tooltip>
+      }
+    >
       <Container>
         {sw < 770 ? (
           <VStack gap={3} py={3} justify={"space-between"}>
             <HStack
               w={"100%"}
-              maxW={"400px"}
               gap={1}
               align={"flex-start"}
               justify={"space-between"}
@@ -166,7 +157,7 @@ export default function Cashier() {
               </HStack>
             </HStack>
 
-            <HStack gap={1} w={"100%"} maxW={"400px"}>
+            <HStack gap={1} w={"100%"}>
               <Tooltip openDelay={500} label={"Camera Scan"} hasArrow>
                 <IconButton
                   aria-label="cameraScan"
@@ -237,6 +228,7 @@ export default function Cashier() {
                           as={ShoppingCartSimple}
                           fontSize={22}
                           color={"wt"}
+                          weight="fill"
                         />
                         <Icon
                           as={ArrowRight}
@@ -256,10 +248,11 @@ export default function Cashier() {
             gap={4}
             py={3}
             justify={"space-between"}
+            // align={"flex-start"}
             // borderBottom={"2px solid var(--divider)"}
           >
             <Box w={"30%"}>
-              <Text opacity={0.5}>Total Payment</Text>
+              <Text opacity={0.5} mb={1} fontSize={11}>Total Payment</Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -344,8 +337,14 @@ export default function Cashier() {
                           as={ShoppingCartSimple}
                           fontSize={22}
                           color={"wt"}
+                          weight="fill"
                         />
-                        <Icon as={ArrowRight} fontSize={18} color={"wt"} />
+                        <Icon
+                          as={ArrowRight}
+                          fontSize={18}
+                          color={"wt"}
+                          weight="bold"
+                        />
                       </HStack>
                     }
                   />
@@ -358,13 +357,13 @@ export default function Cashier() {
 
       {orderList.length === 0 && (
         <VStack
-          opacity={0.2}
-          p={4}
+          flex={1}
           w={"100%"}
           maxW={"600px"}
-          position={"absolute"}
-          bottom={"0"}
-          flex={1}
+          p={4}
+          opacity={0.2}
+          mx={"auto"}
+          justify={"flex-end"}
           // h={sw < 770 ? "calc(100% - 170px)" : "calc(100% - 136px)"}
         >
           <Image src={"/img/cashier.png"} />
@@ -374,26 +373,30 @@ export default function Cashier() {
       {orderList.length !== 0 && (
         <VStack
           w={"100%"}
-          pb={"72px"}
           overflow={"auto"}
           flex={1}
           gap={0}
           // h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>
-            <Text fontSize={23} fontWeight={600} mb={1}>
-              Orders
-            </Text>
+            <HStack w={"100%"} mb={2} justify={"space-between"}>
+              <Text fontSize={15} fontWeight={600}>
+                Order
+              </Text>
+
+              <Text fontSize={15} fontWeight={600}>
+                {`Total : ${orderList.length}`}
+              </Text>
+            </HStack>
           </Container>
 
           {orderList
             .slice()
             .reverse()
             .map((o, i) => (
-              <Container key={i} px={[0, null, 6]}>
+              <Container key={i} px={"0"}>
                 <Box
-                  borderRadius={sw >= 770 ? 6 : ""}
-                  px={[4, null, 2]}
+                  px={[4, 6, 8]}
                   py={2}
                   mb={2}
                   _hover={{ bg: "var(--divider)" }}
@@ -404,6 +407,6 @@ export default function Cashier() {
             ))}
         </VStack>
       )}
-    </Page>
+    </PageWithMainNav>
   );
 }

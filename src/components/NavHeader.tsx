@@ -9,11 +9,8 @@ export default function NavHeader(props: any) {
   return (
     <HStack
       w={"100%"}
-      maxW={"1240px"}
+      maxW={"1040px"}
       mx={"auto"}
-      position={"sticky"}
-      top={0}
-      left={0}
       justify={"space-between"}
       bg={props.bg || navHeaderBg}
       animation={"fade-in 300ms"}
@@ -24,7 +21,7 @@ export default function NavHeader(props: any) {
         props?.left || <BackButton backPath={props?.backPath} />
       )}
 
-      <Text fontWeight={600} color={"p.500"} fontSize={15}>
+      <Text fontWeight={600} fontSize={15}>
         {props.title}
       </Text>
 

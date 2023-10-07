@@ -7,12 +7,13 @@
 :root {
   --p50: #f1f8ff;
   --p100: #ddecfd;
+  --p100a: #6791e510;
   --p200: #bbd7fc;
   --p200a: #76a4ff3e;
   --p300: #98bdf6;
   --p400: #7ca4ec;
   --p450: #618dde;
-  --p500: #5281e1;
+  --p500: #6699ff;
   --p500a: #76a4ff9e;
   --p600: #3b63c1;
   --p700: #2948a2;
@@ -24,7 +25,7 @@
   --w: #ffffff;
   --wt: #ececec;
   --divider: #b4bdc920;
-  --divider2: #b4bdc930;
+  --divider2: #979ea930;
   --divider3: #b4bdc9aa;
   --trans: #ff000000;
 }

@@ -89,7 +89,7 @@ export default function CashierProfile() {
         </Button>
 
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
-          <ModalOverlay backdropFilter={"blur(10px)"} />
+          <ModalOverlay backdropFilter={"blur(10px)"} bg={"var(--divider)"} />
 
           <ModalContent>
             <ModalHeader px={4} py={3} pt={4}>
@@ -172,7 +172,7 @@ export default function CashierProfile() {
                   {profile?.name}
                 </Text>
 
-                <Badge fontSize={15} colorScheme="yellow" mb={4}>
+                <Badge fontSize={13} colorScheme="yellow" mb={4}>
                   {profile?.role}
                 </Badge>
 
