@@ -52,7 +52,7 @@ export default function CashierTransaction() {
     <PageWithMainNav title="Cashier Transaction" headerRight={null}>
       {/* Search Component */}
       <Container>
-        <HStack justify={"center"} py={"19px"}>
+        <HStack justify={"center"} mt={"19px"} mb={2}>
           <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
               <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />
@@ -63,6 +63,7 @@ export default function CashierTransaction() {
               name={"indexProduct"}
               placeholder="Transaction search by ID"
               bg={"var(--divider)"}
+              variant={"filled"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}
               pr={"36px !important"}

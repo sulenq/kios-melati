@@ -19,6 +19,7 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (
 
   return (
     <IconButton
+      {...props}
       size="md"
       fontSize="lg"
       variant="ghost"
@@ -33,7 +34,6 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (
         />
       }
       aria-label={`Switch to ${text} mode`}
-      {...props}
     />
   );
 };

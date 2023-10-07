@@ -10,7 +10,7 @@ export default function Container(props: any) {
       w={"100%"}
       maxW={"1080px"}
       mx={"auto"}
-      px={props.px || [4, 6, 8]}
+      px={props.px || [4, 5, 6]}
     >
       {props.children}
     </VStack>

@@ -17,7 +17,6 @@ import ProductSearchResult from "../components/ProductSearchResult";
 import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
-import useScreenWidth from "../utils/useGetScreenWidth";
 import PageWithMainNav from "../components/PageWithMainNav";
 
 export default function ProductSearch() {
@@ -42,7 +41,6 @@ export default function ProductSearch() {
 
   const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
   const { addOrder } = useOrder();
-  const sw = useScreenWidth();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -61,12 +59,12 @@ export default function ProductSearch() {
   }, []);
 
   return (
-    <PageWithMainNav title='Product Search' headerLeft='backButton'>
+    <PageWithMainNav title="Product Search" headerLeft="backButton">
       <Container>
-        <HStack justify={"center"} py={"19px"}>
+        <HStack justify={"center"} mt={"19px"} mb={2}>
           <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
-              <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />
+              <Icon as={MagnifyingGlass} fontSize={18} />
             </InputLeftElement>
 
             <Input
@@ -74,6 +72,7 @@ export default function ProductSearch() {
               name={"indexProduct"}
               placeholder="Product search"
               bg={"var(--divider)"}
+              variant={"filled"}
               border={"2px solid transparent !important"}
               pl={"40px !important"}
               pr={"36px !important"}
@@ -106,19 +105,18 @@ export default function ProductSearch() {
       </Container>
 
       {productSearch === "" && (
-        <VStack
-          flex={1}
-          opacity={0.2}
-          justify={"flex-end"}
-          p={4}
-          maxW={"600px"}
-        >
-          <Image w={"100%"} src={"/img/search.png"} />
+        <VStack flex={1} justify={"flex-end"} p={4}>
+          <Image
+            opacity={0.2}
+            w={"100%"}
+            maxW={"600px"}
+            src={"/img/search.png"}
+          />
         </VStack>
       )}
 
       {productSearch !== "" && filteredProducts.length === 0 && (
-        <VStack flex={1} justify={"space-between"} p={4} transition={"300ms"}>
+        <VStack flex={1} justify={"space-between"} p={4}>
           <Text fontWeight={500} fontSize={[15, null, 17]} mb={4}>
             No Result
           </Text>
@@ -152,7 +150,7 @@ export default function ProductSearch() {
               return (
                 <Container
                   key={i}
-                  px={[0, null, 6]}
+                  px={"0"}
                   onClick={() => {
                     addOrder({
                       id: p.id,
@@ -168,11 +166,9 @@ export default function ProductSearch() {
                     window.history.back();
                   }}
                 >
-                  <Box
+                  <Container
                     cursor="pointer"
                     _hover={{ bg: "var(--divider)" }}
-                    borderRadius={sw >= 770 ? 6 : ""}
-                    px={[4, null, 2]}
                     py={2}
                   >
                     <ProductSearchResult
@@ -182,7 +178,7 @@ export default function ProductSearch() {
                       price={p?.price}
                       stock={p?.stock}
                     />
-                  </Box>
+                  </Container>
                 </Container>
               );
             })}

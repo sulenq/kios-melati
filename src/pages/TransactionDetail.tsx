@@ -149,14 +149,13 @@ export default function TransactionDetail() {
       )}
 
       {td && (
-        <Box position={"relative"} w={"100%"} maxW={"640px"} mx={"auto"}>
+        <Box position={"relative"} w={"100%"} mx={"auto"}>
           <VStack
             gap={0}
-            backdropFilter={"blur(100px)"}
-            // border={"1px solid var(--divider)"}
             borderRadius={6}
+            // border={"1px solid var(--divider)"}
           >
-            <Box px={5} mt={5} mb={4} w={"100%"}>
+            <Box px={[4, 5, 6]} mt={5} mb={4} w={"100%"}>
               <HStack
                 justify={"space-between"}
                 pb={4}
@@ -172,7 +171,7 @@ export default function TransactionDetail() {
             </Box>
 
             <Box w={"100%"}>
-              <HStack mx={5} mb={2} justify={"space-between"}>
+              <HStack px={[4, 5, 6]} mb={2} justify={"space-between"}>
                 <Text fontSize={15} fontWeight={600}>
                   Order
                 </Text>
@@ -187,7 +186,7 @@ export default function TransactionDetail() {
               </VStack>
             </Box>
 
-            <Box mt={4} px={5} w={"100%"} overflow={"auto"}>
+            <Box mt={4} px={[4, 5, 6]} w={"100%"} overflow={"auto"}>
               <VStack
                 py={4}
                 borderTop={"2px dashed var(--divider)"}

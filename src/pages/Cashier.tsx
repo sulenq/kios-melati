@@ -28,6 +28,7 @@ import OrderItem from "../components/OrderItem";
 import useFormatNumber from "../utils/useFormatNumber";
 import products from "../const/products";
 import PageWithMainNav from "../components/PageWithMainNav";
+import { useComponentsBg } from "../const/colorModeValues";
 
 export default function Cashier() {
   const sw = useScreenWidth();
@@ -36,6 +37,7 @@ export default function Cashier() {
   const { addOrder, orderList, resetOrder, totalPayment } = useOrder();
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const cbg = useComponentsBg();
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -132,12 +134,13 @@ export default function Cashier() {
         </Tooltip>
       }
     >
-      <Container>
+      <Container zIndex={3} position={"sticky"} top={"56.8px"} {...cbg}>
         {sw < 770 ? (
-          <VStack gap={3} py={3} justify={"space-between"}>
+          <VStack gap={3} mt={4} mb={2} justify={"space-between"}>
             <HStack
               w={"100%"}
               gap={1}
+              mb={1}
               align={"flex-start"}
               justify={"space-between"}
             >
@@ -243,13 +246,7 @@ export default function Cashier() {
             </HStack>
           </VStack>
         ) : (
-          <HStack
-            gap={4}
-            py={3}
-            justify={"space-between"}
-            // align={"flex-start"}
-            // borderBottom={"2px solid var(--divider)"}
-          >
+          <HStack gap={4} mt={3} mb={2} justify={"space-between"}>
             <Box w={"25%"}>
               <Text opacity={0.5} mb={1} fontSize={11}>
                 Total Payment
@@ -377,6 +374,7 @@ export default function Cashier() {
           overflow={"auto"}
           flex={1}
           gap={0}
+          pb={sw < 770 ? "72px" : ""}
           // h={sw < 770 ? "calc(100% - 161px)" : "calc(100% - 136px)"}
         >
           <Container>

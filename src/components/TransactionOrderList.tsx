@@ -28,7 +28,7 @@ export default function TransactionOrderList({
           {orderList.map((o, i) => (
             <Tr key={i} cursor="pointer" _hover={{ bg: "var(--divider)" }}>
               <Td
-                pl={6}
+                pl={[4, 5, 6]}
                 pr={2}
                 py={2}
                 // borderRadius={i === orderList.length - 1 ? "0 0 0 6px" : ""}
@@ -62,7 +62,7 @@ export default function TransactionOrderList({
               </Td>
 
               <Td
-                pr={6}
+                pr={[4, 5, 6]}
                 pl={2}
                 py={2}
                 // borderRadius={i === orderList.length - 1 ? "0 0 6px 0" : ""}

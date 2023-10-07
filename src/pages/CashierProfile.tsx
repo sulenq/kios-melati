@@ -77,10 +77,7 @@ export default function CashierProfile() {
         <Button
           onClick={onOpen}
           w={"200px"}
-          // maxW={"300px"}
-          colorScheme="p"
-          variant={"outline"}
-          className="clicky"
+          className="btn-p-outline clicky"
           borderRadius={"full"}
           h={"44px !important"}
         >

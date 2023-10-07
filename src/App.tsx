@@ -22,6 +22,13 @@ export const App = () => {
     e.preventDefault();
   });
 
+  window.addEventListener("scroll", function (e) {
+    const body = document.querySelector("body");
+    if (body) {
+      body.style.marginRight = "=10px";
+    }
+  });
+
   return (
     <ChakraProvider theme={globalTheme}>
       <BrowserRouter>

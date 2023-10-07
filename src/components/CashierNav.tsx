@@ -87,7 +87,8 @@ export default function CashierNav(props: any) {
 
           <ColorModeSwitcher
             borderRadius={"full"}
-            h={"42px !important"}
+            minW={"50px !important"}
+            minH={"50px !important"}
             fontSize={24}
           />
         </HStack>
@@ -97,7 +98,7 @@ export default function CashierNav(props: any) {
   return (
     <VStack
       w={"240px"}
-      minH={"100vh"}
+      h={"100vh"}
       align={"flex-start"}
       justify={"space-between"}
       py={6}
@@ -107,7 +108,7 @@ export default function CashierNav(props: any) {
       top={0}
     >
       <Box>
-        <Image w={"24px"} src="/logo.svg" ml={3} mb={6} mt={1} />
+        <Image w={"26px"} src="/logo.svg" ml={3} mb={6} mt={1} />
 
         {cashierNav.map((n, i) => {
           const isActive = n.link.find((link) => {
@@ -124,7 +125,8 @@ export default function CashierNav(props: any) {
               <HStack
                 mb={2}
                 gap={1}
-                _hover={{ opacity: 0.5 }}
+                // _hover={{ opacity: 0.5 }}
+                role="group"
                 transition={"200ms"}
               >
                 <IconButton
@@ -133,6 +135,8 @@ export default function CashierNav(props: any) {
                   aria-label={n.name}
                   className="sm-clicky"
                   variant={"unstyled"}
+                  _groupHover={{ bg: "var(--divider)" }}
+                  borderRadius={"full"}
                   icon={
                     <Icon
                       as={n.icon}
@@ -150,7 +154,12 @@ export default function CashierNav(props: any) {
         })}
       </Box>
 
-      <ColorModeSwitcher borderRadius={"full"} h={"42px !important"} />
+      <ColorModeSwitcher
+        p={4}
+        borderRadius={"full"}
+        minW={"50px !important"}
+        minH={"50px !important"}
+      />
     </VStack>
   );
 }

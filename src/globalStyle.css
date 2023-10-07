@@ -6,19 +6,19 @@
 /* COLORS */
 :root {
   --p50: #f1f8ff;
-  --p100: #ddecfd;
+  --p100: #d5f6fe;
   --p100a: #6791e510;
-  --p200: #bbd7fc;
-  --p200a: #76a4ff3e;
+  --p200: #81d6fb;
+  --p200a: #2fa1f21f;
   --p300: #98bdf6;
-  --p400: #7ca4ec;
+  --p400: #61c1f7;
   --p450: #618dde;
-  --p500: #6699ff;
+  --p500: #2fa1f2;
   --p500a: #76a4ff9e;
-  --p600: #3b63c1;
-  --p700: #2948a2;
-  --p800: #1a3182;
-  --p900: #0f216c;
+  --p600: #227dd0;
+  --p700: #175eae;
+  --p800: #0e428c;
+  --p900: #092f74;
   --b: #111111;
   --ba: #000000a6;
   --bt: #333333;
@@ -40,6 +40,7 @@ body {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Standard syntax */
+  overflow-y: scroll;
 }
 
 a {
@@ -57,6 +58,14 @@ button {
   font-size: 13px !important;
 }
 
+.btn-p-outline {
+  background: transparent !important;
+  border: 2px solid var(--p500);
+  color: var(--p500) !important;
+}
+.btn-p-outline:hover:not(:disabled) {
+  background: var(--p200a) !important;
+}
 .btn-solid {
   background: var(--divider) !important;
 }
@@ -81,7 +90,7 @@ input {
   outline: none !important;
   border: 2px solid var(--divider) !important;
   font-size: 14px !important;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
 }
 input::placeholder {
   /* opacity: 0.5; */

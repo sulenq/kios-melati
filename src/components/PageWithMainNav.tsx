@@ -24,7 +24,7 @@ export default function PageWithMainNav({
           w={"100%"}
           minH={"100vh"}
           align={"stretch"}
-
+          position={"relative"}
           //   px={4}
         >
           <VStack
@@ -41,9 +41,10 @@ export default function PageWithMainNav({
           </VStack>
 
           <VStack
-            minH={"calc(100vh - 65px)"}
+            flex={1}
             align={"stretch"}
-            pb={sw < 770 ? "72px" : ""}
+            // overflow={"auto"}
+            // minH={"calc(100vh - 65px)"}
           >
             {children}
           </VStack>
@@ -56,10 +57,11 @@ export default function PageWithMainNav({
     <HStack
       w={"100%"}
       maxW={"1280px"}
+      minH={"100vh"}
       mx={"auto"}
       gap={0}
       align={"flex-start"}
-      //   justify={"space-between"}
+      position={"relative"}
     >
       <CashierNav />
 
@@ -86,9 +88,10 @@ export default function PageWithMainNav({
         </VStack>
 
         <VStack
+          flex={1}
           align={"stretch"}
-          minH={"calc(100vh - 65px)"}
-          pb={sw < 770 ? "72px" : ""}
+          // overflow={"auto"}
+          // h={"calc(100vh - 65px)"}
         >
           {children}
         </VStack>

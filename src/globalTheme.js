@@ -4,41 +4,41 @@ export const globalTheme = extendTheme({
   colors: {
     p: {
       50: "#f1f8ff",
-      100: "#DDECFD",
-      200: "#BBD7FC",
-      300: "#98BDF6",
-      400: "#7CA4EC",
-      500: "#6699ff",
-      600: "#3B63C1",
-      700: "#2948A2",
-      800: "#1A3182",
-      900: "#0F216C",
+      100: "#D5F6FE",
+      200: "#81D6FB",
+      300: "#81D6FB",
+      400: "#61C1F7",
+      500: "#2FA1F2",
+      600: "#227DD0",
+      700: "#175EAE",
+      800: "#0E428C",
+      900: "#092F74",
     },
     ap: {
-      50: "#6699ff",
-      100: "#6699ff",
-      200: "#6699ff",
-      300: "#6699ff",
-      400: "#6699ff",
-      500: "#6699ff",
-      600: "#6699ff",
-      700: "#6699ff",
-      800: "#6699ff",
-      900: "#6699ff",
+      50: "#2fa1f2",
+      100: "#2fa1f2",
+      200: "#2fa1f2",
+      300: "#2fa1f2",
+      400: "#2fa1f2",
+      500: "#2fa1f2",
+      600: "#2fa1f2",
+      700: "#2fa1f2",
+      800: "#2fa1f2",
+      900: "#2fa1f2",
     },
     bnw: {
       200: "white",
       300: "white",
-      500: "#050505",
-      600: "#050505",
+      500: "#000000",
+      600: "#000000",
     },
     wnb: {
-      200: "#050505",
-      300: "#050505",
+      200: "#000000",
+      300: "#000000",
       500: "white",
       600: "white",
     },
-    b: "#050505",
+    b: "#000000",
     bt: "#333333",
     w: "white",
     wt: "#eee",
@@ -47,7 +47,7 @@ export const globalTheme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: props.colorMode === "dark" ? "#050505" : "white",
+        bg: props.colorMode === "dark" ? "#000000" : "white",
         color: props.colorMode === "dark" ? "wt" : "bt",
       },
     }),
@@ -67,7 +67,7 @@ export const globalTheme = extendTheme({
     Modal: {
       baseStyle: (props) => ({
         dialog: {
-          bg: props.colorMode === "dark" ? "#050505cc" : "#ffffffcc",
+          bg: props.colorMode === "dark" ? "#000000cc" : "#ffffffcc",
           backdropFilter: "blur(10px)",
           color: props.colorMode === "dark" ? "wt" : "bt",
           border: "1px solid var(--divider)",
@@ -83,7 +83,7 @@ export const globalTheme = extendTheme({
     Menu: {
       baseStyle: (props) => ({
         list: {
-          bg: props.colorMode === "dark" ? "#050505cc" : "#ffffffcc",
+          bg: props.colorMode === "dark" ? "#000000cc" : "#ffffffcc",
           backdropFilter: "blur(10px)",
           border: "1px solid var(--divider)",
           p: 0,
@@ -109,7 +109,7 @@ export const globalTheme = extendTheme({
           _autofill: {
             boxShadow:
               props.colorMode === "dark"
-                ? "0 0 0px 1000px #050505 inset"
+                ? "0 0 0px 1000px #000000 inset"
                 : "0 0 0px 1000px #ffffff inset",
             border: "2px solid var(--divider) !important",
           },

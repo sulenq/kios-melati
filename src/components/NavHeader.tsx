@@ -4,7 +4,6 @@ import { useComponentsBg } from "../const/colorModeValues";
 
 export default function NavHeader(props: any) {
   const navHeaderBg = useComponentsBg();
-  console.log(props.left);
 
   return (
     <HStack
@@ -21,7 +20,7 @@ export default function NavHeader(props: any) {
         props.left || <Box w={"40px"} h={"40px"} />
       )}
 
-      <Text fontWeight={600} fontSize={15}>
+      <Text fontWeight={700} fontSize={15}>
         {props.title}
       </Text>
 

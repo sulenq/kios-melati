@@ -107,8 +107,8 @@ export default function Checkout() {
       headerRight={null}
     >
       <Container>
-        <Box w={"100%"} maxW={"400px"} mx={"auto"} mt={[2, 3, 4]}>
-          <HStack align={"flex-start"} justify={"space-between"} mt={1} mb={4}>
+        <Box w={"100%"} maxW={"400px"} mx={"auto"} mt={4} mb={2}>
+          <HStack align={"flex-start"} justify={"space-between"} mb={4}>
             <Text opacity={0.8} color={"p.500"}>
               Total Payment
             </Text>
@@ -288,7 +288,7 @@ export default function Checkout() {
               pay - totalPayment < 0 || totalPayment <= 0 ? true : false
             }
           >
-            CONFRIM TRANSACTION
+            Confirm Transaction
           </Button>
         </Box>
       </Container>

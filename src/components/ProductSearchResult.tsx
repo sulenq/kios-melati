@@ -26,17 +26,21 @@ export default function ProductSearchResult({
     <HStack gap={3} justify={"space-between"}>
       <HStack gap={3}>
         <Icon as={productCategoryIcon(category)} fontSize={26} weight="light" />
+
         <Box>
           <Tooltip label={name} hasArrow>
-            <Text noOfLines={1}>{name}</Text>
+            <Text noOfLines={1} mb={1}>
+              {name}
+            </Text>
           </Tooltip>
+
           <Text opacity={0.5} fontSize={[10, null, 12]}>
             {code}
           </Text>
         </Box>
       </HStack>
 
-      <VStack align={"flex-end"} gap={0} mr={1} flexShrink={0}>
+      <VStack align={"flex-end"} gap={1} mr={1} flexShrink={0}>
         <HStack gap={1}>
           <Text opacity={0.5} fontSize={[10, null, 12]}>
             Rp
@@ -44,9 +48,7 @@ export default function ProductSearchResult({
           <Text>{fn(price)}</Text>
         </HStack>
 
-        <Text opacity={0.5} fontSize={[10, null, 12]}>{`Stock : ${fn(
-          stock
-        )}`}</Text>
+        <Text opacity={0.5} fontSize={[10, null, 12]}>{`${fn(stock)}`}</Text>
       </VStack>
     </HStack>
   ) : (
