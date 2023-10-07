@@ -67,7 +67,7 @@ export default function CashierTransaction() {
     <PageWithMainNav title="Cashier Transaction" headerRight={null}>
       {/* Search Component */}
       <Container position={"sticky"} top={"56.8px"} zIndex={3} {...cfg}>
-        <SimpleGrid gap={2} columns={[1, null, 2]} mt={"19px"} mb={2}>
+        <SimpleGrid gap={2} columns={sw < 1000 ? 1 : 2} mt={"19px"} mb={2}>
           <HStack gap={6}>
             <HStack>
               <Text fontSize={15} opacity={0.5}>

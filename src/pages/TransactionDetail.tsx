@@ -31,20 +31,6 @@ import PageWithMainNav from "../components/PageWithMainNav";
 import useScreenWidth from "../utils/useGetScreenWidth";
 
 export default function TransactionDetail() {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        window.history.back();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
   const logo = useColorModeValue("/logob.svg", "/logow.svg");
   const { id } = useParams();
   const tc = localStorage.getItem("transaction");
@@ -62,21 +48,23 @@ export default function TransactionDetail() {
     }
   }, [tc, id]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        window.history.back();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const PrintReceiptModal = ({ id }: { id: string }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const modalContentRef = useRef(null);
-
-    useEffect(() => {
-      const handleBackNavigation = () => {
-        onClose();
-      };
-
-      window.addEventListener("popstate", handleBackNavigation);
-
-      return () => {
-        window.removeEventListener("popstate", handleBackNavigation);
-      };
-    }, [onClose]);
 
     return (
       <>

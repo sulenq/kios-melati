@@ -38,29 +38,13 @@ export default function Cashier() {
   const searchProductButton = useRef(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const cbg = useComponentsBg();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    const handleBackNavigation = (e: PopStateEvent) => {
-      e.preventDefault();
-      if (e.state) {
-        navigate("/signin");
-      } else {
-        console.log("forward navigation");
-      }
-    };
-
-    window.addEventListener("popstate", handleBackNavigation);
-
-    return () => {
-      window.removeEventListener("popstate", handleBackNavigation);
-    };
-  }, [navigate]);
 
   useEffect(() => {
     const handleEndKey = (e: KeyboardEvent) => {

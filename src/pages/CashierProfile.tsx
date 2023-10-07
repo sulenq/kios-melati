@@ -12,14 +12,13 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  SimpleGrid,
   Text,
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import Container from "../components/Container";
 import { getCookie, removeCookie } from "typescript-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import PageWithMainNav from "../components/PageWithMainNav";
 import {
@@ -50,15 +49,9 @@ export type typeCashierProfile = {
 
 export default function CashierProfile() {
   const [profile, setProfile] = useState<typeCashierProfile>();
-  useEffect(() => {
-    const pc = getCookie("authState");
-    if (pc) {
-      const profileData: typeCashierProfile = JSON.parse(pc);
-      setProfile(profileData);
-    }
-  }, []);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const sw = useScreenWidth();
 
   const profileData = [
@@ -80,6 +73,14 @@ export default function CashierProfile() {
     },
   ];
 
+  useEffect(() => {
+    const pc = getCookie("authState");
+    if (pc) {
+      const profileData: typeCashierProfile = JSON.parse(pc);
+      setProfile(profileData);
+    }
+  }, []);
+
   const handleSignOut = () => {
     removeCookie("authState");
     removeCookie("token");
@@ -89,19 +90,21 @@ export default function CashierProfile() {
   const SignoutModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    console.log(isOpen);
+    // console.log(isOpen);
     useEffect(() => {
-      if (isOpen) {
-        window.addEventListener("popstate", onClose);
-      } else {
-        window.removeEventListener("popstate", onClose);
-      }
+      const handleBack = (e: PopStateEvent) => {
+        e.preventDefault();
+        window.history.pushState(null, "", location.pathname);
+        console.log("titit");
+      };
+
+      window.addEventListener("popstate", handleBack);
 
       // Cleanup function
       return () => {
-        window.removeEventListener("popstate", onClose);
+        window.removeEventListener("popstate", handleBack);
       };
-    }, [isOpen, onClose]);
+    }, []);
 
     return (
       <>
@@ -153,92 +156,79 @@ export default function CashierProfile() {
 
   return (
     <PageWithMainNav title="Cashier Profile" headerRight={null}>
-      <VStack flex={1} w={"100%"} position={"relative"} overflow={"auto"}>
-        <Container justify={"center"} pb={sw < 770 ? "72px" : ""}>
-          <SimpleGrid
-            my={5}
-            mx={"auto"}
-            w={"100%"}
-            columns={[1, null, 1]}
-            gap={6}
-            maxW={"600px"}
-          >
-            <VStack>
-              <Center
-                borderRadius={6}
-                flexDir={"column"}
-                w={"100%"}
-                minH={"500px"}
-                h={"100%"}
-                // bg={"var(--divider)"}
-              >
-                <Box
-                  borderRadius={"full"}
-                  overflow={"hidden"}
-                  w={"300px"}
-                  h={"300px"}
-                  bgImage={"/img/users/cashier.jpg"}
-                  bgPos={"center top"}
-                  bgSize={"cover"}
-                  mb={4}
-                />
+      <Container pb={sw < 770 ? "72px" : ""}>
+        <VStack my={5} mx={"auto"} w={"100%"} gap={6} maxW={"600px"}>
+          <VStack>
+            <Center
+              borderRadius={6}
+              flexDir={"column"}
+              w={"100%"}
+              minH={"500px"}
+              h={"100%"}
+              // bg={"var(--divider)"}
+            >
+              <Box
+                borderRadius={"full"}
+                overflow={"hidden"}
+                w={"300px"}
+                h={"300px"}
+                bgImage={"/img/users/cashier.jpg"}
+                bgPos={"center top"}
+                bgSize={"cover"}
+                mb={4}
+              />
 
-                <Text fontSize={19} fontWeight={600} mb={1}>
-                  {profile?.name}
-                </Text>
-
-                <Badge fontSize={13} colorScheme="yellow" mb={4}>
-                  {profile?.role}
-                </Badge>
-
-                <SignoutModal />
-              </Center>
-            </VStack>
-
-            <VStack align={"flex-start"} justify={"center"} gap={4}>
-              <Text fontWeight={700} fontSize={23}>
-                Account Details
+              <Text fontSize={19} fontWeight={600} mb={1}>
+                {profile?.name}
               </Text>
 
-              <SimpleGrid
-                w={"100%"}
-                gap={sw < 770 ? 0 : 6}
-                columns={[1, null, 1]}
-              >
-                <Box w={"100%"}>
-                  {profileData.map((p, i) => (
-                    <HStack key={i} mb={3} w={"100%"}>
-                      <HStack w={"100%"} maxW={"120px"}>
-                        <Icon as={p.icon} />
-                        <Text flexShrink={0}>{p.key}</Text>
-                      </HStack>
+              <Badge fontSize={13} colorScheme="yellow" mb={4}>
+                {profile?.role}
+              </Badge>
 
-                      <Box className="inputlike">
-                        <Text>{p.value || "No Data"}</Text>
-                      </Box>
+              <SignoutModal />
+            </Center>
+          </VStack>
+
+          <VStack align={"flex-start"} gap={4}>
+            <Text fontWeight={700} fontSize={23}>
+              Account Details
+            </Text>
+
+            <Box>
+              <Box w={"100%"}>
+                {profileData.map((p, i) => (
+                  <HStack key={i} mb={3} w={"100%"}>
+                    <HStack w={"100%"} maxW={"120px"}>
+                      <Icon as={p.icon} />
+                      <Text flexShrink={0}>{p.key}</Text>
                     </HStack>
-                  ))}
-                </Box>
 
-                <Box w={"100%"}>
-                  {profileData2.map((p, i) => (
-                    <HStack key={i} mb={3} w={"100%"}>
-                      <HStack w={"100%"} maxW={"120px"}>
-                        <Icon as={p.icon} />
-                        <Text flexShrink={0}>{p.key}</Text>
-                      </HStack>
+                    <Box className="inputlike">
+                      <Text>{p.value || "No Data"}</Text>
+                    </Box>
+                  </HStack>
+                ))}
+              </Box>
 
-                      <Box className="inputlike">
-                        <Text>{p.value || "No Data"}</Text>
-                      </Box>
+              <Box w={"100%"}>
+                {profileData2.map((p, i) => (
+                  <HStack key={i} mb={3} w={"100%"}>
+                    <HStack w={"100%"} maxW={"120px"}>
+                      <Icon as={p.icon} />
+                      <Text flexShrink={0}>{p.key}</Text>
                     </HStack>
-                  ))}
-                </Box>
-              </SimpleGrid>
-            </VStack>
-          </SimpleGrid>
-        </Container>
-      </VStack>
+
+                    <Box className="inputlike">
+                      <Text>{p.value || "No Data"}</Text>
+                    </Box>
+                  </HStack>
+                ))}
+              </Box>
+            </Box>
+          </VStack>
+        </VStack>
+      </Container>
     </PageWithMainNav>
   );
 }
