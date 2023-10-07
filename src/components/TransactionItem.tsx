@@ -70,7 +70,7 @@ export default function TransactionItem({ t }: Props) {
   const TransactionItem = ({ t }: Props) => {
     return (
       <>
-        <Td px={2} py={2} borderRadius={"6px 0 0 6px"}>
+        <Td pl={6} pr={2} py={2}>
           <Text opacity={0.8} color={"p.500"}>{`${t.id}`}</Text>
         </Td>
 
@@ -105,7 +105,7 @@ export default function TransactionItem({ t }: Props) {
           </HStack>
         </Td>
 
-        <Td px={2} py={2} borderRadius={"0 6px 6px 0"}>
+        <Td pr={6} pl={2} py={2}>
           <HStack justify={"flex-end"}>
             <TransactionDetail />
           </HStack>

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Page from "../components/Page";
 import {
   Box,
   HStack,
@@ -22,12 +21,12 @@ import {
   IconButton,
   Icon,
 } from "@chakra-ui/react";
-import NavHeader from "../components/NavHeader";
 import { useParams } from "react-router-dom";
 import { Transaction } from "./Checkout";
 import TransactionOrderList from "../components/TransactionOrderList";
 import useFormatNumber from "../utils/useFormatNumber";
 import { Printer } from "@phosphor-icons/react";
+import PageWithMainNav from "../components/PageWithMainNav";
 
 export default function TransactionDetail() {
   useEffect(() => {
@@ -79,7 +78,7 @@ export default function TransactionDetail() {
         <Tooltip label={"Print Receipt"} hasArrow openDelay={500}>
           <IconButton
             aria-label="orderListButton"
-            icon={<Icon as={Printer} fontSize={[17, null, 19]} />}
+            icon={<Icon as={Printer} fontSize={19} />}
             className="btn clicky"
             variant={"ghost"}
             onClick={onOpen}
@@ -128,14 +127,11 @@ export default function TransactionDetail() {
   };
 
   return (
-    <Page>
-      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader
-          title={`Transaction Detail`}
-          right={<PrintReceiptModal id={id ? id : ""} />}
-        />
-      </VStack>
-
+    <PageWithMainNav
+      title={"Transaction Detail"}
+      headerLeft={"backButton"}
+      headerRight={<PrintReceiptModal id={id ? id : ""} />}
+    >
       {!td && (
         <VStack
           p={4}
@@ -153,7 +149,7 @@ export default function TransactionDetail() {
       )}
 
       {td && (
-        <Box position={"relative"} w={"100%"} maxW={"640px"}>
+        <Box position={"relative"} w={"100%"} maxW={"640px"} mx={"auto"}>
           <VStack
             gap={0}
             backdropFilter={"blur(100px)"}
@@ -186,12 +182,8 @@ export default function TransactionDetail() {
                 </Text>
               </HStack>
 
-              <VStack w={"100%"}>
-                <Table variant={"unstyled"}>
-                  <Tbody>
-                    <TransactionOrderList orderList={td.orderList} />
-                  </Tbody>
-                </Table>
+              <VStack w={"100%"} align={"stretch"}>
+                <TransactionOrderList orderList={td.orderList} />
               </VStack>
             </Box>
 
@@ -260,6 +252,6 @@ export default function TransactionDetail() {
           </VStack>
         </Box>
       )}
-    </Page>
+    </PageWithMainNav>
   );
 }

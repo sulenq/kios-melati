@@ -23,6 +23,7 @@ import { setCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
 import cashierUsers from "../const/cashierUsers";
 import { useComponentsBg } from "../const/colorModeValues";
+import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 
 export type AuthState = {
   token: string;
@@ -158,7 +159,17 @@ export default function SignIn() {
   return (
     <>
       <VStack zIndex={99} position={"sticky"} top={0} left={0} {...cfg} p={2}>
-        <NavHeader title={"Sign In"} backPath={"/"} />
+        <NavHeader
+          title={"Sign In"}
+          backPath={"/"}
+          right={
+            <ColorModeSwitcher
+              className="btn sm-clicky"
+              borderRadius={"full"}
+              h={"40px !important"}
+            />
+          }
+        />
       </VStack>
 
       <Container>

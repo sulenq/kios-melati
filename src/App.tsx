@@ -49,7 +49,7 @@ export const App = () => {
           />
 
           <Route
-            path="/search-product"
+            path="/product-search"
             element={
               <RequireRole
                 allowedRoles={["admin", "cashier"]}

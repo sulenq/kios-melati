@@ -1,15 +1,23 @@
 import { ShoppingCartSimple, Receipt, User } from "@phosphor-icons/react";
 
-type AdminNav = {
+type CashierNav = {
   name: string;
   icon: any;
-  link: string;
+  link: string[];
 };
 
-const adminNav: AdminNav[] = [
-  { name: "Cashiering", icon: ShoppingCartSimple, link: "/cashier" },
-  { name: "Transaction", icon: Receipt, link: "/cashier/transaction" },
-  { name: "Profile", icon: User, link: "/cashier/profile" },
+const cashierNav: CashierNav[] = [
+  {
+    name: "Cashiering",
+    icon: ShoppingCartSimple,
+    link: ["/cashier", "/product-search", "/checkout"],
+  },
+  {
+    name: "Transaction",
+    icon: Receipt,
+    link: ["/cashier/transaction", "/transaction/:id"],
+  },
+  { name: "Profile", icon: User, link: ["/cashier/profile"] },
 ];
 
-export default adminNav;
+export default cashierNav;

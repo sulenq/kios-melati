@@ -16,13 +16,11 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import CashierNav from "../components/CashierNav";
-import Page from "../components/Page";
-import NavHeader from "../components/NavHeader";
 import Container from "../components/Container";
 import { getCookie, removeCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
 import useScreenWidth from "../utils/useGetScreenWidth";
+import PageWithMainNav from "../components/PageWithMainNav";
 
 export type typeCashierProfile = {
   idPublic: number;
@@ -80,7 +78,8 @@ export default function CashierProfile() {
           onClick={onOpen}
           w={"200px"}
           // maxW={"300px"}
-          colorScheme="bnw"
+          colorScheme="p"
+          variant={"outline"}
           className="clicky"
           borderRadius={"full"}
           h={"44px !important"}
@@ -125,20 +124,8 @@ export default function CashierProfile() {
   };
 
   return (
-    <Page>
-      <CashierNav />
-
-      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader title={"Cashier Profile"} left={null} right={null} />
-      </VStack>
-
-      <VStack
-        w={"100%"}
-        position={"relative"}
-        pb={"72px"}
-        flex={1}
-        overflow={"auto"}
-      >
+    <PageWithMainNav title="Cashier Profile" headerRight={null}>
+      <VStack flex={1} w={"100%"} position={"relative"} overflow={"auto"}>
         <Container justify={"center"}>
           <SimpleGrid
             my={5}
@@ -222,6 +209,6 @@ export default function CashierProfile() {
           </SimpleGrid>
         </Container>
       </VStack>
-    </Page>
+    </PageWithMainNav>
   );
 }

@@ -17,6 +17,7 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 export default function CashierNav(props: any) {
   const sw = useScreenWidth();
   const location = useLocation();
+  const pathname = location.pathname;
   const bg = useColorModeValue("#ffffffaa", "#050505aa");
 
   const NavMobileContainer = (props: any) => {
@@ -47,9 +48,21 @@ export default function CashierNav(props: any) {
           zIndex={99}
         >
           {cashierNav.map((n, i) => {
+            const isActive = n.link.find((link) => {
+              const pathnameReduced = pathname
+                .split("/")
+                .slice(0, -1)
+                .join("/");
+
+              if (pathname === link || pathnameReduced + "/:id" === link) {
+                return true;
+              }
+              return false;
+            });
+
             return (
               <Tooltip key={i} label={n.name} placement={"top"} hasArrow>
-                <Link to={n.link}>
+                <Link to={n.link[0]}>
                   <IconButton
                     w={"50px"}
                     h={"50px !important"}
@@ -61,9 +74,7 @@ export default function CashierNav(props: any) {
                       <Icon
                         as={n.icon}
                         fontSize={24}
-                        weight={
-                          location.pathname === n.link ? "fill" : "regular"
-                        }
+                        weight={isActive ? "fill" : "regular"}
                       />
                     }
                     // bg={location.pathname === n.link ? "var(--divider)" : ""}
@@ -99,8 +110,17 @@ export default function CashierNav(props: any) {
         <Image w={"24px"} src="/logo.svg" ml={3} mb={6} mt={1} />
 
         {cashierNav.map((n, i) => {
+          const isActive = n.link.find((link) => {
+            const pathnameReduced = pathname.split("/").slice(0, -1).join("/");
+
+            if (pathname === link || pathnameReduced + "/:id" === link) {
+              return true;
+            }
+            return false;
+          });
+
           return (
-            <Link to={n.link}>
+            <Link to={n.link[0]} key={i}>
               <HStack
                 mb={2}
                 gap={1}
@@ -118,15 +138,12 @@ export default function CashierNav(props: any) {
                       as={n.icon}
                       mt={"5px"}
                       fontSize={22}
-                      weight={location.pathname === n.link ? "fill" : "regular"}
+                      weight={isActive ? "fill" : "regular"}
                     />
                   }
-                  // color={location.pathname === n.link ? "p.500" : ""}
                 />
 
-                <Text fontWeight={location.pathname === n.link ? 600 : 400}>
-                  {n.name}
-                </Text>
+                <Text fontWeight={isActive ? 600 : 400}>{n.name}</Text>
               </HStack>
             </Link>
           );

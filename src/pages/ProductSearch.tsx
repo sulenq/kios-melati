@@ -12,14 +12,13 @@ import {
 } from "@chakra-ui/react";
 import Container from "../components/Container";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
-import NavHeader from "../components/NavHeader";
 import useProductSearch from "../globalState/useProductSearch";
 import ProductSearchResult from "../components/ProductSearchResult";
 import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
-import Page from "../components/Page";
 import useScreenWidth from "../utils/useGetScreenWidth";
+import PageWithMainNav from "../components/PageWithMainNav";
 
 export default function ProductSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -62,15 +61,7 @@ export default function ProductSearch() {
   }, []);
 
   return (
-    <Page>
-      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader
-          title={"Cashiering - Product Search"}
-          right={null}
-          // backPath={"/cashier"}
-        />
-      </VStack>
-
+    <PageWithMainNav title='Product Search' headerLeft='backButton'>
       <Container>
         <HStack justify={"center"} py={"19px"}>
           <InputGroup maxW={"473px"} position={"relative"}>
@@ -198,6 +189,6 @@ export default function ProductSearch() {
           </Box>
         </VStack>
       )}
-    </Page>
+    </PageWithMainNav>
   );
 }

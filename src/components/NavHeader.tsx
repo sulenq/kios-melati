@@ -1,10 +1,10 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import BackButton from "./BackButton";
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useComponentsBg } from "../const/colorModeValues";
 
 export default function NavHeader(props: any) {
   const navHeaderBg = useComponentsBg();
+  console.log(props.left);
 
   return (
     <HStack
@@ -15,27 +15,17 @@ export default function NavHeader(props: any) {
       bg={props.bg || navHeaderBg}
       animation={"fade-in 300ms"}
     >
-      {props?.left === null ? (
-        <Box w={"40px"} h={"40px"} />
+      {props.left === "backButton" ? (
+        <BackButton />
       ) : (
-        props?.left || <BackButton backPath={props?.backPath} />
+        props.left || <Box w={"40px"} h={"40px"} />
       )}
 
       <Text fontWeight={600} fontSize={15}>
         {props.title}
       </Text>
 
-      {props?.right === null ? (
-        <Box w={"40px"} h={"40px"} />
-      ) : (
-        props?.right || (
-          <ColorModeSwitcher
-            className="btn sm-clicky"
-            borderRadius={"full"}
-            h={"40px !important"}
-          />
-        )
-      )}
+      {props.right || <Box w={"40px"} h={"40px"} />}
     </HStack>
   );
 }

@@ -16,14 +16,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Container from "../components/Container";
-import NavHeader from "../components/NavHeader";
-import CashierNav from "../components/CashierNav";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import TransactionItem from "../components/TransactionItem";
-import Page from "../components/Page";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import useTransactionSearch from "../globalState/useTransactionSearch";
 import { Transaction } from "./Checkout";
+import PageWithMainNav from "../components/PageWithMainNav";
 
 export default function CashierTransaction() {
   const [cashierTransaction, setCashierTransaction] = useState<
@@ -51,13 +49,7 @@ export default function CashierTransaction() {
   >([]);
 
   return (
-    <Page>
-      <CashierNav />
-
-      <VStack w={"100%"} borderBottom={"1px solid var(--divider)"} p={2}>
-        <NavHeader title={"Cashier Transaction"} left={null} right={null} />
-      </VStack>
-
+    <PageWithMainNav title="Cashier Transaction" headerRight={null}>
       {/* Search Component */}
       <Container>
         <HStack justify={"center"} py={"19px"}>
@@ -141,7 +133,7 @@ export default function CashierTransaction() {
       )}
 
       {cashierTransaction.length > 0 && filteredTransaction.length > 0 && (
-        <Container px={[0, null, 8]} overflow={"auto"}>
+        <Container px={"0"} overflow={"auto"}>
           <Table variant={"unstyled"}>
             <Thead opacity={0.5}>
               <Tr>
@@ -162,22 +154,22 @@ export default function CashierTransaction() {
                   </>
                 ) : (
                   <>
-                    <Th px={[4, null, 2]} py={2}>
+                    <Th pl={6} pr={2} py={2}>
                       ID
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} px={2} py={2}>
                       Total Payment
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} px={2} py={2}>
                       Payment Method
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} px={2} py={2}>
                       Pay Amount
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} px={2} py={2}>
                       Change
                     </Th>
-                    <Th textAlign={"right"} px={[4, null, 2]} py={2}>
+                    <Th textAlign={"right"} pr={6} pl={2} py={2}>
                       Detail
                     </Th>
                   </>
@@ -218,6 +210,6 @@ export default function CashierTransaction() {
           </Table>
         </Container>
       )}
-    </Page>
+    </PageWithMainNav>
   );
 }

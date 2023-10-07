@@ -154,11 +154,11 @@ th {
   }
 }
 
-@media screen and (max-width: 770px) {
+/* @media screen and (max-width: 770px) {
   button {
     height: 36px !important;
   }
   input {
     height: 36px !important;
   }
-}
+} */

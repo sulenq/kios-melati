@@ -112,8 +112,7 @@ export default function Cashier() {
 
   return (
     <PageWithMainNav
-      title="cashiering"
-      headerLeft={null}
+      title="Cashiering"
       headerRight={
         <Tooltip
           openDelay={500}
@@ -180,6 +179,7 @@ export default function Cashier() {
                     value={productSearch}
                     onChange={handleIndexProduct}
                     onKeyDown={handleIndexProductKeydown}
+                    variant={"filled"}
                   />
 
                   <HStack gap={"2px"} position={"absolute"} right={0} top={0}>
@@ -200,8 +200,7 @@ export default function Cashier() {
                       <IconButton
                         ref={searchProductButton}
                         as={Link}
-                        to={"/search-product"}
-                        h={"36px"}
+                        to={"/product-search"}
                         aria-label="indexProductButton"
                         icon={<Icon as={MagnifyingGlass} fontSize={18} />}
                         // colorScheme="bnw"
@@ -251,8 +250,10 @@ export default function Cashier() {
             // align={"flex-start"}
             // borderBottom={"2px solid var(--divider)"}
           >
-            <Box w={"30%"}>
-              <Text opacity={0.5} mb={1} fontSize={11}>Total Payment</Text>
+            <Box w={"25%"}>
+              <Text opacity={0.5} mb={1} fontSize={11}>
+                Total Payment
+              </Text>
 
               <HStack align={"flex-end"}>
                 <Text>Rp</Text>
@@ -267,7 +268,7 @@ export default function Cashier() {
               </HStack>
             </Box>
 
-            <HStack w={"40%"}>
+            <HStack w={"50%"}>
               <Tooltip openDelay={500} label={"Camera Scan"} hasArrow>
                 <IconButton
                   aria-label="cameraScan"
@@ -309,7 +310,7 @@ export default function Cashier() {
                       <IconButton
                         ref={searchProductButton}
                         as={Link}
-                        to={"/search-product"}
+                        to={"/product-search"}
                         aria-label="indexProductButton"
                         icon={<Icon as={MagnifyingGlass} fontSize={18} />}
                         className="btn-solid sm-clicky"
@@ -321,7 +322,7 @@ export default function Cashier() {
               </Box>
             </HStack>
 
-            <HStack w={"30%"} justify={"flex-end"}>
+            <HStack w={"25%"} justify={"flex-end"}>
               <Tooltip openDelay={500} label={"Chekout"} hasArrow>
                 <Link to={"/checkout"}>
                   <IconButton
