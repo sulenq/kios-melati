@@ -20,6 +20,7 @@ import {
   Tooltip,
   IconButton,
   Icon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { Transaction } from "./Checkout";
@@ -43,6 +44,7 @@ export default function TransactionDetail() {
     };
   }, []);
 
+  const logo = useColorModeValue("/logob.svg", "/logow.svg");
   const { id } = useParams();
   const tc = localStorage.getItem("transaction");
   const [td, setTd] = useState<Transaction>();
@@ -161,7 +163,7 @@ export default function TransactionDetail() {
                 pb={4}
                 borderBottom={"2px dashed var(--divider)"}
               >
-                <Image w={"50px"} src="/logo.svg" />
+                <Image w={"50px"} src={logo} />
 
                 <VStack align="flex-end" gap={0} opacity={0.5}>
                   <Text fontSize={17}>{td.id}</Text>

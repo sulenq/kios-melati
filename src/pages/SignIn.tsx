@@ -38,8 +38,8 @@ export type AuthState = {
 };
 
 export default function SignIn() {
-  const signInRoleBg = useColorModeValue("b", "w");
-  const signInRoleColor = useColorModeValue("wt", "bt");
+  const signInRoleBg = useColorModeValue("var(--p200a)", "var(--p100a)");
+  const signInRoleColor = useColorModeValue("p.500", "p.300");
   const navigate = useNavigate();
   const cfg = useComponentsBg();
 
@@ -203,7 +203,7 @@ export default function SignIn() {
                   <HStack
                     p={1}
                     justify={"space-between"}
-                    bg={"var(--divider)"}
+                    border={"2px solid var(--divider)"}
                     borderRadius={6}
                   >
                     <Text
@@ -292,7 +292,8 @@ export default function SignIn() {
                   type="submit"
                   className="clicky"
                   w={"100%"}
-                  colorScheme="bnw"
+                  colorScheme="ap"
+                  color={"wt"}
                   mb={4}
                   borderRadius={"full"}
                   h={"44px !important"}

@@ -7,6 +7,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  SimpleGrid,
   Table,
   Tbody,
   Text,
@@ -22,11 +23,23 @@ import useScreenWidth from "../utils/useGetScreenWidth";
 import useTransactionSearch from "../globalState/useTransactionSearch";
 import { Transaction } from "./Checkout";
 import PageWithMainNav from "../components/PageWithMainNav";
+import useFormatNumber from "../utils/useFormatNumber";
+import { useComponentsBg } from "../const/colorModeValues";
 
 export default function CashierTransaction() {
   const [cashierTransaction, setCashierTransaction] = useState<
     Transaction[] | []
   >([]);
+  const [filteredTransaction, setFilteredTransaction] = useState<
+    Transaction[] | []
+  >([]);
+  const [totalSales, setTotalSales] = useState<number>(0);
+  const fn = useFormatNumber;
+  const sw = useScreenWidth();
+  const cfg = useComponentsBg();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const { transactionSearch, setTransactionSearch } = useTransactionSearch();
+
   useEffect(() => {
     const ctc = localStorage.getItem("transaction");
     if (ctc) {
@@ -34,9 +47,15 @@ export default function CashierTransaction() {
     }
   }, []);
 
-  const sw = useScreenWidth();
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const { transactionSearch, setTransactionSearch } = useTransactionSearch();
+  useEffect(() => {
+    let ts: number = 0;
+    cashierTransaction.forEach((t) => {
+      ts += t.totalPayment;
+    });
+
+    setTotalSales(ts);
+  }, [cashierTransaction]);
+
   useEffect(() => {
     const filteredTransaction = cashierTransaction.filter((transaction) =>
       transaction.id.includes(transactionSearch)
@@ -44,16 +63,35 @@ export default function CashierTransaction() {
     setFilteredTransaction(filteredTransaction);
   }, [transactionSearch, cashierTransaction]);
 
-  const [filteredTransaction, setFilteredTransaction] = useState<
-    Transaction[] | []
-  >([]);
-
   return (
     <PageWithMainNav title="Cashier Transaction" headerRight={null}>
       {/* Search Component */}
-      <Container>
-        <HStack justify={"center"} mt={"19px"} mb={2}>
-          <InputGroup maxW={"473px"} position={"relative"}>
+      <Container position={"sticky"} top={"56.8px"} zIndex={3} {...cfg}>
+        <SimpleGrid gap={2} columns={[1, null, 2]} mt={"19px"} mb={2}>
+          <HStack gap={6}>
+            <HStack>
+              <Text fontSize={15} opacity={0.5}>
+                Transactions :
+              </Text>
+              <Text fontSize={19} fontWeight={600}>
+                {cashierTransaction.length}
+              </Text>
+            </HStack>
+
+            <HStack>
+              <Text fontSize={15} opacity={0.5}>
+                Total Sales :
+              </Text>
+              <HStack gap={1}>
+                <Text opacity={0.5}>Rp</Text>
+                <Text fontSize={19} fontWeight={600}>
+                  {fn(totalSales) || 0}
+                </Text>
+              </HStack>
+            </HStack>
+          </HStack>
+
+          <InputGroup>
             <InputLeftElement pointerEvents="none">
               <Icon as={MagnifyingGlass} fontSize={18} mb={[1, null, 0]} />
             </InputLeftElement>
@@ -92,7 +130,7 @@ export default function CashierTransaction() {
               />
             )}
           </InputGroup>
-        </HStack>
+        </SimpleGrid>
       </Container>
 
       {transactionSearch === "" && cashierTransaction.length <= 0 && (

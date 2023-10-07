@@ -5,6 +5,7 @@ import {
   Button,
   Center,
   HStack,
+  Icon,
   Modal,
   ModalBody,
   ModalContent,
@@ -21,6 +22,17 @@ import { getCookie, removeCookie } from "typescript-cookie";
 import { useNavigate } from "react-router-dom";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import PageWithMainNav from "../components/PageWithMainNav";
+import {
+  GenderNeuter,
+  Hash,
+  IdentificationBadge,
+  IdentificationCard,
+  MapPin,
+  Phone,
+  Pulse,
+  Storefront,
+  User,
+} from "@phosphor-icons/react";
 
 export type typeCashierProfile = {
   idPublic: number;
@@ -49,18 +61,18 @@ export default function CashierProfile() {
   const sw = useScreenWidth();
 
   const profileData = [
-    { key: "ID", value: profile?.idPublic },
-    { key: "Store Name", value: profile?.storeName },
-    { key: "Role", value: profile?.role },
-    { key: "Username", value: profile?.username },
-    { key: "Name", value: profile?.name },
+    { key: "ID", icon: IdentificationBadge, value: profile?.idPublic },
+    { key: "Store Name", icon: Storefront, value: profile?.storeName },
+    { key: "Role", icon: IdentificationBadge, value: profile?.role },
+    { key: "Username", icon: User, value: profile?.username },
+    { key: "Name", icon: IdentificationCard, value: profile?.name },
   ];
   const profileData2 = [
-    { key: "Age", value: profile?.age },
-    { key: "Gender", value: profile?.gender },
-    { key: "Address", value: profile?.address },
-    { key: "Phone", value: profile?.phone },
-    { key: "Status", value: profile?.status },
+    { key: "Age", icon: Hash, value: profile?.age },
+    { key: "Gender", icon: GenderNeuter, value: profile?.gender },
+    { key: "Address", icon: MapPin, value: profile?.address },
+    { key: "Phone", icon: Phone, value: profile?.phone },
+    { key: "Status", icon: Pulse, value: profile?.status },
   ];
 
   const handleSignOut = () => {
@@ -177,9 +189,10 @@ export default function CashierProfile() {
                 <Box w={"100%"}>
                   {profileData.map((p, i) => (
                     <HStack key={i} mb={3} w={"100%"}>
-                      <Text w={"100%"} maxW={"100px"} flexShrink={0}>
-                        {p.key}
-                      </Text>
+                      <HStack w={"100%"} maxW={"120px"}>
+                        <Icon as={p.icon} />
+                        <Text flexShrink={0}>{p.key}</Text>
+                      </HStack>
 
                       <Box className="inputlike">
                         <Text>{p.value || "No Data"}</Text>
@@ -191,9 +204,10 @@ export default function CashierProfile() {
                 <Box w={"100%"}>
                   {profileData2.map((p, i) => (
                     <HStack key={i} mb={3} w={"100%"}>
-                      <Text w={"100%"} maxW={"100px"} flexShrink={0}>
-                        {p.key}
-                      </Text>
+                      <HStack w={"100%"} maxW={"120px"}>
+                        <Icon as={p.icon} />
+                        <Text flexShrink={0}>{p.key}</Text>
+                      </HStack>
 
                       <Box className="inputlike">
                         <Text>{p.value || "No Data"}</Text>

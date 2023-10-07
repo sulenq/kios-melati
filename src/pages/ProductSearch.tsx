@@ -18,29 +18,14 @@ import products, { Product } from "../const/products";
 import { useState, useEffect, useRef } from "react";
 import useOrder from "../globalState/useOrder";
 import PageWithMainNav from "../components/PageWithMainNav";
+import { useComponentsBg } from "../const/colorModeValues";
 
 export default function ProductSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  useEffect(() => {
-    if (inputRef.current) {
-      if (!inputRef.current.value) {
-        inputRef.current.focus();
-      }
-    }
-  }, []);
-
   const { productSearch, setProductSearch } = useProductSearch();
-  useEffect(() => {
-    const filteredProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(productSearch.toLowerCase()) ||
-        product.code.toLowerCase().includes(productSearch.toLowerCase())
-    );
-    setFilteredProducts(filteredProducts);
-  }, [productSearch]);
-
   const [filteredProducts, setFilteredProducts] = useState<Product[] | []>([]);
   const { addOrder } = useOrder();
+  const cfg = useComponentsBg();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -58,9 +43,26 @@ export default function ProductSearch() {
     };
   }, []);
 
+  useEffect(() => {
+    const filteredProducts = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(productSearch.toLowerCase()) ||
+        product.code.toLowerCase().includes(productSearch.toLowerCase())
+    );
+    setFilteredProducts(filteredProducts);
+  }, [productSearch]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      if (!inputRef.current.value) {
+        inputRef.current.focus();
+      }
+    }
+  }, []);
+
   return (
     <PageWithMainNav title="Product Search" headerLeft="backButton">
-      <Container>
+      <Container position={"sticky"} top={"56.8px"} zIndex={3} {...cfg}>
         <HStack justify={"center"} mt={"19px"} mb={2}>
           <InputGroup maxW={"473px"} position={"relative"}>
             <InputLeftElement pointerEvents="none">
