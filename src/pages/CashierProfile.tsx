@@ -23,11 +23,12 @@ import { useNavigate } from "react-router-dom";
 import useScreenWidth from "../utils/useGetScreenWidth";
 import PageWithMainNav from "../components/PageWithMainNav";
 import {
-  GenderNeuter,
+  GenderIntersex,
   Hash,
   IdentificationBadge,
   IdentificationCard,
   MapPin,
+  PersonSimple,
   Phone,
   Pulse,
   Storefront,
@@ -63,16 +64,20 @@ export default function CashierProfile() {
   const profileData = [
     { key: "ID", icon: IdentificationBadge, value: profile?.idPublic },
     { key: "Store Name", icon: Storefront, value: profile?.storeName },
-    { key: "Role", icon: IdentificationBadge, value: profile?.role },
+    { key: "Role", icon: PersonSimple, value: profile?.role },
     { key: "Username", icon: User, value: profile?.username },
     { key: "Name", icon: IdentificationCard, value: profile?.name },
   ];
   const profileData2 = [
     { key: "Age", icon: Hash, value: profile?.age },
-    { key: "Gender", icon: GenderNeuter, value: profile?.gender },
+    { key: "Gender", icon: GenderIntersex, value: profile?.gender },
     { key: "Address", icon: MapPin, value: profile?.address },
     { key: "Phone", icon: Phone, value: profile?.phone },
-    { key: "Status", icon: Pulse, value: profile?.status },
+    {
+      key: "Status",
+      icon: Pulse,
+      value: profile?.status ? "Active" : "Not Active",
+    },
   ];
 
   const handleSignOut = () => {
@@ -83,6 +88,20 @@ export default function CashierProfile() {
 
   const SignoutModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    console.log(isOpen);
+    useEffect(() => {
+      if (isOpen) {
+        window.addEventListener("popstate", onClose);
+      } else {
+        window.removeEventListener("popstate", onClose);
+      }
+
+      // Cleanup function
+      return () => {
+        window.removeEventListener("popstate", onClose);
+      };
+    }, [isOpen, onClose]);
 
     return (
       <>
@@ -135,14 +154,14 @@ export default function CashierProfile() {
   return (
     <PageWithMainNav title="Cashier Profile" headerRight={null}>
       <VStack flex={1} w={"100%"} position={"relative"} overflow={"auto"}>
-        <Container justify={"center"}>
+        <Container justify={"center"} pb={sw < 770 ? "72px" : ""}>
           <SimpleGrid
             my={5}
             mx={"auto"}
             w={"100%"}
             columns={[1, null, 1]}
             gap={6}
-            maxW={"680px"}
+            maxW={"600px"}
           >
             <VStack>
               <Center
@@ -184,7 +203,7 @@ export default function CashierProfile() {
               <SimpleGrid
                 w={"100%"}
                 gap={sw < 770 ? 0 : 6}
-                columns={[1, null, 2]}
+                columns={[1, null, 1]}
               >
                 <Box w={"100%"}>
                   {profileData.map((p, i) => (

@@ -32,6 +32,9 @@ export type AuthState = {
   role: "admin" | "cashier";
   name: string;
   age: number;
+  gender: "Male" | "Female";
+  address: string;
+  status: boolean;
   phone: string;
   storeName: string;
   expires: number;
@@ -83,6 +86,9 @@ export default function SignIn() {
                 role: u.role,
                 name: u.name,
                 age: u.age,
+                gender: u.gender,
+                address: u.address,
+                status: u.status,
                 phone: u.phone,
                 storeName: u.storeName,
                 expires: values.staySignedIn ? 7 : 1,
@@ -122,6 +128,9 @@ export default function SignIn() {
                 role: u.role,
                 name: u.name,
                 age: u.age,
+                gender: u.gender,
+                address: u.address,
+                status: u.status,
                 phone: u.phone,
                 storeName: u.storeName,
                 expires: values.staySignedIn ? 7 : 1,

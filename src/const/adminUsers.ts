@@ -6,6 +6,9 @@ type AdminUser = {
   role: "admin";
   name: string;
   age: number;
+  gender: "Male" | "Female";
+  address: string;
+  status: boolean;
   phone: string;
   storeName: string;
 };
@@ -19,6 +22,9 @@ const adminUsers: AdminUser[] = [
     role: "admin",
     name: "Alber Leo",
     age: 21,
+    gender: "Male",
+    address: "Jalan jalan ke kota sumedang, pulangnya bawa gedang",
+    status: true,
     phone: "08584543151",
     storeName: "Kios Melati",
   },

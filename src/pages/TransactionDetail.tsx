@@ -28,6 +28,7 @@ import TransactionOrderList from "../components/TransactionOrderList";
 import useFormatNumber from "../utils/useFormatNumber";
 import { Printer } from "@phosphor-icons/react";
 import PageWithMainNav from "../components/PageWithMainNav";
+import useScreenWidth from "../utils/useGetScreenWidth";
 
 export default function TransactionDetail() {
   useEffect(() => {
@@ -49,6 +50,8 @@ export default function TransactionDetail() {
   const tc = localStorage.getItem("transaction");
   const [td, setTd] = useState<Transaction>();
   const fn = useFormatNumber;
+  const sw = useScreenWidth();
+
   useEffect(() => {
     if (tc) {
       const tl = JSON.parse(tc);
@@ -151,7 +154,12 @@ export default function TransactionDetail() {
       )}
 
       {td && (
-        <Box position={"relative"} w={"100%"} mx={"auto"}>
+        <Box
+          position={"relative"}
+          w={"100%"}
+          mx={"auto"}
+          pb={sw < 770 ? "72px" : ""}
+        >
           <VStack
             gap={0}
             borderRadius={6}

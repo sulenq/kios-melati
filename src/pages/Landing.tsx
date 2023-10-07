@@ -65,7 +65,8 @@ export default function Landing() {
             as={Link}
             to={"/signin"}
             className="clicky"
-            colorScheme="bnw"
+            colorScheme="ap"
+            color={'wt'}
             w={"100%"}
             h={"44px"}
             borderRadius={"full"}
